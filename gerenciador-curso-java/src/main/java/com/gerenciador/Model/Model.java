@@ -1,6 +1,6 @@
-package com.gerenciador.gerenciador.Model;
+package com.gerenciador.Model;
 
-import com.gerenciador.gerenciador.Dao.ConnectionFactory;
+import com.gerenciador.Dao.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

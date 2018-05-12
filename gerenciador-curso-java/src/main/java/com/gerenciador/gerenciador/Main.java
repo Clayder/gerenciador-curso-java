@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gerenciador.gerenciador.curso.java;
+package com.gerenciador.gerenciador;
 
+import com.gerenciador.gerenciador.Dao.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        CONNECTION = new ConnectionFactory().getConnection();
+        CONNECTION = ConnectionFactory.getConnection();
         
 
     }

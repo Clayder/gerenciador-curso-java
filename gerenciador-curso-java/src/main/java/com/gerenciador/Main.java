@@ -5,9 +5,9 @@
  */
 package com.gerenciador;
 
-import com.gerenciador.Dao.ConnectionFactory;
-import java.sql.Connection;
+import com.gerenciador.Model.Professor.Professor;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,13 +16,20 @@ import java.util.Scanner;
  */
 public class Main {
 
-    private static Connection CONNECTION = null;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        CONNECTION = ConnectionFactory.getConnection();
+
+        Professor p = new Professor();
+       
+
+        ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
+        for (Professor movie : data) {
+            System.out.println("Id: " + movie.getId());
+            System.out.println("Name: " + movie.getNome());
+        }
     }
 
 }

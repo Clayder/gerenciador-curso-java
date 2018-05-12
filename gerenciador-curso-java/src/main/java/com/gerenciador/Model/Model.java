@@ -5,9 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public abstract class Model extends Dao{
+    
+    public Model() throws SQLException{
+        super();
+    }
 
     /**
-     *
+     * 
      * @return @throws SQLException
      */
     public ResultSet findAll() throws SQLException {

@@ -1,4 +1,4 @@
-package com.gerenciador.gerenciador.curso.java;
+package com.gerenciador.gerenciador.Dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,12 +9,12 @@ import java.sql.SQLException;
  * @author peter
  */
 public class ConnectionFactory {
-    private final String BANCO = "curso";
-    private final String HOST = "localhost:3306/";
-    private final String URL = "jdbc:mysql://"+HOST+ BANCO +"?serverTimezone=UTC";
-    private final String USER = "root";
-    private final String PASSWORD = "p1p2ls";
-    private final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
+    private static final String BANCO = "curso";
+    private static final String HOST = "localhost:3306/";
+    private static final String URL = "jdbc:mysql://"+HOST+ BANCO +"?serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "p1p2ls";
+    private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
     
     /**
      * 
@@ -22,7 +22,7 @@ public class ConnectionFactory {
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
-    private Connection createConnection() throws SQLException, ClassNotFoundException{
+    private static Connection createConnection() throws SQLException, ClassNotFoundException{
         Connection connection = null;
         try{
             Class.forName(DRIVER_CLASS);
@@ -38,7 +38,7 @@ public class ConnectionFactory {
      * @return
      * @throws SQLException 
      */
-    public Connection getConnection() throws SQLException{
+    public static Connection getConnection() throws SQLException{
         try{
             return createConnection();
         }catch(ClassNotFoundException e){

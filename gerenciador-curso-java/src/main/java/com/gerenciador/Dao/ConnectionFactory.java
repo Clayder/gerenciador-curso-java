@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     private static final String BANCO = "curso";
     private static final String HOST = "localhost:3306/";
-    private static final String URL = "jdbc:mysql://"+HOST+ BANCO +"?serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://"+HOST+ BANCO +"?serverTimezone=UTC&autoReconnect=true&useSSL=false";
     private static final String USER = "root";
     private static final String PASSWORD = "p1p2ls";
     private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";

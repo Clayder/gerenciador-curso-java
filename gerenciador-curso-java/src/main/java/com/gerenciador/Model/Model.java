@@ -22,9 +22,10 @@ public abstract class Model extends Dao{
 
     /**
      *
+     * @param id
      * @return @throws SQLException
      */
-    public static ResultSet findById(Integer id) throws SQLException {
+    protected ResultSet findById(Integer id) throws SQLException {
         String query = "SELECT * FROM " + TABELA + " WHERE (id) = ?";
         statement = connection.prepareStatement(query);
         statement.setInt(1, id);
@@ -33,14 +34,33 @@ public abstract class Model extends Dao{
 
     /**
      *
-     * @param movie
+     * @param id
      * @throws SQLException
      */
-    public static void removeById(Integer id) throws SQLException {
+    public void removeById(Integer id) throws SQLException {
         String query = "DELETE FROM " + TABELA + " WHERE id = ?";
 
         statement = connection.prepareStatement(query);
         statement.setInt(1, id);
         statement.execute();
     }
+    
+    /**
+     * 
+     * @throws SQLException 
+     */
+    public abstract void insert() throws SQLException;
+    
+    /**
+     * 
+     * @throws SQLException 
+     */
+    public abstract void update() throws SQLException;
+    
+    /**
+     * 
+     * @param id
+     * @throws SQLException 
+     */
+    public abstract void get(Integer id) throws SQLException;
 }

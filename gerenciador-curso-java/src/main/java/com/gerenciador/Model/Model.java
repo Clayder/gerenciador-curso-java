@@ -1,20 +1,10 @@
 package com.gerenciador.Model;
 
-import com.gerenciador.Dao.ConnectionFactory;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import com.gerenciador.Dao.Dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Model {
-
-    private static Connection connection = null;
-    protected static String TABELA;
-    private static PreparedStatement statement = null;
-
-    public Model() throws SQLException {
-        connection = ConnectionFactory.getConnection();
-    }
+public abstract class Model extends Dao{
 
     /**
      *

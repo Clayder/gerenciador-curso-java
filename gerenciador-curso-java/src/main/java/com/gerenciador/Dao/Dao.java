@@ -9,10 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-/**
- *
- * @author peter
- */
 public abstract class Dao {
     protected static Connection connection = null;
     protected static String TABELA;

@@ -23,13 +23,24 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Professor p = new Professor();
+        
+        
+        p.setEndereco("Rua bangu");
+        p.setMatricula("123458");
+        p.setNome("Peter");
+        p.setTelefone("21 971579961");
+        p.setValorHora(100.00);
+        p.insert();
+        
        
-
+       
+        /*
         ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
         for (Professor movie : data) {
             System.out.println("Id: " + movie.getId());
             System.out.println("Name: " + movie.getNome());
         }
+*/
     }
 
 }

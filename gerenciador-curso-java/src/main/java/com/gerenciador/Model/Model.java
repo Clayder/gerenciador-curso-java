@@ -1,23 +1,17 @@
 package com.gerenciador.Model;
 
-import com.gerenciador.Dao.ConnectionFactory;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import com.gerenciador.Dao.Dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Model {
-
-    private static Connection connection = null;
-    protected static String TABELA;
-    private static PreparedStatement statement = null;
-
-    public Model() throws SQLException {
-        connection = ConnectionFactory.getConnection();
+public abstract class Model extends Dao{
+    
+    public Model() throws SQLException{
+        super();
     }
 
     /**
-     *
+     * 
      * @return @throws SQLException
      */
     public ResultSet findAll() throws SQLException {
@@ -28,9 +22,10 @@ public class Model {
 
     /**
      *
+     * @param id
      * @return @throws SQLException
      */
-    public static ResultSet findById(Integer id) throws SQLException {
+    protected ResultSet findById(Integer id) throws SQLException {
         String query = "SELECT * FROM " + TABELA + " WHERE (id) = ?";
         statement = connection.prepareStatement(query);
         statement.setInt(1, id);
@@ -39,14 +34,33 @@ public class Model {
 
     /**
      *
-     * @param movie
+     * @param id
      * @throws SQLException
      */
-    public static void removeById(Integer id) throws SQLException {
+    public void removeById(Integer id) throws SQLException {
         String query = "DELETE FROM " + TABELA + " WHERE id = ?";
 
         statement = connection.prepareStatement(query);
         statement.setInt(1, id);
         statement.execute();
     }
+    
+    /**
+     * 
+     * @throws SQLException 
+     */
+    public abstract void insert() throws SQLException;
+    
+    /**
+     * 
+     * @throws SQLException 
+     */
+    public abstract void update() throws SQLException;
+    
+    /**
+     * 
+     * @param id
+     * @throws SQLException 
+     */
+    public abstract void get(Integer id) throws SQLException;
 }

@@ -18,6 +18,7 @@ class ProfessorDAO extends Model {
     public ProfessorDAO() throws SQLException {
         super();
         TABELA = "professor";
+        setCampos();
     }
 
     public Integer getId() {
@@ -68,13 +69,21 @@ class ProfessorDAO extends Model {
         this.id = id;
     }
 
+    protected void setCampos() {
+        colunasBD.add("matricula");
+        colunasBD.add("nome");
+        colunasBD.add("endereco");
+        colunasBD.add("telefone");
+        colunasBD.add("valor_hora");
+    }
+
     /**
      *
      * @throws SQLException
      */
     @Override
     public void insert() throws SQLException {
-        String query = "INSERT INTO " + TABELA + " (matricula, nome, endereco, telefone, valor_hora) VALUES (?, ?, ?, ?, ?)";
+        String query = getQueryInsert();
         statement = connection.prepareStatement(query);
         statement.setString(1, getMatricula());
         statement.setString(2, getNome());

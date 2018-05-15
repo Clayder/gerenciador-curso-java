@@ -24,14 +24,16 @@ public class Main {
 
         Professor p = new Professor();
         
-        
+        /*
         p.setEndereco("Rua bangu");
         p.setMatricula("123458");
         p.setNome("Peter");
         p.setTelefone("21 971579961");
         p.setValorHora(100.00);
         p.insert();
+        */
         
+        System.out.println(p.getQueryInsert());
        
        
         /*

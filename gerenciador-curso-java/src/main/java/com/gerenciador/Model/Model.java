@@ -3,6 +3,7 @@ package com.gerenciador.Model;
 import com.gerenciador.Dao.Dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public abstract class Model extends Dao{
     
@@ -45,6 +46,39 @@ public abstract class Model extends Dao{
         statement.execute();
     }
     
+      /**
+     * 
+     * @return String "INSERT INTO " + TABELA + " (matricula, nome, endereco, telefone, valor_hora) VALUES (?, ?, ?, ?, ?)"
+     */
+    public String getQueryInsert(){
+        String campos = "";
+        String values = "";
+        
+        int tam  = this.colunasBD.size();
+        
+        for(String coluna : this.colunasBD){
+            tam--;
+            campos += coluna;
+            values += "?";
+            if(tam > 0){
+                campos += ", ";
+                values += ", ";
+            }
+        }
+        
+        String insert;
+        
+        insert = "INSERT INTO " + TABELA;
+        insert += " (";
+        insert += campos;
+        insert += ")";
+        insert += " VALUES (";
+        insert += values;
+        insert += ")";
+        
+        return insert;
+    }
+    
     /**
      * 
      * @throws SQLException 
@@ -63,4 +97,6 @@ public abstract class Model extends Dao{
      * @throws SQLException 
      */
     public abstract void get(Integer id) throws SQLException;
+    
+    protected abstract void setCampos();
 }

@@ -82,7 +82,7 @@ public abstract class Model extends Dao{
      *
      * @return String UPDATE tabela SET matricula = ?, nome = ?, endereco = ?, telefone = ?, valor_hora = ? WHERE id = ?
      */
-    public String getQueryUpdate(){
+    protected String getQueryUpdate(){
         String campos = "";
         
         int tam  = this.colunasBD.size();
@@ -120,7 +120,7 @@ public abstract class Model extends Dao{
      * @param id
      * @throws SQLException 
      */
-    public abstract void get(Integer id) throws SQLException;
+    public abstract void setById(Integer id) throws SQLException;
     
     protected abstract void setCampos();
 }

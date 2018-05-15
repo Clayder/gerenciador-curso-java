@@ -95,7 +95,7 @@ class ProfessorDAO extends Model {
 
     @Override
     public void update() throws SQLException {
-        String query = "UPDATE " + TABELA + " SET matricula = ?, nome = ?, endereco = ?, telefone = ?, valor_hora = ? WHERE id = ?";
+        String query = getQueryUpdate();
         statement = connection.prepareStatement(query);
         statement.setString(1, getMatricula());
         statement.setString(2, getNome());
@@ -111,7 +111,8 @@ class ProfessorDAO extends Model {
      * @param id
      * @throws SQLException
      */
-    public void get(Integer id) throws SQLException {
+    @Override
+    public void setById(Integer id) throws SQLException {
         ResultSet res = findById(id);
         while (res.next()) {
             setAll(res);

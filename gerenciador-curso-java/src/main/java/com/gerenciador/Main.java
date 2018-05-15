@@ -26,14 +26,17 @@ public class Main {
         
         /*
         p.setEndereco("Rua bangu");
-        p.setMatricula("123458");
+        p.setMatricula("123874598");
         p.setNome("Peter");
         p.setTelefone("21 971579961");
-        p.setValorHora(100.00);
+        p.setValorHora(130.00);
         p.insert();
         */
+        p.setById(5);
         
-        System.out.println(p.getQueryUpdate());
+        System.out.println(p.getNome());
+        
+        
        
        
         /*

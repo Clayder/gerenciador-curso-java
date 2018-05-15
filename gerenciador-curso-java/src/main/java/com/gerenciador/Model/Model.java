@@ -3,7 +3,6 @@ package com.gerenciador.Model;
 import com.gerenciador.Dao.Dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public abstract class Model extends Dao{
     
@@ -75,6 +74,31 @@ public abstract class Model extends Dao{
         insert += " VALUES (";
         insert += values;
         insert += ")";
+        
+        return insert;
+    }
+    
+    /**
+     *
+     * @return String UPDATE tabela SET matricula = ?, nome = ?, endereco = ?, telefone = ?, valor_hora = ? WHERE id = ?
+     */
+    public String getQueryUpdate(){
+        String campos = "";
+        
+        int tam  = this.colunasBD.size();
+        
+        for(String coluna : this.colunasBD){
+            tam--;
+            campos += coluna + " = ?";
+            if(tam > 0){
+                campos += ", ";
+            }
+        }
+        
+        String insert = "";
+        insert += "UPDATE "+ TABELA +" SET ";
+        insert += campos;
+        insert += " WHERE id = ?";
         
         return insert;
     }

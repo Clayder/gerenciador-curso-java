@@ -33,7 +33,7 @@ public class Main {
         p.insert();
         */
         
-        System.out.println(p.getQueryInsert());
+        System.out.println(p.getQueryUpdate());
        
        
         /*

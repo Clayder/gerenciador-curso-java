@@ -49,7 +49,7 @@ public abstract class Model extends Dao{
      * 
      * @return String "INSERT INTO " + TABELA + " (matricula, nome, endereco, telefone, valor_hora) VALUES (?, ?, ?, ?, ?)"
      */
-    public String getQueryInsert(){
+    protected String getQueryInsert(){
         String campos = "";
         String values = "";
         

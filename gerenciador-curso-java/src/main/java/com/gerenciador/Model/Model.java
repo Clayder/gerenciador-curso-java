@@ -45,6 +45,64 @@ public abstract class Model extends Dao{
         statement.execute();
     }
     
+      /**
+     * 
+     * @return String "INSERT INTO " + TABELA + " (matricula, nome, endereco, telefone, valor_hora) VALUES (?, ?, ?, ?, ?)"
+     */
+    protected String getQueryInsert(){
+        String campos = "";
+        String values = "";
+        
+        int tam  = this.colunasBD.size();
+        
+        for(String coluna : this.colunasBD){
+            tam--;
+            campos += coluna;
+            values += "?";
+            if(tam > 0){
+                campos += ", ";
+                values += ", ";
+            }
+        }
+        
+        String insert;
+        
+        insert = "INSERT INTO " + TABELA;
+        insert += " (";
+        insert += campos;
+        insert += ")";
+        insert += " VALUES (";
+        insert += values;
+        insert += ")";
+        
+        return insert;
+    }
+    
+    /**
+     *
+     * @return String UPDATE tabela SET matricula = ?, nome = ?, endereco = ?, telefone = ?, valor_hora = ? WHERE id = ?
+     */
+    protected String getQueryUpdate(){
+        String campos = "";
+        
+        int tam  = this.colunasBD.size();
+        
+        for(String coluna : this.colunasBD){
+            tam--;
+            campos += coluna + " = ?";
+            if(tam > 0){
+                campos += ", ";
+            }
+        }
+        
+        String insert = "";
+        insert += "UPDATE "+ TABELA +" SET ";
+        insert += campos;
+        insert += " WHERE id = ?";
+        
+        return insert;
+    }
+    
     /**
      * 
      * @throws SQLException 
@@ -62,5 +120,7 @@ public abstract class Model extends Dao{
      * @param id
      * @throws SQLException 
      */
-    public abstract void get(Integer id) throws SQLException;
+    public abstract void setById(Integer id) throws SQLException;
+    
+    protected abstract void setCampos();
 }

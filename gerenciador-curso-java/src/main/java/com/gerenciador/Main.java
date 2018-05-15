@@ -5,6 +5,7 @@
  */
 package com.gerenciador;
 
+import com.gerenciador.Model.Professor.IProfessor;
 import com.gerenciador.Model.Professor.Professor;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,27 +21,28 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        Scanner scanner = new Scanner(System.in);
 
-        Professor p = new Professor();
-        
-        
+        IProfessor p = new Professor();
+
+        /*
         p.setEndereco("Rua bangu");
-        p.setMatricula("123458");
+        p.setMatricula("123874598");
         p.setNome("Peter");
         p.setTelefone("21 971579961");
-        p.setValorHora(100.00);
+        p.setValorHora(130.00);
         p.insert();
-        
-       
-       
+         */
+        p.setById(5);
+
+        System.out.println(p.getNome());
+
         /*
         ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
         for (Professor movie : data) {
             System.out.println("Id: " + movie.getId());
             System.out.println("Name: " + movie.getNome());
         }
-*/
+         */
     }
 
 }

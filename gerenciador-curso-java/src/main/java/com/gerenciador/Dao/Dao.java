@@ -8,14 +8,21 @@ package com.gerenciador.Dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public abstract class Dao {
     protected static Connection connection = null;
     protected static String TABELA;
+    protected ArrayList<String> colunasBD;
     protected static PreparedStatement statement = null;
     
     public Dao() throws SQLException {
         connection = ConnectionFactory.getConnection();
+        colunasBD = new ArrayList<>();
+    }
+    
+    public ArrayList<String> getColunasBD() {
+        return colunasBD;
     }
     
 }

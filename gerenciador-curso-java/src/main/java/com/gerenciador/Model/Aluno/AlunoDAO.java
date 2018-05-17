@@ -16,7 +16,7 @@ class AlunoDAO extends Model {
 
     public AlunoDAO() throws SQLException {
         super();
-        TABELA = "professor";
+        TABELA = "aluno";
         setCampos();
     }
 
@@ -114,13 +114,13 @@ class AlunoDAO extends Model {
      */
     public List<Aluno> getAll() throws SQLException {
         ResultSet res = findAll();
-        List<Aluno> professores = new ArrayList<>();
+        List<Aluno> alunos = new ArrayList<>();
         while (res.next()) {
-            Aluno professor = new Aluno();
-            professor.setAll(res);
-            professores.add(professor);
+            Aluno aluno = new Aluno();
+            aluno.setAll(res);
+            alunos.add(aluno);
         }
-        return professores;
+        return alunos;
     }
 
     /**

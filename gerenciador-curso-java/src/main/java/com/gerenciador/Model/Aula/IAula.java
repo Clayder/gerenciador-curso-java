@@ -29,11 +29,11 @@ public interface IAula {
 
     public IDisciplina getDisciplina() ;
 
-    public void setDisciplina(Integer disciplinaId) throws SQLException ;
+    public void setDisciplina(Integer disciplinaId, IDisciplina disciplina) throws SQLException ;
 
     public IProfessor getProfessor() ;
 
-    public void setProfessor(Integer professorId) throws SQLException ;
+    public void setProfessor(Integer professorId, IProfessor professor) throws SQLException ;
 
     public List<IAluno> getAlunos();
 

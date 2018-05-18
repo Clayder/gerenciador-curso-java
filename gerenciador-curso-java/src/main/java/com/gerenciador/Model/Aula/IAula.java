@@ -1,10 +1,13 @@
-package com.gerenciador.Model.Aluno;
+package com.gerenciador.Model.Aula;
 
+import com.gerenciador.Model.Aluno.*;
+import com.gerenciador.Model.Disciplina.IDisciplina;
+import com.gerenciador.Model.Professor.IProfessor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IAluno {
+public interface IAula {
 
      /**
      * 
@@ -20,29 +23,33 @@ public interface IAluno {
     public void removeById(Integer id) throws SQLException;
     
     
-    public Integer getId();
+    public Integer getId() ;
 
-    public String getMatricula();
+    public void setId(Integer id) ;
 
-    public String getNome();
+    public IDisciplina getDisciplina() ;
 
-    public String getEmail();
+    public void setDisciplina(Integer disciplinaId) throws SQLException ;
 
-    public String getTelefone();
+    public IProfessor getProfessor() ;
 
-    public void setMatricula(String matricula);
+    public void setProfessor(Integer professorId) throws SQLException ;
 
-    public void setNome(String nome);
+    public List<IAluno> getAlunos();
 
-    public void setEmail(String endereco);
+    public void setAlunos(int alunoId);
 
-    public void setTelefone(String telefone);
+    public String getData() ;
 
-    public void setId(Integer id);
+    public void setData(String data);
 
+    /**
+     *
+     * @throws SQLException
+     */
     public void insert() throws SQLException;
 
-    public void update() throws SQLException;
+    public void update() throws SQLException ;
 
     /**
      *
@@ -55,6 +62,6 @@ public interface IAluno {
      *
      * @return @throws SQLException
      */
-    public List<Aluno> getAll() throws SQLException;
+    public List<Aula> getAll() throws SQLException;
 
 }

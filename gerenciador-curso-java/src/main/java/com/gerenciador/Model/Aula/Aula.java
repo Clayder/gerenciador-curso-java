@@ -1,10 +1,10 @@
-package com.gerenciador.Model.Aluno;
+package com.gerenciador.Model.Aula;
 
 import java.sql.SQLException;
 
-public class Aluno extends AlunoDAO implements IAluno {
+public class Aula extends AulaDAO implements IAula {
 
-    public Aluno() throws SQLException {
+    public Aula() throws SQLException {
         super();
     }
 

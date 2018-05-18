@@ -7,6 +7,8 @@ package com.gerenciador;
 
 import com.gerenciador.Model.Aluno.Aluno;
 import com.gerenciador.Model.Aluno.IAluno;
+import com.gerenciador.Model.Disciplina.Disciplina;
+import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Professor.IProfessor;
 import com.gerenciador.Model.Professor.Professor;
 import java.sql.SQLException;
@@ -64,8 +66,31 @@ public class Main {
 //            System.out.println("Id: " + movie.getId());
 //            System.out.println("Name: " + movie.getNome());
 //        }
+//        a.removeById(1);
 
+        /* ***************** Disciplina ************************************* */
+        IDisciplina d = new Disciplina();
         
+//        d.setCargaHoraria(23.4);
+//        d.setCodigo("1111");
+//        d.setConteudo("Tet ete te ttee");
+//        d.setTipo(d.getPRATICA());
+//        d.insert();
+
+//          d.setById(1);
+//          System.out.println("Name: " + d.getConteudo());
+//          d.setTipo(d.getTEORICA());
+//         d.setCargaHoraria(23.4);
+//          d.update();
+
+//        ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
+//        for (Disciplina movie : data) {
+//            System.out.println("Id: " + movie.getId());
+//            System.out.println("Name: " + movie.getConteudo());
+//        }
+          
+//          d.removeById(1);
+    
     }
 
 }

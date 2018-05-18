@@ -24,7 +24,7 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException {
 
-//        IProfessor p = new Professor();
+        IProfessor p = new Professor();
 //
 //        /*
 //        p.setEndereco("Rua bangu");
@@ -65,8 +65,7 @@ public class Main {
 //            System.out.println("Name: " + movie.getNome());
 //        }
 
-        a.removeById(1);
-    
+        
     }
 
 }

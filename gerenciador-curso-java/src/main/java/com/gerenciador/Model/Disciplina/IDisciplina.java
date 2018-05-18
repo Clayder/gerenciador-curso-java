@@ -20,6 +20,8 @@ public interface IDisciplina {
     public void removeById(Integer id) throws SQLException;
 
     public void setId(Integer id);
+    
+    public Integer getId();
 
     public String getCodigo();
 

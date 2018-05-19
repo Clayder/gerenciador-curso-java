@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public abstract class Dao {
     protected static Connection connection = null;
-    protected static String TABELA;
+    protected String TABELA;
     protected ArrayList<String> colunasBD;
     protected static PreparedStatement statement = null;
     

@@ -65,5 +65,19 @@ abstract class AulaDAO extends Model {
         colunasBD.add("data");
     }
 
+    /**
+     *
+     * @throws SQLException
+     */
+    @Override
+    public void insert() throws SQLException {
+        String query = getQueryInsert();
+        statement = connection.prepareStatement(query);
+        statement.setInt(1, getDisciplina().getId());
+        statement.setInt(2, getProfessor().getId());
+        statement.setString(3, getData());
+        statement.execute();
+    }
+
     
 }

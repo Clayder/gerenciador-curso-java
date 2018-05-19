@@ -1,9 +1,14 @@
 package com.gerenciador.Model.Aula;
 
 import com.gerenciador.Model.Aluno.IAluno;
+import com.gerenciador.Model.Disciplina.Disciplina;
 import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Model;
 import com.gerenciador.Model.Professor.IProfessor;
+import com.gerenciador.Model.Professor.Professor;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 abstract class AulaDAO extends Model {
@@ -13,6 +18,13 @@ abstract class AulaDAO extends Model {
     private IProfessor professor;
     private List<IAluno> alunos;
     private String data;
+
+    public AulaDAO(IProfessor professor, IDisciplina disciplina) throws SQLException {
+        TABELA = "aula";
+        this.professor = professor;
+        this.disciplina = disciplina;
+        setCampos();
+    }
 
     
 }

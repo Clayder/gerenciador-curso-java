@@ -79,5 +79,16 @@ abstract class AulaDAO extends Model {
         statement.execute();
     }
 
+    @Override
+    public void update() throws SQLException {
+        String query = getQueryUpdate();
+        statement = connection.prepareStatement(query);
+        statement.setInt(1, getDisciplina().getId());
+        statement.setInt(2, getProfessor().getId());
+        statement.setString(3, getData());
+        statement.setInt(4, getId());
+        statement.execute();
+    }
+
     
 }

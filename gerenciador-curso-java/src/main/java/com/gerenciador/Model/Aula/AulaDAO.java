@@ -26,5 +26,44 @@ abstract class AulaDAO extends Model {
         setCampos();
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public IDisciplina getDisciplina() {
+        return disciplina;
+    }
+
+    public IProfessor getProfessor() {
+        return professor;
+    }
+
+    public List<IAluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(int alunoId) {
+        this.alunos = alunos;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    @Override
+    protected void setCampos() {
+        colunasBD.add("fkDisciplina");
+        colunasBD.add("fkProfessor");
+        colunasBD.add("data");
+    }
+
     
 }

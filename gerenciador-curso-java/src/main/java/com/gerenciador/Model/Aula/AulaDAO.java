@@ -90,5 +90,68 @@ abstract class AulaDAO extends Model {
         statement.execute();
     }
 
+    /**
+     *
+     * @param id
+     * @throws SQLException
+     */
+    @Override
+    public void setById(Integer id) throws SQLException {
+        ResultSet res = findById(id);
+        while (res.next()) {
+            setAll(res);
+        }
+    }
     
+    /**
+     *
+     * @param id
+     * @return @throws SQLException
+     */
+    @Override
+    protected ResultSet findById(Integer id) throws SQLException {
+        String query = join() + " WHERE (aula.id) = ?";
+        statement = connection.prepareStatement(query);
+        statement.setInt(1, id);
+        return statement.executeQuery();
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    private String join(){
+        String query = "SELECT aula.id, aula.fkProfessor, aula.fkDisciplina, aula.data,\n" +
+                "prof.matricula, prof.nome, prof.endereco, prof.telefone, prof.valor_hora,\n" +
+                "disc.carga_horaria, disc.codigo, disc.conteudo, disc.tipo\n" +
+                "FROM curso.aula as aula\n" +
+                "INNER JOIN curso.professor as prof ON prof.id = aula.fkProfessor\n" +
+                "INNER JOIN curso.disciplina as disc ON disc.id = aula.fkDisciplina\n";
+        return query;
+    }
+
+    
+
+    /**
+     *
+     * @param res
+     * @throws SQLException
+     */
+    protected void setAll(ResultSet res) throws SQLException {
+        this.disciplina.setId(res.getInt("fkDisciplina"));
+        this.disciplina.setTipo(res.getString("tipo"));
+        this.disciplina.setConteudo(res.getString("conteudo"));
+        this.disciplina.setCodigo(res.getString("codigo"));
+        this.disciplina.setCargaHoraria(res.getDouble("carga_horaria"));
+        
+        this.professor.setId(res.getInt("fkProfessor"));
+        this.professor.setValorHora(res.getDouble("valor_hora"));
+        this.professor.setTelefone(res.getString("telefone"));
+        this.professor.setNome(res.getString("nome"));
+        this.professor.setMatricula(res.getString("matricula"));
+        this.professor.setEndereco(res.getString("endereco"));
+        
+        setData(res.getString("data"));
+        setId(res.getInt("id"));
+    }
 }

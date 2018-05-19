@@ -58,6 +58,6 @@ public interface IAula {
      *
      * @return @throws SQLException
      */
-//    public List<Aula> getAll() throws SQLException;
+    public List<Aula> getAll() throws SQLException;
 
 }

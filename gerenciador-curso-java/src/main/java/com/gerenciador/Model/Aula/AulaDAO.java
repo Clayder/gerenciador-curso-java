@@ -130,7 +130,37 @@ abstract class AulaDAO extends Model {
         return query;
     }
 
+    /**
+     *
+     * @return @throws SQLException
+     */
+    public List<Aula> getAll() throws SQLException {
+        
+        ResultSet res = findAll();
+        List<Aula> aulas = new ArrayList<>();
+        while (res.next()) {
+            IProfessor professor = new Professor();
+            
+            IDisciplina disciplina = new Disciplina();
+            
+            Aula aula = new Aula(professor, disciplina);
+            aula.setAll(res);
+            aulas.add(aula);
+        }
+
+        return aulas;
+    }
     
+     /**
+     * 
+     * @return @throws SQLException
+     */
+    @Override
+    public ResultSet findAll() throws SQLException {
+        String query = join() ;
+        statement = connection.prepareStatement(query);
+        return statement.executeQuery();
+    }
 
     /**
      *

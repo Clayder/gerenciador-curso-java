@@ -59,5 +59,9 @@ public interface IAula {
      * @return @throws SQLException
      */
     public List<Aula> getAll() throws SQLException;
+    
+    public void setDisciplina(IDisciplina disciplina);
+
+    public void setProfessor(IProfessor professor);
 
 }

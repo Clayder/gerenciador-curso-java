@@ -41,7 +41,15 @@ abstract class AulaDAO extends Model {
     public IProfessor getProfessor() {
         return professor;
     }
+    
+    public void setDisciplina(IDisciplina disciplina) {
+       this.disciplina = disciplina;
+    }
 
+    public void setProfessor(IProfessor professor) {
+        this.professor = professor;
+    }
+    
     public List<IAluno> getAlunos() {
         return alunos;
     }

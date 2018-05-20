@@ -20,7 +20,13 @@ abstract public class AulaAlunoDAO  extends Model {
         super();
         this.fkAluno = fkAluno;
         this.fkAula = fkAula;
-        TABELA = "aula-aluno";
+        TABELA = "aula_aluno";
+        setCampos();
+    }
+    
+      public AulaAlunoDAO() throws SQLException {
+        super();
+        TABELA = "aula_aluno";
         setCampos();
     }
 

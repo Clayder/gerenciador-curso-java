@@ -12,6 +12,8 @@ abstract public class AulaAlunoDAO  extends Model {
     
     /**
      *
+     * @param fkAluno
+     * @param fkAula
      * @throws SQLException
      */
     public AulaAlunoDAO(Integer fkAluno, Integer fkAula) throws SQLException {
@@ -26,22 +28,42 @@ abstract public class AulaAlunoDAO  extends Model {
         return id;
     }
 
+    /**
+     * 
+     * @param id 
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Integer getFkAluno() {
         return fkAluno;
     }
 
+    /**
+     * 
+     * @param fkAluno 
+     */
     public void setFkAluno(Integer fkAluno) {
         this.fkAluno = fkAluno;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Integer getFkAula() {
         return fkAula;
     }
 
+    /**
+     * 
+     * @param fkAula 
+     */
     public void setFkAula(Integer fkAula) {
         this.fkAula = fkAula;
     }
@@ -69,6 +91,11 @@ abstract public class AulaAlunoDAO  extends Model {
         statement.execute();
     }
 
+    /**
+     * 
+     * @param id
+     * @throws SQLException 
+     */
     @Override
     public void setById(Integer id) throws SQLException {
         ResultSet res = findById(id);

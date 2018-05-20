@@ -7,13 +7,14 @@ package com.gerenciador;
 
 import com.gerenciador.Model.Aluno.Aluno;
 import com.gerenciador.Model.Aluno.IAluno;
+import com.gerenciador.Model.Aula.Aula;
+import com.gerenciador.Model.Aula.IAula;
 import com.gerenciador.Model.Disciplina.Disciplina;
 import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Professor.IProfessor;
 import com.gerenciador.Model.Professor.Professor;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
@@ -26,20 +27,19 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException {
 
-        IProfessor p = new Professor();
-//
-//        /*
+        
+
 //        p.setEndereco("Rua bangu");
-//        p.setMatricula("123874598");
+//        p.setMatricula("123874522298");
 //        p.setNome("Peter");
 //        p.setTelefone("21 971579961");
 //        p.setValorHora(130.00);
 //        p.insert();
-//         */
+//
 //        p.setById(5);
 //
 //        System.out.println(p.getNome());
-//
+
 //        /*
 //        ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
 //        for (Professor movie : data) {
@@ -69,7 +69,7 @@ public class Main {
 //        a.removeById(1);
 
         /* ***************** Disciplina ************************************* */
-        IDisciplina d = new Disciplina();
+//        IDisciplina d = new Disciplina();
         
 //        d.setCargaHoraria(23.4);
 //        d.setCodigo("1111");
@@ -90,6 +90,40 @@ public class Main {
 //        }
           
 //          d.removeById(1);
+
+//        Aulas 
+
+    IProfessor p = new Professor();
+    p.setById(5);
+//    System.out.println(p.getNome());
+//    
+    IDisciplina d = new Disciplina();
+    d.setById(2);
+//    System.out.println(d.getConteudo());
+
+    IAula al = new Aula(p, d);
+//    al.setData("2018-03-02");
+//    al.insert();
+//    al.setById(3);
+//    al.setData("2011-01-03");
+//    al.update();
+      al.removeById(3);
+//    IProfessor p1 = new Professor();
+//    p1.setById(7);
+//    
+//    al.setProfessor(p1);
+    
+//    System.out.println(al.getDisciplina().getCargaHoraria());
+//    
+//    al.update();
+    
+//    System.out.println(al.getProfessor().getNome());
+//
+//        ArrayList<Aula> data = (ArrayList<Aula>) al.getAll();
+//        for (Aula movie : data) {
+//            System.out.println("Id: " + movie.getId());
+//            System.out.println("Name: " + movie.getDisciplina().getConteudo());
+//        }
     
     }
 

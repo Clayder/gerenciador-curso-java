@@ -16,7 +16,6 @@ abstract class AulaDAO extends Model {
     private Integer id;
     private IDisciplina disciplina;
     private IProfessor professor;
-    private List<IAluno> alunos;
     private String data;
 
     public AulaDAO(IProfessor professor, IDisciplina disciplina) throws SQLException {
@@ -48,14 +47,6 @@ abstract class AulaDAO extends Model {
 
     public void setProfessor(IProfessor professor) {
         this.professor = professor;
-    }
-    
-    public List<IAluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(int alunoId) {
-        this.alunos = alunos;
     }
 
     public String getData() {

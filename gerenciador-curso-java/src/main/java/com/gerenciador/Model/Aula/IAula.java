@@ -1,6 +1,5 @@
 package com.gerenciador.Model.Aula;
 
-import com.gerenciador.Model.Aluno.*;
 import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Professor.IProfessor;
 import java.sql.ResultSet;
@@ -30,10 +29,6 @@ public interface IAula {
     public IDisciplina getDisciplina() ;
 
     public IProfessor getProfessor() ;
-
-    public List<IAluno> getAlunos();
-
-    public void setAlunos(int alunoId);
 
     public String getData() ;
 

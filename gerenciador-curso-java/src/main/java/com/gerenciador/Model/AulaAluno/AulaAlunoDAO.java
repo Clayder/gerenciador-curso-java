@@ -1,24 +1,23 @@
 package com.gerenciador.Model.AulaAluno;
 
-import com.gerenciador.Model.Aluno.IAluno;
-import com.gerenciador.Model.Aula.IAula;
 import com.gerenciador.Model.Model;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AulaAluno  extends Model {
+public class AulaAlunoDAO  extends Model {
     
     private Integer id;
-    private IAluno aluno;
-    private IAula aula;
+    private Integer fkAluno;
+    private Integer fkAula;
     
     /**
      *
      * @throws SQLException
      */
-    public AulaAluno(IAula aula, IAluno aluno) throws SQLException {
+    public AulaAlunoDAO(Integer fkAluno, Integer fkAula) throws SQLException {
         super();
-        this.aluno = aluno;
-        this.aula = aula;
+        this.fkAluno = fkAluno;
+        this.fkAula = fkAula;
         TABELA = "aula-aluno";
         setCampos();
     }
@@ -31,23 +30,21 @@ public class AulaAluno  extends Model {
         this.id = id;
     }
 
-    public IAluno getAluno() {
-        return aluno;
+    public Integer getFkAluno() {
+        return fkAluno;
     }
 
-    public void setAluno(IAluno aluno) {
-        this.aluno = aluno;
+    public void setFkAluno(Integer fkAluno) {
+        this.fkAluno = fkAluno;
     }
 
-    public IAula getAula() {
-        return aula;
+    public Integer getFkAula() {
+        return fkAula;
     }
 
-    public void setAula(IAula aula) {
-        this.aula = aula;
+    public void setFkAula(Integer fkAula) {
+        this.fkAula = fkAula;
     }
-    
-    
 
     /**
      *
@@ -57,8 +54,8 @@ public class AulaAluno  extends Model {
     public void insert() throws SQLException {
         String query = getQueryInsert();
         statement = connection.prepareStatement(query);
-        statement.setInt(1, getAula().getId());
-        statement.setInt(2, getAluno().getId());
+        statement.setInt(1, getFkAula());
+        statement.setInt(2, getFkAluno());
         statement.execute();
     }
 
@@ -66,21 +63,35 @@ public class AulaAluno  extends Model {
     public void update() throws SQLException {
         String query = getQueryUpdate();
         statement = connection.prepareStatement(query);
-        statement.setInt(1, getAula().getId());
-        statement.setInt(2, getAluno().getId());
+        statement.setInt(1, getFkAula());
+        statement.setInt(2, getFkAluno());
         statement.setInt(3, getId());
         statement.execute();
     }
 
     @Override
     public void setById(Integer id) throws SQLException {
-        
+        ResultSet res = findById(id);
+        while (res.next()) {
+            setAll(res);
+        }
     }
 
     @Override
     protected void setCampos() {
         colunasBD.add("fkAula");
         colunasBD.add("fkAluno");
+    }
+    
+    /**
+     *
+     * @param res
+     * @throws SQLException
+     */
+    protected void setAll(ResultSet res) throws SQLException {
+        setFkAula(res.getInt("fkAula"));
+        setFkAluno(res.getInt("fkAluno"));
+        setId(res.getInt("id"));
     }
     
 }

@@ -9,6 +9,8 @@ import com.gerenciador.Model.Aluno.Aluno;
 import com.gerenciador.Model.Aluno.IAluno;
 import com.gerenciador.Model.Aula.Aula;
 import com.gerenciador.Model.Aula.IAula;
+import com.gerenciador.Model.AulaAluno.AulaAluno;
+import com.gerenciador.Model.AulaAluno.IAulaAluno;
 import com.gerenciador.Model.Disciplina.Disciplina;
 import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Professor.IProfessor;
@@ -27,8 +29,6 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException {
 
-        
-
 //        p.setEndereco("Rua bangu");
 //        p.setMatricula("123874522298");
 //        p.setNome("Peter");
@@ -39,7 +39,6 @@ public class Main {
 //        p.setById(5);
 //
 //        System.out.println(p.getNome());
-
 //        /*
 //        ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
 //        for (Professor movie : data) {
@@ -48,14 +47,13 @@ public class Main {
 //        }
 //         */
 
-/* ***************** Aluno ************************************* */
+        /* ***************** Aluno ************************************* */
 //        IAluno a = new Aluno();
 //        a.setEmail("peterclayder@gmail.com");
 //        a.setMatricula("232323");
 //        a.setNome("Peter");
 //        a.setTelefone("21971579961");
 //        a.insert();
-
 //        a.setById(1);
 //        System.out.println(a.getNome());
 //        a.setNome("Pailo");
@@ -70,53 +68,46 @@ public class Main {
 
         /* ***************** Disciplina ************************************* */
 //        IDisciplina d = new Disciplina();
-        
 //        d.setCargaHoraria(23.4);
 //        d.setCodigo("1111");
 //        d.setConteudo("Tet ete te ttee");
 //        d.setTipo(d.getPRATICA());
 //        d.insert();
-
 //          d.setById(1);
 //          System.out.println("Name: " + d.getConteudo());
 //          d.setTipo(d.getTEORICA());
 //         d.setCargaHoraria(23.4);
 //          d.update();
-
 //        ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
 //        for (Disciplina movie : data) {
 //            System.out.println("Id: " + movie.getId());
 //            System.out.println("Name: " + movie.getConteudo());
 //        }
-          
 //          d.removeById(1);
-
 //        Aulas 
-
-    IProfessor p = new Professor();
-    p.setById(5);
+        IProfessor p = new Professor();
+        p.setById(5);
 //    System.out.println(p.getNome());
 //    
-    IDisciplina d = new Disciplina();
-    d.setById(2);
+        IDisciplina d = new Disciplina();
+        d.setById(2);
 //    System.out.println(d.getConteudo());
 
-    IAula al = new Aula(p, d);
+        IAula al = new Aula(p, d);
 //    al.setData("2018-03-02");
 //    al.insert();
 //    al.setById(3);
 //    al.setData("2011-01-03");
 //    al.update();
-      al.removeById(3);
+//      al.removeById(3);
 //    IProfessor p1 = new Professor();
 //    p1.setById(7);
 //    
 //    al.setProfessor(p1);
-    
+
 //    System.out.println(al.getDisciplina().getCargaHoraria());
 //    
 //    al.update();
-    
 //    System.out.println(al.getProfessor().getNome());
 //
 //        ArrayList<Aula> data = (ArrayList<Aula>) al.getAll();
@@ -124,7 +115,15 @@ public class Main {
 //            System.out.println("Id: " + movie.getId());
 //            System.out.println("Name: " + movie.getDisciplina().getConteudo());
 //        }
-    
+// Aula Aluno
+//        IAulaAluno aual = new AulaAluno(2, 1);
+//        aual.insert();
+//        IAulaAluno aual2 = new AulaAluno();
+//        aual2.removeById(2);
+//        aual2.setById(1);
+//        System.out.println(aual2.getFkAula());
+//        aual2.setFkAula(1);
+//        aual2.update();
     }
 
 }

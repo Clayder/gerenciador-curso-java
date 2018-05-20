@@ -5,8 +5,9 @@ import com.gerenciador.Model.Aluno.IAluno;
 import com.github.javafaker.Faker;
 import java.sql.SQLException;
 
-public class AlunoFaker {
+public class AlunoFaker implements IFaker{
 
+    @Override
     public void insert() throws SQLException {
 
         Faker faker = new Faker();

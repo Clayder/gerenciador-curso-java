@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.gerenciador.Model.Aula.Aluno;
+package com.gerenciador.Model.AulaAluno;
 
 import com.gerenciador.Model.Aluno.IAluno;
 import com.gerenciador.Model.Aula.IAula;

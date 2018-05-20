@@ -49,12 +49,12 @@ public class Main {
 //         */
 
 /* ***************** Aluno ************************************* */
-        IAluno a = new Aluno();
-        a.setEmail("peterclayder@gmail.com");
-        a.setMatricula("232323");
-        a.setNome("Peter");
-        a.setTelefone("21971579961");
-        a.insert();
+//        IAluno a = new Aluno();
+//        a.setEmail("peterclayder@gmail.com");
+//        a.setMatricula("232323");
+//        a.setNome("Peter");
+//        a.setTelefone("21971579961");
+//        a.insert();
 
 //        a.setById(1);
 //        System.out.println(a.getNome());

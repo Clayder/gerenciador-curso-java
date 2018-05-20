@@ -4,7 +4,7 @@ import com.gerenciador.Model.Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AulaAlunoDAO  extends Model {
+abstract public class AulaAlunoDAO  extends Model {
     
     private Integer id;
     private Integer fkAluno;

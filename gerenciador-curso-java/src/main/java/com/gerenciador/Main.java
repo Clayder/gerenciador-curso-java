@@ -10,6 +10,7 @@ import com.gerenciador.Dao.Faker.AulaAlunoFaker;
 import com.gerenciador.Dao.Faker.AulaFaker;
 import com.gerenciador.Dao.Faker.DisciplinaFaker;
 import com.gerenciador.Dao.Faker.IFaker;
+import com.gerenciador.Dao.Faker.ProfessorDisciplinaFaker;
 import com.gerenciador.Dao.Faker.ProfessorFaker;
 import com.gerenciador.Model.Aluno.Aluno;
 import com.gerenciador.Model.Aluno.IAluno;
@@ -147,19 +148,19 @@ public class Main {
 //
 //        System.out.println(randomBirthDate);
 //
-//        IFaker fake;
-////        AlunoFaker alFaker = new AlunoFaker();
-////        alFaker.insert();
+        IFaker fake;
+//        AlunoFaker alFaker = new AlunoFaker();
+//        alFaker.insert();
 //
-////        fake = new ProfessorFaker();
+        fake = new ProfessorDisciplinaFaker();
 //        fake = new AulaAlunoFaker();
-//        fake.insert();
+        fake.insert();
 // Professor Disciplina
 //        IProfessorDisciplina profDisc = new ProfessorDisciplina(5, 2);
-//        profDisc.insert();
-        IProfessorDisciplina profDisc = new ProfessorDisciplina();
-        profDisc.setById(1);
-        profDisc.removeById(1);
+////        profDisc.insert();
+//        IProfessorDisciplina profDisc = new ProfessorDisciplina();
+//        profDisc.setById(1);
+//        profDisc.removeById(1);
         
     }
 

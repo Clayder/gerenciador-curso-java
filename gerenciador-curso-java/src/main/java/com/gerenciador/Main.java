@@ -13,6 +13,8 @@ import com.gerenciador.Dao.Faker.IFaker;
 import com.gerenciador.Dao.Faker.ProfessorFaker;
 import com.gerenciador.Model.Aluno.Aluno;
 import com.gerenciador.Model.Aluno.IAluno;
+import com.gerenciador.Model.AlunoDisciplina.IProfessorDisciplina;
+import com.gerenciador.Model.AlunoDisciplina.ProfessorDisciplina;
 import com.gerenciador.Model.Aula.Aula;
 import com.gerenciador.Model.Aula.IAula;
 import com.gerenciador.Model.AulaAluno.AulaAluno;
@@ -134,24 +136,31 @@ public class Main {
 //        System.out.println(aual2.getFkAula());
 //        aual2.setFkAula(1);
 //        aual2.update();
-        Faker faker = new Faker();
-//        int idProfessor = faker.number().numberBetween(5, 50);
-        Random random = new Random();
-        int minDay = (int) LocalDate.of(2017, 1, 1).toEpochDay();
-        int maxDay = (int) LocalDate.of(2019, 1, 1).toEpochDay();
-        long randomDay = minDay + random.nextInt(maxDay - minDay);
-
-        LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
-
-        System.out.println(randomBirthDate);
-
-        IFaker fake;
-//        AlunoFaker alFaker = new AlunoFaker();
-//        alFaker.insert();
-
-//        fake = new ProfessorFaker();
-        fake = new AulaAlunoFaker();
-        fake.insert();
+//        Faker faker = new Faker();
+////        int idProfessor = faker.number().numberBetween(5, 50);
+//        Random random = new Random();
+//        int minDay = (int) LocalDate.of(2017, 1, 1).toEpochDay();
+//        int maxDay = (int) LocalDate.of(2019, 1, 1).toEpochDay();
+//        long randomDay = minDay + random.nextInt(maxDay - minDay);
+//
+//        LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
+//
+//        System.out.println(randomBirthDate);
+//
+//        IFaker fake;
+////        AlunoFaker alFaker = new AlunoFaker();
+////        alFaker.insert();
+//
+////        fake = new ProfessorFaker();
+//        fake = new AulaAlunoFaker();
+//        fake.insert();
+// Professor Disciplina
+//        IProfessorDisciplina profDisc = new ProfessorDisciplina(5, 2);
+//        profDisc.insert();
+        IProfessorDisciplina profDisc = new ProfessorDisciplina();
+        profDisc.setById(1);
+        profDisc.removeById(1);
+        
     }
 
 }

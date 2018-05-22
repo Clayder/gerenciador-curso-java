@@ -26,6 +26,11 @@ abstract class AulaDAO extends Model {
         this.disciplina = disciplina;
         setCampos();
     }
+    
+    public AulaDAO() throws SQLException {
+        TABELA = "aula";
+        setCampos();
+    }
 
     public Integer getId() {
         return id;

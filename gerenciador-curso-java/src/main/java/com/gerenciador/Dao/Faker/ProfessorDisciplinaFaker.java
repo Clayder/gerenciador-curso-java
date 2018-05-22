@@ -1,21 +1,21 @@
 package com.gerenciador.Dao.Faker;
 
-import com.gerenciador.Model.AulaAluno.AulaAluno;
-import com.gerenciador.Model.AulaAluno.IAulaAluno;
+import com.gerenciador.Model.AlunoDisciplina.IProfessorDisciplina;
+import com.gerenciador.Model.AlunoDisciplina.ProfessorDisciplina;
 import com.github.javafaker.Faker;
 import java.sql.SQLException;
 
-public class AulaAlunoFaker implements IFaker {
+public class ProfessorDisciplinaFaker implements IFaker {
 
     @Override
     public void insert() throws SQLException {
         Faker faker = new Faker();
         for (int i = 0; i < 50; i++) {
 
-            Integer idAula = faker.number().numberBetween(4, 100);
-            Integer idAluno = faker.number().numberBetween(2, 150);
+            Integer idProfessor = faker.number().numberBetween(6, 57);
+            Integer idDisciplina = faker.number().numberBetween(4, 120);
 
-            IAulaAluno aulaAluno = new AulaAluno(idAluno, idAula);
+            IProfessorDisciplina aulaAluno = new ProfessorDisciplina(idProfessor, idDisciplina);
             aulaAluno.insert();
         }
     }

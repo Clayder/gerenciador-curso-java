@@ -1,6 +1,5 @@
 package com.gerenciador.Model.Aula;
 
-import com.gerenciador.Model.Aluno.IAluno;
 import com.gerenciador.Model.Disciplina.Disciplina;
 import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Model;

@@ -5,6 +5,12 @@
  */
 package com.gerenciador;
 
+import com.gerenciador.Dao.Faker.AlunoFaker;
+import com.gerenciador.Dao.Faker.AulaAlunoFaker;
+import com.gerenciador.Dao.Faker.AulaFaker;
+import com.gerenciador.Dao.Faker.DisciplinaFaker;
+import com.gerenciador.Dao.Faker.IFaker;
+import com.gerenciador.Dao.Faker.ProfessorFaker;
 import com.gerenciador.Model.Aluno.Aluno;
 import com.gerenciador.Model.Aluno.IAluno;
 import com.gerenciador.Model.Aula.Aula;
@@ -15,8 +21,12 @@ import com.gerenciador.Model.Disciplina.Disciplina;
 import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Professor.IProfessor;
 import com.gerenciador.Model.Professor.Professor;
+import com.github.javafaker.Faker;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -124,6 +134,24 @@ public class Main {
 //        System.out.println(aual2.getFkAula());
 //        aual2.setFkAula(1);
 //        aual2.update();
+        Faker faker = new Faker();
+//        int idProfessor = faker.number().numberBetween(5, 50);
+        Random random = new Random();
+        int minDay = (int) LocalDate.of(2017, 1, 1).toEpochDay();
+        int maxDay = (int) LocalDate.of(2019, 1, 1).toEpochDay();
+        long randomDay = minDay + random.nextInt(maxDay - minDay);
+
+        LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
+
+        System.out.println(randomBirthDate);
+
+        IFaker fake;
+//        AlunoFaker alFaker = new AlunoFaker();
+//        alFaker.insert();
+
+//        fake = new ProfessorFaker();
+        fake = new AulaAlunoFaker();
+        fake.insert();
     }
 
 }

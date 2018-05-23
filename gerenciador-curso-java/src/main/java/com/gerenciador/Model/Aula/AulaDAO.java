@@ -18,7 +18,6 @@ abstract class AulaDAO extends Model {
     private IDisciplina disciplina;
     private IProfessor professor;
     private String data;
-    private List<Aluno> alunos;
 
     public AulaDAO(IProfessor professor, IDisciplina disciplina) throws SQLException {
         TABELA = "aula";
@@ -71,6 +70,7 @@ abstract class AulaDAO extends Model {
         statement = connection.prepareStatement(query);
         statement.setInt(1, getId());
         ResultSet res = statement.executeQuery();
+        List<Aluno> alunos = new ArrayList<>();
         while (res.next()) {
             IAluno aluno = new Aluno();
             aluno.setEmail(res.getString("email"));

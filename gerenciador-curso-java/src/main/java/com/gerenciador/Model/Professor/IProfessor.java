@@ -1,5 +1,6 @@
 package com.gerenciador.Model.Professor;
 
+import com.gerenciador.Model.Disciplina.Disciplina;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -47,6 +48,8 @@ public interface IProfessor {
     public void insert() throws SQLException;
 
     public void update() throws SQLException;
+    
+    public List<Disciplina> getDisciplinas() throws SQLException;
 
     /**
      *

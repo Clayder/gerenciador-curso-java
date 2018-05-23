@@ -29,6 +29,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -106,7 +107,7 @@ public class Main {
         d.setById(2);
 //    System.out.println(d.getConteudo());
 
-        IAula al = new Aula(p, d);
+//        IAula al = new Aula(p, d);
 //    al.setData("2018-03-02");
 //    al.insert();
 //    al.setById(3);
@@ -117,7 +118,6 @@ public class Main {
 //    p1.setById(7);
 //    
 //    al.setProfessor(p1);
-
 //    System.out.println(al.getDisciplina().getCargaHoraria());
 //    
 //    al.update();
@@ -148,20 +148,34 @@ public class Main {
 //
 //        System.out.println(randomBirthDate);
 //
-        IFaker fake;
-//        AlunoFaker alFaker = new AlunoFaker();
-//        alFaker.insert();
-//
-        fake = new ProfessorDisciplinaFaker();
-//        fake = new AulaAlunoFaker();
-        fake.insert();
+//        IFaker fake;
+////        AlunoFaker alFaker = new AlunoFaker();
+////        alFaker.insert();
+////
+//        fake = new ProfessorDisciplinaFaker();
+////        fake = new AulaAlunoFaker();
+//        fake.insert();
 // Professor Disciplina
 //        IProfessorDisciplina profDisc = new ProfessorDisciplina(5, 2);
 ////        profDisc.insert();
 //        IProfessorDisciplina profDisc = new ProfessorDisciplina();
 //        profDisc.setById(1);
 //        profDisc.removeById(1);
-        
+        IProfessor p2 = new Professor();
+//        p.setById(5);
+//    System.out.println(p.getNome());
+//    
+        IDisciplina d2 = new Disciplina();
+//        d.setById(2);
+        IAula al = new Aula(p2, d2);
+        al.setById(71);
+        System.out.println(al.getId());
+        List<Aluno> data = al.getAlunos();
+        for (Aluno movie : data) {
+            System.out.println("Id: " + movie.getId());
+            System.out.println("Name: " + movie.getNome());
+        }
+
     }
 
 }

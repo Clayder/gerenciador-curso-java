@@ -10,7 +10,4 @@ public class Aula extends AulaDAO implements IAula {
         super(p, d);
     }
     
-    public Aula() throws SQLException {
-        super();
-    }
 }

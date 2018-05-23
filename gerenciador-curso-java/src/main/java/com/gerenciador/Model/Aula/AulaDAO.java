@@ -1,5 +1,7 @@
 package com.gerenciador.Model.Aula;
 
+import com.gerenciador.Model.Aluno.Aluno;
+import com.gerenciador.Model.Aluno.IAluno;
 import com.gerenciador.Model.Disciplina.Disciplina;
 import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Model;
@@ -39,9 +41,9 @@ abstract class AulaDAO extends Model {
     public IProfessor getProfessor() {
         return professor;
     }
-    
+
     public void setDisciplina(IDisciplina disciplina) {
-       this.disciplina = disciplina;
+        this.disciplina = disciplina;
     }
 
     public void setProfessor(IProfessor professor) {
@@ -54,6 +56,26 @@ abstract class AulaDAO extends Model {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public List<Aluno> getAlunos() throws SQLException {
+        String query = "SELECT aula_aluno.id, aluno.nome, aluno.telefone, aluno.matricula, aluno.email, aluno.id as id_aluno FROM curso.aula_aluno as aula_aluno\n"
+                + "INNER JOIN curso.aluno as aluno ON aluno.id = aula_aluno.fkAluno\n"
+                + "where fkAula = ?";
+        statement = connection.prepareStatement(query);
+        statement.setInt(1, getId());
+        ResultSet res = statement.executeQuery();
+        List<Aluno> alunos = new ArrayList<>();
+        while (res.next()) {
+            IAluno aluno = new Aluno();
+            aluno.setEmail(res.getString("email"));
+            aluno.setId(res.getInt("id_aluno"));
+            aluno.setMatricula(res.getString("matricula"));
+            aluno.setNome(res.getString("nome"));
+            aluno.setTelefone(res.getString("telefone"));
+            alunos.add((Aluno) aluno);
+        }
+        return alunos;
     }
 
     @Override
@@ -100,7 +122,7 @@ abstract class AulaDAO extends Model {
             setAll(res);
         }
     }
-    
+
     /**
      *
      * @param id
@@ -113,18 +135,18 @@ abstract class AulaDAO extends Model {
         statement.setInt(1, id);
         return statement.executeQuery();
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
-    private String join(){
-        String query = "SELECT aula.id, aula.fkProfessor, aula.fkDisciplina, aula.data,\n" +
-                "prof.matricula, prof.nome, prof.endereco, prof.telefone, prof.valor_hora,\n" +
-                "disc.carga_horaria, disc.codigo, disc.conteudo, disc.tipo\n" +
-                "FROM curso.aula as aula\n" +
-                "INNER JOIN curso.professor as prof ON prof.id = aula.fkProfessor\n" +
-                "INNER JOIN curso.disciplina as disc ON disc.id = aula.fkDisciplina\n";
+    private String join() {
+        String query = "SELECT aula.id, aula.fkProfessor, aula.fkDisciplina, aula.data,\n"
+                + "prof.matricula, prof.nome, prof.endereco, prof.telefone, prof.valor_hora,\n"
+                + "disc.carga_horaria, disc.codigo, disc.conteudo, disc.tipo\n"
+                + "FROM curso.aula as aula\n"
+                + "INNER JOIN curso.professor as prof ON prof.id = aula.fkProfessor\n"
+                + "INNER JOIN curso.disciplina as disc ON disc.id = aula.fkDisciplina\n";
         return query;
     }
 
@@ -133,14 +155,14 @@ abstract class AulaDAO extends Model {
      * @return @throws SQLException
      */
     public List<Aula> getAll() throws SQLException {
-        
+
         ResultSet res = findAll();
         List<Aula> aulas = new ArrayList<>();
         while (res.next()) {
             IProfessor professor = new Professor();
-            
+
             IDisciplina disciplina = new Disciplina();
-            
+
             Aula aula = new Aula(professor, disciplina);
             aula.setAll(res);
             aulas.add(aula);
@@ -148,14 +170,14 @@ abstract class AulaDAO extends Model {
 
         return aulas;
     }
-    
-     /**
-     * 
+
+    /**
+     *
      * @return @throws SQLException
      */
     @Override
     public ResultSet findAll() throws SQLException {
-        String query = join() ;
+        String query = join();
         statement = connection.prepareStatement(query);
         return statement.executeQuery();
     }
@@ -171,14 +193,14 @@ abstract class AulaDAO extends Model {
         this.disciplina.setConteudo(res.getString("conteudo"));
         this.disciplina.setCodigo(res.getString("codigo"));
         this.disciplina.setCargaHoraria(res.getDouble("carga_horaria"));
-        
+
         this.professor.setId(res.getInt("fkProfessor"));
         this.professor.setValorHora(res.getDouble("valor_hora"));
         this.professor.setTelefone(res.getString("telefone"));
         this.professor.setNome(res.getString("nome"));
         this.professor.setMatricula(res.getString("matricula"));
         this.professor.setEndereco(res.getString("endereco"));
-        
+
         setData(res.getString("data"));
         setId(res.getInt("id"));
     }

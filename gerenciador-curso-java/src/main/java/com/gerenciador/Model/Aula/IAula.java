@@ -1,5 +1,6 @@
 package com.gerenciador.Model.Aula;
 
+import com.gerenciador.Model.Aluno.Aluno;
 import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Professor.IProfessor;
 import java.sql.ResultSet;
@@ -48,6 +49,8 @@ public interface IAula {
      * @throws SQLException
      */
     public void setById(Integer id) throws SQLException;
+    
+    public List<Aluno> getAlunos() throws SQLException;
 
     /**
      *

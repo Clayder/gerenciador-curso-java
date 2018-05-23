@@ -1,5 +1,7 @@
 package com.gerenciador.Model.Professor;
 
+import com.gerenciador.Model.Disciplina.Disciplina;
+import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,6 +69,27 @@ class ProfessorDAO extends Model {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<Disciplina> getDisciplinas() throws SQLException {
+        String query = "SELECT prof_disc.id, prof_disc.fkProfessor, disciplina.carga_horaria, disciplina.codigo, disciplina.conteudo, disciplina.id as disciplina_id, disciplina.tipo\n"
+                + "FROM curso.professor_disciplinas as prof_disc\n"
+                + "INNER JOIN curso.disciplina as disciplina ON disciplina.id = prof_disc.fkDisciplina\n"
+                + "where prof_disc.fkProfessor = ?";
+        statement = connection.prepareStatement(query);
+        statement.setInt(1, getId());
+        ResultSet res = statement.executeQuery();
+        List<Disciplina> disciplinas = new ArrayList<>();
+        while (res.next()) {
+            IDisciplina disc = new Disciplina();
+            disc.setCargaHoraria(res.getDouble("carga_horaria"));
+            disc.setCodigo(res.getString("codigo"));
+            disc.setConteudo(res.getString("conteudo"));
+            disc.setId(res.getInt("disciplina_id"));
+            disc.setTipo(res.getString("tipo"));
+            disciplinas.add((Disciplina) disc);
+        }
+        return disciplinas ;
     }
 
     protected void setCampos() {

@@ -167,13 +167,22 @@ public class Main {
 //    
         IDisciplina d2 = new Disciplina();
 //        d.setById(2);
-        IAula al = new Aula(p2, d2);
-        al.setById(71);
-        System.out.println(al.getId());
-        List<Aluno> data = al.getAlunos();
-        for (Aluno movie : data) {
+//        IAula al = new Aula(p2, d2);
+//        al.setById(71);
+//        System.out.println(al.getId());
+//        List<Aluno> data = al.getAlunos();
+//        for (Aluno movie : data) {
+//            System.out.println("Id: " + movie.getId());
+//            System.out.println("Name: " + movie.getNome());
+//        }
+
+        IProfessor prof = new Professor();
+        prof.setById(24);
+
+        List<Disciplina> data = prof.getDisciplinas();
+        for (Disciplina movie : data) {
             System.out.println("Id: " + movie.getId());
-            System.out.println("Name: " + movie.getNome());
+            System.out.println("Name: " + movie.getConteudo());
         }
 
     }

@@ -24,6 +24,7 @@ import com.gerenciador.Model.Disciplina.Disciplina;
 import com.gerenciador.Model.Disciplina.IDisciplina;
 import com.gerenciador.Model.Professor.IProfessor;
 import com.gerenciador.Model.Professor.Professor;
+import com.gerenciador.Model.Relatorio.Relatorio;
 import com.github.javafaker.Faker;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -175,15 +176,18 @@ public class Main {
 //            System.out.println("Id: " + movie.getId());
 //            System.out.println("Name: " + movie.getNome());
 //        }
+//
+//        IProfessor prof = new Professor();
+//        prof.setById(24);
+//
+//        List<Disciplina> data = prof.getDisciplinas();
+//        for (Disciplina movie : data) {
+//            System.out.println("Id: " + movie.getId());
+//            System.out.println("Name: " + movie.getConteudo());
+//        }
 
-        IProfessor prof = new Professor();
-        prof.setById(24);
-
-        List<Disciplina> data = prof.getDisciplinas();
-        for (Disciplina movie : data) {
-            System.out.println("Id: " + movie.getId());
-            System.out.println("Name: " + movie.getConteudo());
-        }
+            Relatorio r = new Relatorio();
+            r.pagamentoProfessor(2017, null);
 
     }
 

@@ -1,17 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gerenciador;
 
-import com.gerenciador.Dao.Faker.AlunoFaker;
-import com.gerenciador.Dao.Faker.AulaAlunoFaker;
-import com.gerenciador.Dao.Faker.AulaFaker;
-import com.gerenciador.Dao.Faker.DisciplinaFaker;
-import com.gerenciador.Dao.Faker.IFaker;
-import com.gerenciador.Dao.Faker.ProfessorDisciplinaFaker;
-import com.gerenciador.Dao.Faker.ProfessorFaker;
+import App.View.Menu;
+import App.View.IView;
 import com.gerenciador.Model.Aluno.Aluno;
 import com.gerenciador.Model.Aluno.IAluno;
 import com.gerenciador.Model.AlunoDisciplina.IProfessorDisciplina;
@@ -26,12 +16,14 @@ import com.gerenciador.Model.Professor.IProfessor;
 import com.gerenciador.Model.Professor.Professor;
 import com.gerenciador.Model.Relatorio.Relatorio;
 import com.github.javafaker.Faker;
+import static java.lang.System.exit;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -43,7 +35,11 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
+        
+        IView menu = new Menu();
+        menu.init();
 
+//        
 //        p.setEndereco("Rua bangu");
 //        p.setMatricula("123874522298");
 //        p.setNome("Peter");
@@ -186,9 +182,13 @@ public class Main {
 //            System.out.println("Name: " + movie.getConteudo());
 //        }
 
-            Relatorio r = new Relatorio();
-            r.pagamentoProfessor(2017, null);
+        Relatorio r = new Relatorio();
+        r.pagamentoProfessor(2017, null);
 
     }
+
+    
+
+    
 
 }

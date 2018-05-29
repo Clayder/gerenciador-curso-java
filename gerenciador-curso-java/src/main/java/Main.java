@@ -13,10 +13,17 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/App/View/Professor/Cadastrar.fxml"));
 
         Scene scene = new Scene(root);
+        
+        /**
+         * abre a tela maximizada
+         */
         stage.centerOnScreen();
-        stage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
-        stage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        
         stage.setTitle("Cadastro de professores");
+        
+        
 
         stage.setScene(scene);
         stage.show();

@@ -18,6 +18,11 @@ public class ProfessorView implements IView {
         switch (op2) {
             case 1:
                 System.out.println("Cadastrar");
+                System.out.print("Forneça o nome: ");
+                System.out.print("Forneça a matrícula: ");
+                System.out.print("Forneça o endereço: ");
+                System.out.print("Forneça o valor hora: ");
+                System.out.print("Forneça o telefone: ");
                 break;
             case 2:
                 System.out.println("Listar");

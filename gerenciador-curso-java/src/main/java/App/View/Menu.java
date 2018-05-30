@@ -43,7 +43,6 @@ public class Menu implements IView {
                     view = new RelatorioView();
                     view.init();
                     break;
-                   
                 case 6:
                     System.exit(0);
                     break;

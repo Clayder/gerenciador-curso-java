@@ -23,6 +23,27 @@ class ProfessorDAO extends Model {
         setCampos();
     }
 
+    /**
+     *
+     * @param matricula
+     * @param nome
+     * @param endereco
+     * @param telefone
+     * @param valorHora
+     * @throws SQLException
+     */
+    public ProfessorDAO(String matricula, String nome, String endereco, String telefone, double valorHora) throws SQLException {
+        super();
+        this.matricula = matricula;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.valorHora = valorHora;
+
+        TABELA = "professor";
+        setCampos();
+    }
+
     public Integer getId() {
         return id;
     }
@@ -89,7 +110,7 @@ class ProfessorDAO extends Model {
             disc.setTipo(res.getString("tipo"));
             disciplinas.add((Disciplina) disc);
         }
-        return disciplinas ;
+        return disciplinas;
     }
 
     protected void setCampos() {
@@ -139,6 +160,29 @@ class ProfessorDAO extends Model {
         ResultSet res = findById(id);
         while (res.next()) {
             setAll(res);
+        }
+    }
+
+    /**
+     * 
+     * @param matricula
+     * @return
+     * @throws SQLException 
+     */
+    public boolean existeMatricula(String matricula) throws SQLException{
+        String query = "SELECT count(curso.professor.matricula) as qty FROM curso.professor "
+                + "where curso.professor.matricula = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1, matricula);
+        ResultSet res = statement.executeQuery();
+        int qty = 0;
+        while (res.next()) {
+            qty = res.getInt("qty");
+        }
+        if(qty == 1){
+            return true;
+        }else{
+            return false;
         }
     }
 

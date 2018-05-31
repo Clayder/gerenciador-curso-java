@@ -20,6 +20,7 @@ public interface IProfessor {
      */
     public void removeById(Integer id) throws SQLException;
     
+    public boolean existeMatricula(String matricula) throws SQLException;
     
     public Integer getId();
 

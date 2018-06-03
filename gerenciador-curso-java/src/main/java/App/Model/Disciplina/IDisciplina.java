@@ -40,6 +40,8 @@ public interface IDisciplina {
     public String getTEORICA();
 
     public void setTipo(String tipo);
+    
+    public boolean existe(String valor, String campo) throws SQLException;
 
     /**
      *

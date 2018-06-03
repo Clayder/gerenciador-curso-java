@@ -22,7 +22,7 @@ public class ConnectionFactory {
      * @throws SQLException
      * @throws ClassNotFoundException 
      */
-    private static Connection createConnection() throws SQLException, ClassNotFoundException{
+    private Connection createConnection() throws SQLException, ClassNotFoundException{
         Connection connection = null;
         try{
             Class.forName(DRIVER_CLASS);
@@ -38,7 +38,7 @@ public class ConnectionFactory {
      * @return
      * @throws SQLException 
      */
-    public static Connection getConnection() throws SQLException{
+    public Connection getConnection() throws SQLException{
         try{
             return createConnection();
         }catch(ClassNotFoundException e){

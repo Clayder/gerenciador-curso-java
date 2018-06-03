@@ -11,13 +11,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public abstract class Dao {
-    protected static Connection connection = null;
+    protected Connection connection = null;
     protected String TABELA;
     protected ArrayList<String> colunasBD;
     protected static PreparedStatement statement = null;
     
     public Dao() throws SQLException {
-        connection = ConnectionFactory.getConnection();
+        ConnectionFactory factory = new ConnectionFactory();
+        connection = factory.getConnection();
         colunasBD = new ArrayList<>();
     }
     

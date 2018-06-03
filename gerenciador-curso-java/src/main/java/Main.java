@@ -3,6 +3,7 @@ import App.Controller.Professor.ProfessorController;
 import App.View.IView;
 import App.View.Menu;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 public class Main {
 
@@ -11,6 +12,7 @@ public class Main {
      * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
+        org.apache.log4j.PropertyConfigurator.configure("src\\test\\java\\log4j.properties");
         
         IView menu = new Menu();
         menu.init();

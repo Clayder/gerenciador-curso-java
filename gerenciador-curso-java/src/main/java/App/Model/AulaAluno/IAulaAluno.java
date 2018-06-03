@@ -9,6 +9,8 @@ public interface IAulaAluno {
      * @return @throws SQLException
      */
     public ResultSet findAll() throws SQLException;
+    
+    public boolean existe(String valor, String campo) throws SQLException;
 
     /**
      *

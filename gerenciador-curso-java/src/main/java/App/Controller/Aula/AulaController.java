@@ -1,7 +1,11 @@
 package App.Controller.Aula;
 
+import App.Model.Aluno.Aluno;
+import App.Model.Aluno.IAluno;
 import App.Model.Aula.Aula;
 import App.Model.Aula.IAula;
+import App.Model.AulaAluno.AulaAluno;
+import App.Model.AulaAluno.IAulaAluno;
 import App.Model.Disciplina.Disciplina;
 import App.Model.Disciplina.IDisciplina;
 import App.Model.Professor.IProfessor;
@@ -20,27 +24,37 @@ public class AulaController {
         this.idDisciplina = idDisciplina;
         this.data = data;
     }
-    
+
     public AulaController() {
 
     }
-    
-    public boolean existeProfessor(String id) throws SQLException{
+
+    public boolean existeProfessor(String id) throws SQLException {
         IProfessor professor = new Professor();
         return professor.existe(id, "id");
     }
     
-    public boolean existeDisciplina(String id) throws SQLException{
+    public boolean existeAula(String id) throws SQLException {
+        IAula aula = new Aula();
+        return aula.existe(id, "id");
+    }
+    
+     public boolean existeAluno(String id) throws SQLException {
+        IAluno aluno = new Aluno();
+        return aluno.existe(id, "id");
+    }
+
+    public boolean existeDisciplina(String id) throws SQLException {
         IDisciplina disciplina = new Disciplina();
         return disciplina.existe(id, "id");
     }
 
     public void addAula(Integer idProfessor, Integer idDisciplina, String data) throws SQLException {
-        
+
         this.idProfessor = idProfessor;
         this.idDisciplina = idDisciplina;
         this.data = data;
-        
+
         IProfessor professor = new Professor();
         professor.setById(idProfessor);
 
@@ -64,15 +78,39 @@ public class AulaController {
             System.out.println("---------------------------------------------------");
         }
     }
-    
+
     public void disciplinas() throws SQLException {
         IDisciplina d = new Disciplina();
         ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
         System.out.println("---------------- Lista de disciplinas ----------------");
         System.out.println("ID   |  Codigo  ");
         for (Disciplina disciplina : data) {
-            System.out.println(disciplina.getId() + "   |  " + disciplina.getCodigo()+"  ");
+            System.out.println(disciplina.getId() + "   |  " + disciplina.getCodigo() + "  ");
         }
-         
+    }
+
+    public void aulas() throws SQLException {
+        IAula aulas = new Aula();
+        ArrayList<Aula> data = (ArrayList<Aula>) aulas.getAll();
+        System.out.println("---------------- Lista de aulas ----------------");
+        System.out.println("ID   |  Codigo disciplina  ");
+        for (Aula aula : data) {
+            System.out.println(aula.getId() + "   |  " + aula.getDisciplina().getCodigo() + "  ");
+        }
+    }
+
+    public void alunos() throws SQLException {
+        IAluno alunos = new Aluno();
+        ArrayList<Aluno> data = (ArrayList<Aluno>) alunos.getAll();
+        System.out.println("---------------- Lista de aulas ----------------");
+        System.out.println("ID   |  Codigo disciplina  ");
+        for (Aluno aluno : data) {
+            System.out.println(aluno.getId() + "   |  " + aluno.getNome() + "  ");
+        }
+    }
+    
+    public void addAlunoAula(Integer fkAluno, Integer fkAula) throws SQLException{
+        IAulaAluno aulaAluno = new AulaAluno(fkAluno, fkAula);
+        aulaAluno.insert();
     }
 }

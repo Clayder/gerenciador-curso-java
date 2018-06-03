@@ -14,20 +14,19 @@ public class AulaView implements IView {
     public void init() {
         Scanner teclado = new Scanner(System.in);
         System.out.println(" ****** 3.Aula ****** ");
-        System.out.println("3.1- Cadastrar");
-        System.out.println("3.2- Listar");
-        System.out.println("3.3- Pesquisar");
+        System.out.println("3.1- Cadastrar Aula");
+        System.out.println("3.2- Cadastrar alunos em uma aula");
+        System.out.println("3.3- Listar");
+        System.out.println("3.4- Pesquisar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
+        AulaController aula = new AulaController();
         switch (op2) {
             case 1:
                 System.out.println("Cadastrar aula");
-                
-                 System.out.println("Forneça a data: ");
-                String data = teclado.nextLine();
-                
-                AulaController aula = new AulaController();
 
+                System.out.println("Forneça a data: ");
+                String data = teclado.nextLine();
                  {
                     try {
                         aula.disciplinas();
@@ -80,10 +79,66 @@ public class AulaView implements IView {
                 }
 
                 break;
+
             case 2:
-                System.out.println("Listar");
+                System.out.println("Cadastrar alunos em aula");
+
+                 {
+                    try {
+                        aula.aulas();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                System.out.println("Forneça o id da aula: ");
+                String idAula = teclado.nextLine();
+                 {
+                    try {
+                        while (!aula.existeAula(idAula)) {
+                            System.err.println("Essa aula não existe.");
+                            System.out.println("Forneça o id da aula: ");
+                            idAula = teclado.nextLine();
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
+
+                 {
+                    try {
+                        aula.alunos();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                System.out.println("Forneça o id do aluno: ");
+                String idAluno = teclado.nextLine();
+
+                 {
+                    try {
+                        while (!aula.existeAluno(idAluno)) {
+                            System.err.println("Esse aluno não existe.");
+                            System.out.println("Forneça o id do aluno: ");
+                            idAluno = teclado.nextLine();
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
+                 {
+                    try {
+                        aula.addAlunoAula(Integer.parseInt(idAluno), Integer.parseInt(idAula));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                System.out.println(" Cadastro realizado. ");
                 break;
             case 3:
+                System.out.println("Listar");
+                break;
+            case 4:
                 System.out.println("Pesquisar");
                 break;
             default:

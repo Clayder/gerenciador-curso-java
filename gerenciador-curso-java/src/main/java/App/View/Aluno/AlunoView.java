@@ -6,6 +6,8 @@ import App.View.Menu;
 import App.View.IView;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AlunoView implements IView {
 
@@ -26,12 +28,27 @@ public class AlunoView implements IView {
                  {
                     try {
                         while (AlunoController.existeMatricula(matricula)) {
-                            System.err.println("A matrícula não pode ser repetida.");
+                            System.out.println("A matrícula não pode ser repetida.");
                             System.out.println("Forneça a matrícula: ");
                             matricula = teclado.nextLine();
                         }
                     } catch (SQLException ex) {
                         System.out.println(ex.getMessage());
+                    }
+                }
+                System.out.println("Forneça o nome: ");
+                String nome = teclado.nextLine();
+                System.out.println("Forneça o telefone: ");
+                String telefone = teclado.nextLine();
+                System.out.println("Forneça o e-mail: ");
+                String email = teclado.nextLine();
+
+                AlunoController aluno = new AlunoController(matricula, nome, telefone, email);
+                 {
+                    try {
+                        aluno.add();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;

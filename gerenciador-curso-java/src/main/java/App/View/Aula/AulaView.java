@@ -22,10 +22,15 @@ public class AulaView implements IView {
         switch (op2) {
             case 1:
                 System.out.println("Cadastrar aula");
+                
+                 System.out.println("Forneça a data: ");
+                String data = teclado.nextLine();
+                
+                AulaController aula = new AulaController();
 
                  {
                     try {
-                        AulaController.disciplinas();
+                        aula.disciplinas();
                     } catch (SQLException ex) {
                         Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -35,7 +40,7 @@ public class AulaView implements IView {
 
                  {
                     try {
-                        while (!AulaController.existeDisciplina(idDisciplina)) {
+                        while (!aula.existeDisciplina(idDisciplina)) {
                             System.err.println("Essa disciplina não existe.");
                             System.out.println("Forneça o id da disciplina: ");
                             idDisciplina = teclado.nextLine();
@@ -47,7 +52,7 @@ public class AulaView implements IView {
 
                  {
                     try {
-                        AulaController.professores();
+                        aula.professores();
                     } catch (SQLException ex) {
                         Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -57,7 +62,7 @@ public class AulaView implements IView {
 
                  {
                     try {
-                        while (!AulaController.existeProfessor(idProfessor)) {
+                        while (!aula.existeProfessor(idProfessor)) {
                             System.err.println("Esse professor não existe.");
                             System.out.println("Forneça o id do professor: ");
                             idProfessor = teclado.nextLine();
@@ -66,15 +71,9 @@ public class AulaView implements IView {
                         System.out.println(ex.getMessage());
                     }
                 }
-
-                System.out.println("Forneça a data: ");
-                String data = teclado.nextLine();
-
-                AulaController aula = new AulaController(Integer.parseInt(teclado.nextLine()), Integer.parseInt(idDisciplina), data);
-
                  {
                     try {
-                        aula.addAula();
+                        aula.addAula(Integer.parseInt(idProfessor), Integer.parseInt(idDisciplina), data);
                     } catch (SQLException ex) {
                         Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
                     }

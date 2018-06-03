@@ -21,17 +21,26 @@ public class AulaController {
         this.data = data;
     }
     
-    public static boolean existeProfessor(String id) throws SQLException{
+    public AulaController() {
+
+    }
+    
+    public boolean existeProfessor(String id) throws SQLException{
         IProfessor professor = new Professor();
         return professor.existe(id, "id");
     }
     
-    public static boolean existeDisciplina(String id) throws SQLException{
+    public boolean existeDisciplina(String id) throws SQLException{
         IDisciplina disciplina = new Disciplina();
         return disciplina.existe(id, "id");
     }
 
-    public void addAula() throws SQLException {
+    public void addAula(Integer idProfessor, Integer idDisciplina, String data) throws SQLException {
+        
+        this.idProfessor = idProfessor;
+        this.idDisciplina = idDisciplina;
+        this.data = data;
+        
         IProfessor professor = new Professor();
         professor.setById(idProfessor);
 
@@ -45,7 +54,7 @@ public class AulaController {
         System.out.println("Cadastrado a disciplina " + disciplina.getCodigo() + " para o professor " + professor.getNome());
     }
 
-    public static void professores() throws SQLException {
+    public void professores() throws SQLException {
         IProfessor p = new Professor();
         ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
         System.out.println("---------------- Lista de professores ----------------");
@@ -56,7 +65,7 @@ public class AulaController {
         }
     }
     
-    public static void disciplinas() throws SQLException {
+    public void disciplinas() throws SQLException {
         IDisciplina d = new Disciplina();
         ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
         System.out.println("---------------- Lista de disciplinas ----------------");

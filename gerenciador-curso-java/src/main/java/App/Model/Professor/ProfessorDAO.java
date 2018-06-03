@@ -164,29 +164,6 @@ class ProfessorDAO extends Model {
     }
 
     /**
-     * 
-     * @param matricula
-     * @return
-     * @throws SQLException 
-     */
-    public boolean existeMatricula(String matricula) throws SQLException{
-        String query = "SELECT count(curso.professor.matricula) as qty FROM curso.professor "
-                + "where curso.professor.matricula = ?";
-        statement = connection.prepareStatement(query);
-        statement.setString(1, matricula);
-        ResultSet res = statement.executeQuery();
-        int qty = 0;
-        while (res.next()) {
-            qty = res.getInt("qty");
-        }
-        if(qty == 1){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    /**
      *
      * @return @throws SQLException
      */

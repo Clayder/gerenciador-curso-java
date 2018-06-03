@@ -33,7 +33,7 @@ public class ProfessorView implements IView {
                             matricula = teclado.nextLine();
                         }
                     } catch (SQLException ex) {
-                        Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println(ex.getMessage());
                     }
                 }
                 System.out.println("Forneça o nome: ");
@@ -49,7 +49,7 @@ public class ProfessorView implements IView {
                     try {
                         professor.add();
                     } catch (SQLException ex) {
-                        Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+                        System.out.println(ex.getMessage());
                     }
                 }
                 break;

@@ -27,6 +27,6 @@ public class ProfessorController {
     
     public static boolean existeMatricula(String matricula) throws SQLException{
         IProfessor professor = new Professor();
-        return professor.existeMatricula(matricula);
+        return professor.existe(matricula, "matricula");
     }
 }

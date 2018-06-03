@@ -29,6 +29,8 @@ public interface IAluno {
     public String getEmail();
 
     public String getTelefone();
+    
+    public boolean existe(String valor, String campo) throws SQLException;
 
     public void setMatricula(String matricula);
 

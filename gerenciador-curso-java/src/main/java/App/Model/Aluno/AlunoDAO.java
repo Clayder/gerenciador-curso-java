@@ -20,6 +20,18 @@ class AlunoDAO extends Model {
         setCampos();
     }
 
+    public AlunoDAO(String matricula, String nome, String telefone, String email) throws SQLException {
+        super();
+        this.matricula = matricula;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        TABELA = "aluno";
+        setCampos();
+    }
+    
+    
+
     public Integer getId() {
         return id;
     }

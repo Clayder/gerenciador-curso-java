@@ -1,7 +1,10 @@
 package App.View.Aluno;
 
+import App.Controller.Aluno.AlunoController;
+import App.Controller.Professor.ProfessorController;
 import App.View.Menu;
 import App.View.IView;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class AlunoView implements IView {
@@ -18,6 +21,19 @@ public class AlunoView implements IView {
         switch (op2) {
             case 1:
                 System.out.println("Cadastrar");
+                System.out.println("Forneça a matrícula: ");
+                String matricula = teclado.nextLine();
+                 {
+                    try {
+                        while (AlunoController.existeMatricula(matricula)) {
+                            System.err.println("A matrícula não pode ser repetida.");
+                            System.out.println("Forneça a matrícula: ");
+                            matricula = teclado.nextLine();
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
                 break;
             case 2:
                 System.out.println("Listar");

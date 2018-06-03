@@ -1,7 +1,7 @@
 package App.Dao.Faker;
 
-import App.Model.AlunoDisciplina.IProfessorDisciplina;
-import App.Model.AlunoDisciplina.ProfessorDisciplina;
+import App.Model.ProfessorDisciplina.IProfessorDisciplina;
+import App.Model.ProfessorDisciplina.ProfessorDisciplina;
 import com.github.javafaker.Faker;
 import java.sql.SQLException;
 

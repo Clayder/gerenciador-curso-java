@@ -5,7 +5,6 @@ import App.View.IView;
 import App.View.Menu;
 import java.sql.SQLException;
 
-
 public class Main {
 
     /**

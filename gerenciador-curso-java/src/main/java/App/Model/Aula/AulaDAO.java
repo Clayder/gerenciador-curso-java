@@ -20,9 +20,16 @@ abstract class AulaDAO extends Model {
     private String data;
 
     public AulaDAO(IProfessor professor, IDisciplina disciplina) throws SQLException {
+        super();
         TABELA = "aula";
         this.professor = professor;
         this.disciplina = disciplina;
+        setCampos();
+    }
+    
+    public AulaDAO() throws SQLException {
+        super();
+        TABELA = "aula";
         setCampos();
     }
 

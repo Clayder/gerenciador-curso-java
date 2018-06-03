@@ -1,4 +1,4 @@
-package App.Model.AlunoDisciplina;
+package App.Model.ProfessorDisciplina;
 
 import App.Model.Model;
 import java.sql.ResultSet;

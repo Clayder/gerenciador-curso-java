@@ -96,6 +96,12 @@ public class AulaController {
         System.out.println("ID   |  Codigo disciplina     |  Professor  ");
         for (Aula aula : data) {
             System.out.println(aula.getId() + "   |  " + aula.getDisciplina().getCodigo() + "   |   " + aula.getProfessor().getNome());
+            System.out.println("alunos: ");
+            String alunos = "";
+            for (Aluno a : aula.getAlunos()) {
+                alunos += "Matrícula: "+ a.getMatricula()+ " nome: " + a.getNome()+ ", ";
+            }
+            System.out.println(alunos);
         }
     }
 

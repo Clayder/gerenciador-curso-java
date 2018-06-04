@@ -1,4 +1,4 @@
-package App.Dao.Faker;
+package App.Model.Dao.Faker;
 
 import java.sql.SQLException;
 

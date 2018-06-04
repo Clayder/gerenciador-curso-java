@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package App.Dao;
+package App.Model.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

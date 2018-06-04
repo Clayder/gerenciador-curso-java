@@ -1,4 +1,4 @@
-package App.Dao.Faker;
+package App.Model.Dao.Faker;
 
 import App.Model.Disciplina.Disciplina;
 import App.Model.Disciplina.IDisciplina;

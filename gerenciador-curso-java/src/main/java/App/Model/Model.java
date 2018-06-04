@@ -1,6 +1,6 @@
 package App.Model;
 
-import App.Dao.Dao;
+import App.Model.Dao.Dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.log4j.Logger;

@@ -71,10 +71,21 @@ public class ProfessorController {
     public void professores() throws SQLException {
         IProfessor p = new Professor();
         ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
-        System.out.println("ID   |  Nome  ");
         System.out.println("---------------- Lista de professores ----------------");
         for (Professor professor : data) {
-            System.out.println(professor.getId() + "   |   " + professor.getNome());
+            System.out.println(
+                    "ID: "+professor.getId() + "   |   "
+                    + "Matrícula: " + professor.getMatricula() + "   |   "
+                    + "Nome: " + professor.getNome() + "   |   "
+                    + "Endereço: " + professor.getEndereco() + "   |   "
+                    + "Telefone: " + professor.getTelefone() + "   |   "
+                    + "Valor Hora: " + professor.getValorHora()
+            );
+            System.out.println("----------------------------"
+                    + "--------------------------------------------------"
+                    + "------------------------------------------"
+                    + "---------------------------------------"
+                    + "--------------------------------");
         }
     }
     

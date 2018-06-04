@@ -20,6 +20,7 @@ public class ProfessorView implements IView {
         System.out.println("1.3- Pesquisar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
+        ProfessorController prof = new ProfessorController();
         switch (op2) {
             case 1:
 
@@ -54,8 +55,59 @@ public class ProfessorView implements IView {
                     }
                 }
                 break;
-            case 2:
-                ProfessorController prof = new ProfessorController();
+            case 2: {
+                try {
+                    prof.professores();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            System.out.println("Forneça o id do professor: ");
+            String idProfessor = teclado.nextLine();
+
+             {
+                try {
+                    while (!prof.existeProfessor(idProfessor)) {
+                        System.err.println("Professor não cadastrado.");
+                        System.out.println("Forneça o id do professor: ");
+                        idProfessor = teclado.nextLine();
+                    }
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+
+             {
+                try {
+                    prof.disciplinas();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            System.out.println("Forneça o id da disciplina: ");
+            String idDisciplina = teclado.nextLine();
+             {
+                try {
+                    while (!prof.existeDisciplina(idDisciplina)) {
+                        System.err.println("Disciplina não cadastrada.");
+                        System.out.println("Forneça o id da disciplina: ");
+                        idDisciplina = teclado.nextLine();
+                    }
+                } catch (SQLException ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+
+             {
+                try {
+                    prof.addProfessorDisciplina(Integer.parseInt(idProfessor), Integer.parseInt(idDisciplina));
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+            case 3:
                  {
                     try {
                         prof.professores();
@@ -63,53 +115,6 @@ public class ProfessorView implements IView {
                         Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                System.out.println("Forneça o id do professor: ");
-                String idProfessor = teclado.nextLine();
-
-                 {
-                    try {
-                        while (!prof.existeProfessor(idProfessor)) {
-                            System.err.println("Professor não cadastrado.");
-                            System.out.println("Forneça o id do professor: ");
-                            idProfessor = teclado.nextLine();
-                        }
-                    } catch (SQLException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                }
-
-                 {
-                    try {
-                        prof.disciplinas();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-                System.out.println("Forneça o id da disciplina: ");
-                String idDisciplina = teclado.nextLine();
-                 {
-                    try {
-                        while (!prof.existeDisciplina(idDisciplina)) {
-                            System.err.println("Disciplina não cadastrada.");
-                            System.out.println("Forneça o id da disciplina: ");
-                            idDisciplina = teclado.nextLine();
-                        }
-                    } catch (SQLException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                }
-
-                 {
-                    try {
-                        prof.addProfessorDisciplina(Integer.parseInt(idProfessor), Integer.parseInt(idDisciplina));
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                break;
-            case 3:
-                System.out.println("Pesquisar");
                 break;
             default:
                 Menu menu = new Menu();

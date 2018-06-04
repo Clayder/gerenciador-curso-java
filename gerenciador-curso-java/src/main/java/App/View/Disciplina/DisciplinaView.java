@@ -16,7 +16,6 @@ public class DisciplinaView implements IView {
         System.out.println(" ****** 4.Disciplina ****** ");
         System.out.println("4.1- Cadastrar");
         System.out.println("4.2- Listar");
-        System.out.println("4.3- Pesquisar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
         DisciplinaController disciplina = new DisciplinaController();
@@ -65,9 +64,6 @@ public class DisciplinaView implements IView {
                 break;
             case 2:
                 System.out.println("Listar");
-                break;
-            case 3:
-                System.out.println("Pesquisar");
                 break;
             default:
                 Menu menu = new Menu();

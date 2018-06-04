@@ -17,7 +17,6 @@ public class AlunoView implements IView {
         System.out.println(" ****** 2.Aluno ****** ");
         System.out.println("2.1- Cadastrar");
         System.out.println("2.2- Listar");
-        System.out.println("2.3- Pesquisar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
         switch (op2) {
@@ -62,9 +61,6 @@ public class AlunoView implements IView {
                         Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                break;
-            case 3:
-                System.out.println("Pesquisar");
                 break;
             default:
                 Menu menu = new Menu();

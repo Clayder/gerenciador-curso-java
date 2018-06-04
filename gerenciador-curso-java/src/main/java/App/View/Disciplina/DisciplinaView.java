@@ -44,15 +44,16 @@ public class DisciplinaView implements IView {
 
                 System.out.println("Forneça o tipo ( 1 para pratica ou 2 para teorica): ");
                 int idTipo = Integer.parseInt(teclado.nextLine());
-                
+
                 while (idTipo != 1 && idTipo != 2) {
                     System.out.println("Tipo inválido: ");
                     System.out.println("Forneça o tipo ( 1 para pratica ou 2 para teorica):");
                     idTipo = Integer.parseInt(teclado.nextLine());
                 }
                 String tipo = "teorica";
-                if(idTipo == 1)
+                if (idTipo == 1) {
                     tipo = "pratica";
+                }
 
                  {
                     try {
@@ -62,9 +63,14 @@ public class DisciplinaView implements IView {
                     }
                 }
                 break;
-            case 2:
-                System.out.println("Listar");
-                break;
+            case 2: {
+                try {
+                    disciplina.disciplinas();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
             default:
                 Menu menu = new Menu();
                 menu.init();

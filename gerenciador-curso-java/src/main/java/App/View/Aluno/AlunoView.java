@@ -54,6 +54,14 @@ public class AlunoView implements IView {
                 break;
             case 2:
                 System.out.println("Listar");
+                AlunoController a = new AlunoController();
+                 {
+                    try {
+                        a.alunos();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 break;
             case 3:
                 System.out.println("Pesquisar");

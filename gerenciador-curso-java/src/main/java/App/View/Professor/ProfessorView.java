@@ -17,7 +17,6 @@ public class ProfessorView implements IView {
         System.out.println("1.1- Cadastrar");
         System.out.println("1.2- Atribuir disciplina para um professor");
         System.out.println("1.3- Listar");
-        System.out.println("1.3- Pesquisar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
         ProfessorController prof = new ProfessorController();

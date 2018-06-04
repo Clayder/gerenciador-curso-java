@@ -17,7 +17,6 @@ public class AulaView implements IView {
         System.out.println("3.1- Cadastrar Aula");
         System.out.println("3.2- Cadastrar alunos em uma aula");
         System.out.println("3.3- Listar");
-        System.out.println("3.4- Pesquisar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
         AulaController aula = new AulaController();
@@ -135,12 +134,15 @@ public class AulaView implements IView {
                 }
                 System.out.println(" Cadastro realizado. ");
                 break;
-            case 3:
-                System.out.println("Listar");
-                break;
-            case 4:
-                System.out.println("Pesquisar");
-                break;
+            case 3: {
+                try {
+                    aula.aulas();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            break;
+
             default:
                 Menu menu = new Menu();
                 menu.init();

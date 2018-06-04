@@ -93,9 +93,9 @@ public class AulaController {
         IAula aulas = new Aula();
         ArrayList<Aula> data = (ArrayList<Aula>) aulas.getAll();
         System.out.println("---------------- Lista de aulas ----------------");
-        System.out.println("ID   |  Codigo disciplina  ");
+        System.out.println("ID   |  Codigo disciplina     |  Professor  ");
         for (Aula aula : data) {
-            System.out.println(aula.getId() + "   |  " + aula.getDisciplina().getCodigo() + "  ");
+            System.out.println(aula.getId() + "   |  " + aula.getDisciplina().getCodigo() + "   |   " + aula.getProfessor().getNome());
         }
     }
 

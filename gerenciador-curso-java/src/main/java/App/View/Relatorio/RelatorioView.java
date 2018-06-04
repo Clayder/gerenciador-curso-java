@@ -10,9 +10,10 @@ public class RelatorioView implements IView {
     public void init() {
         Scanner teclado = new Scanner(System.in);
         System.out.println(" ****** 5.Relatório ****** ");
-        System.out.println("5.1- Valor já arrecadado nas aulas (aulas realizadas)");
-        System.out.println("5.2- Gasto já acontecido (pago aos professores)");
-        System.out.println("5.3- Gasto ainda a acontecer (aulas agendadas)");
+        System.out.println("1- Valor já arrecadado nas aulas (aulas realizadas)");
+        System.out.println("2- Gasto já acontecido (pago aos professores)");
+        System.out.println("3- Gasto ainda a acontecer (aulas agendadas)");
+        System.out.println("4- Voltar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
         switch (op2) {

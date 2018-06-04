@@ -14,8 +14,9 @@ public class DisciplinaView implements IView {
     public void init() {
         Scanner teclado = new Scanner(System.in);
         System.out.println(" ****** 4.Disciplina ****** ");
-        System.out.println("4.1- Cadastrar");
-        System.out.println("4.2- Listar");
+        System.out.println("1- Cadastrar");
+        System.out.println("2- Listar");
+        System.out.println("3- Voltar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
         DisciplinaController disciplina = new DisciplinaController();

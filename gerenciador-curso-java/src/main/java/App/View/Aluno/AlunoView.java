@@ -15,8 +15,9 @@ public class AlunoView implements IView {
     public void init() {
         Scanner teclado = new Scanner(System.in);
         System.out.println(" ****** 2.Aluno ****** ");
-        System.out.println("2.1- Cadastrar");
-        System.out.println("2.2- Listar");
+        System.out.println("1- Cadastrar");
+        System.out.println("2- Listar");
+        System.out.println("3- Voltar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
         switch (op2) {

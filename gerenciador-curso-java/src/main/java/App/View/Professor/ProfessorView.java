@@ -14,9 +14,10 @@ public class ProfessorView implements IView {
     public void init() {
         Scanner teclado = new Scanner(System.in);
         System.out.println(" ****** 1.Professor ****** ");
-        System.out.println("1.1- Cadastrar");
-        System.out.println("1.2- Atribuir disciplina para um professor");
-        System.out.println("1.3- Listar");
+        System.out.println("1- Cadastrar");
+        System.out.println("2- Atribuir disciplina para um professor");
+        System.out.println("3- Listar");
+        System.out.println("4- Voltar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
         ProfessorController prof = new ProfessorController();

@@ -14,9 +14,10 @@ public class AulaView implements IView {
     public void init() {
         Scanner teclado = new Scanner(System.in);
         System.out.println(" ****** 3.Aula ****** ");
-        System.out.println("3.1- Cadastrar Aula");
-        System.out.println("3.2- Cadastrar alunos em uma aula");
-        System.out.println("3.3- Listar");
+        System.out.println("1- Cadastrar Aula");
+        System.out.println("2- Cadastrar alunos em uma aula");
+        System.out.println("3- Listar");
+        System.out.println("4- Voltar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
         AulaController aula = new AulaController();

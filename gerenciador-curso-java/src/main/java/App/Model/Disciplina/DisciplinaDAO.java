@@ -74,7 +74,7 @@ class DisciplinaDAO extends Model {
         colunasBD.add("tipo");
     }
     
-    private String getTipo(){
+    public String getTipo(){
         return tipo;
     }
 

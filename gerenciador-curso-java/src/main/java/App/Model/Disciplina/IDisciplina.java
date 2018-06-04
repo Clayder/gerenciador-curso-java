@@ -28,6 +28,8 @@ public interface IDisciplina {
     public void setCodigo(String codigo);
 
     public String getConteudo();
+    
+    public String getTipo();
 
     public void setConteudo(String conteudo);
 

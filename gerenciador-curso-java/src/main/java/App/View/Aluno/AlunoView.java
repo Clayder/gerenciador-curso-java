@@ -17,9 +17,11 @@ public class AlunoView implements IView {
         System.out.println(" ****** 2.Aluno ****** ");
         System.out.println("1- Cadastrar");
         System.out.println("2- Listar");
-        System.out.println("3- Voltar");
+        System.out.println("3- Editar");
+        System.out.println("4- Voltar");
         int op2;
         op2 = Integer.parseInt(teclado.nextLine());
+        AlunoController a = new AlunoController();
         switch (op2) {
             case 1:
                 System.out.println("Cadastrar");
@@ -52,9 +54,9 @@ public class AlunoView implements IView {
                     }
                 }
                 break;
+
             case 2:
                 System.out.println("Listar");
-                AlunoController a = new AlunoController();
                  {
                     try {
                         a.alunos();
@@ -63,6 +65,29 @@ public class AlunoView implements IView {
                     }
                 }
                 break;
+
+            case 3:
+                System.out.println("Editar");
+                 {
+                    try {
+                        a.alunos();
+                        System.out.println("Forneça o id do aluno: ");
+                        int id = Integer.parseInt(teclado.nextLine());
+                        
+                        System.out.println("Forneça o telefone: ");
+                        String telefone2 = teclado.nextLine();
+                        
+                        System.out.println("Forneça o e-mail: ");
+                        String email2 = teclado.nextLine();
+                        
+                        a.update(id, telefone2, email2);
+                        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+
             default:
                 Menu menu = new Menu();
                 menu.init();

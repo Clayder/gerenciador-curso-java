@@ -46,4 +46,12 @@ public class AlunoController {
     public String tab(){
         return "\t\t\t|\t\t\t";
     }
+    
+    public void update(int id, String telefone, String email) throws SQLException{
+        IAluno a = new Aluno();
+        a.setById(id);
+        a.setTelefone(telefone);
+        a.setEmail(email);
+        a.update();
+    }
 }

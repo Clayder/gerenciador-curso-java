@@ -81,14 +81,4 @@ public class ProfessorController {
         ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
         return data;
     }
-
-    public void disciplinas() throws SQLException {
-        IDisciplina d = new Disciplina();
-        ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
-        System.out.println("ID   |  Código  ");
-        System.out.println("---------------- Lista de disciplinas ----------------");
-        for (Disciplina disciplina : data) {
-            System.out.println(disciplina.getId() + "   |   " + disciplina.getCodigo());
-        }
-    }
 }

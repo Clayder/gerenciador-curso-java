@@ -25,17 +25,5 @@ public class DisciplinaController {
         IDisciplina d = new Disciplina();
         ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
         return data;
-//        System.out.println("---------------- Lista de disciplinas ----------------");
-//        for (Disciplina disciplina : data) {
-//            System.out.println("ID: " + disciplina.getId()
-//                    + "   |  Código: " + disciplina.getCodigo()
-//                    + "   |  Conteúdo: " + disciplina.getConteudo()
-//                    + "   |  Carga horária: " + disciplina.getCargaHoraria()
-//                    + "   |  Tipo: " + disciplina.getTipo()
-//            );
-//            System.out.println("----------------------------------------"
-//                    + "----------------------------------------------"
-//                    + "-------------------------------------------------------");
-//        }
     }
 }

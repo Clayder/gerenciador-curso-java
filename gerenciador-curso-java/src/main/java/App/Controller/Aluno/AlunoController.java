@@ -33,18 +33,10 @@ public class AlunoController {
         return aluno.existe(matricula, "matricula");
     }
     
-    public void alunos() throws SQLException {
+    public ArrayList<Aluno> getAll() throws SQLException {
         IAluno a = new Aluno();
-        System.out.println("---------------- Lista de alunos ----------------");
         ArrayList<Aluno> data = (ArrayList<Aluno>) a.getAll();
-        System.out.println("ID"+tab()+"Matrícula"+tab()+"Nome"+tab()+"Telefone"+tab()+"Email");
-        for (Aluno aluno : data) {
-            System.out.println(aluno.getId() + tab() + aluno.getMatricula() + tab() + aluno.getNome()+ tab() + aluno.getTelefone()+ tab() + aluno.getEmail());
-        }
-    }
-    
-    public String tab(){
-        return "\t\t\t|\t\t\t";
+        return data;
     }
     
     public void update(int id, String telefone, String email) throws SQLException{

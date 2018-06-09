@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProfessorView implements IView {
+public class ProfessorTeView implements IView {
 
     @Override
     public void init() {
@@ -59,7 +59,7 @@ public class ProfessorView implements IView {
                 try {
                     prof.professores();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ProfessorTeView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             System.out.println("Forneça o id do professor: ");
@@ -81,7 +81,7 @@ public class ProfessorView implements IView {
                 try {
                     prof.disciplinas();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ProfessorTeView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -103,7 +103,7 @@ public class ProfessorView implements IView {
                 try {
                     prof.addProfessorDisciplina(Integer.parseInt(idProfessor), Integer.parseInt(idDisciplina));
                 } catch (SQLException ex) {
-                    Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ProfessorTeView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             break;
@@ -112,7 +112,7 @@ public class ProfessorView implements IView {
                     try {
                         prof.professores();
                     } catch (SQLException ex) {
-                        Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(ProfessorTeView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;

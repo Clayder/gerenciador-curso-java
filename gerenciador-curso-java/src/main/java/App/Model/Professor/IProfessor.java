@@ -1,27 +1,12 @@
 package App.Model.Professor;
 
 import App.Model.Disciplina.Disciplina;
-import java.sql.ResultSet;
+import App.Model.IModel;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IProfessor {
+public interface IProfessor extends IModel {
 
-     /**
-     * 
-     * @return @throws SQLException
-     */
-    public ResultSet findAll() throws SQLException;
-
-    /**
-     *
-     * @param id
-     * @throws SQLException
-     */
-    public void removeById(Integer id) throws SQLException;
-    
-    public boolean existe(String valor, String campo) throws SQLException;
-    
     public Integer getId();
 
     public String getMatricula();
@@ -46,18 +31,7 @@ public interface IProfessor {
 
     public void setId(Integer id);
 
-    public void insert() throws SQLException;
-
-    public void update() throws SQLException;
-    
     public List<Disciplina> getDisciplinas() throws SQLException;
-
-    /**
-     *
-     * @param id
-     * @throws SQLException
-     */
-    public void setById(Integer id) throws SQLException;
 
     /**
      *

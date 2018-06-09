@@ -8,6 +8,7 @@ import App.Model.ProfessorDisciplina.IProfessorDisciplina;
 import App.Model.ProfessorDisciplina.ProfessorDisciplina;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProfessorController {
 
@@ -67,31 +68,18 @@ public class ProfessorController {
         return disciplina.existe(id, "id");
     }
 
-    public void professores() throws SQLException {
+    public String getDisciplinasByProfessor(List<Disciplina> disciplinas) {
+        String sDisciplinas = "";
+        for (IDisciplina d : disciplinas) {
+            sDisciplinas += d.getCodigo() + ", ";
+        }
+        return sDisciplinas;
+    }
+
+    public ArrayList<Professor> professores() throws SQLException {
         IProfessor p = new Professor();
         ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
-        System.out.println("---------------- Lista de professores ----------------");
-        for (Professor professor : data) {
-            System.out.println(
-                    "ID: " + professor.getId() + "   |   "
-                    + "Matrícula: " + professor.getMatricula() + "   |   "
-                    + "Nome: " + professor.getNome() + "   |   "
-                    + "Endereço: " + professor.getEndereco() + "   |   "
-                    + "Telefone: " + professor.getTelefone() + "   |   "
-                    + "Valor Hora: " + professor.getValorHora()
-            );
-            System.out.println("Disciplinas: ");
-            String disciplinas = "";
-            for (Disciplina d : professor.getDisciplinas()) {
-                disciplinas += d.getCodigo() + ", ";
-            }
-            System.out.println(disciplinas);
-            System.out.println("----------------------------"
-                    + "--------------------------------------------------"
-                    + "------------------------------------------"
-                    + "---------------------------------------"
-                    + "--------------------------------");
-        }
+        return data;
     }
 
     public void disciplinas() throws SQLException {

@@ -238,9 +238,21 @@ public class AlunoView extends javax.swing.JFrame {
             } else {
                 AlunoController aluno = new AlunoController(matricula.getText(), nome.getText(), telefone.getText(), email.getText());
                 aluno.add();
+                
                 mensagem.setForeground(Color.GREEN);
                 mensagem.setText("Aluno cadastrado com sucesso");
-                
+
+                DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+
+                model.addRow(
+                        new Object[]{
+                            matricula.getText(),
+                            nome.getText(),
+                            telefone.getText(), 
+                            email.getText()
+                        }
+                );
+
                 matricula.setText(null);
                 nome.setText(null);
                 telefone.setText(null);

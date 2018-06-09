@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import App.View.Disciplina.DisciplinasView;
+import java.awt.Color;
 import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -56,6 +57,7 @@ public class ProfessorView extends javax.swing.JFrame {
         tableProfessores = new javax.swing.JTable();
         Cancelar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        mensagem = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -130,15 +132,20 @@ public class ProfessorView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel3))
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(endereco, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                    .addComponent(valorHora)
-                    .addComponent(matricula))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel3))
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(endereco, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                            .addComponent(valorHora)
+                            .addComponent(matricula)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -187,7 +194,8 @@ public class ProfessorView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Cancelar)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(107, 107, 107))
@@ -253,17 +261,42 @@ public class ProfessorView extends javax.swing.JFrame {
     }//GEN-LAST:event_nomeActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ProfessorController professor = new ProfessorController(matricula.getText(), nome.getText(), endereco.getText(), telefone.getText(), Double.parseDouble(valorHora.getText()));
+
         try {
-            professor.add();
+            if (ProfessorController.existeMatricula(matricula.getText())) {
+                matricula.setText(null);
+                mensagem.setForeground(Color.red);
+                mensagem.setText("A matrícula não pode ser repetida.");
+            } else {
+                ProfessorController professor = new ProfessorController(matricula.getText(), nome.getText(), endereco.getText(), telefone.getText(), Double.parseDouble(valorHora.getText()));
+                professor.add();
+                
+                mensagem.setForeground(Color.GREEN);
+                mensagem.setText("Professor cadastrado com sucesso");
+                
+                DefaultTableModel model = (DefaultTableModel) tableProfessores.getModel();
+                
+                model.addRow(
+                        new Object[]{
+                            matricula.getText(),
+                            nome.getText(),
+                            endereco.getText(),
+                            telefone.getText(), 
+                            Double.parseDouble(valorHora.getText())
+                        }
+                );
+                
+                matricula.setText(null);
+                nome.setText(null);
+                endereco.setText(null);
+                telefone.setText(null);
+                valorHora.setText(null);
+                
+                
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        matricula.setText(null);
-        nome.setText(null);
-        endereco.setText(null);
-        telefone.setText(null);
-        valorHora.setText(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void menuDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDisciplinaActionPerformed
@@ -349,6 +382,7 @@ public class ProfessorView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField matricula;
+    private javax.swing.JLabel mensagem;
     private javax.swing.JMenu menuDisciplina;
     private javax.swing.JTextField nome;
     private javax.swing.JTable tableProfessores;

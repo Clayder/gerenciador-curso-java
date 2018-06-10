@@ -14,11 +14,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class ProfessorDisciplinaView extends javax.swing.JFrame {
     
-    private int id;
+    private int idProfessor;
     private String nomeProfessorByViewProfessor;
 
     public void setId(int id) {
-        this.id = id;
+        this.idProfessor = id;
     }
 
     public void setNomeProfessorByProfessorView(String nomeProfessorByViewProfessor) {
@@ -188,16 +188,16 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
 
     private void tabelaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabelaAncestorAdded
 
-        AlunoController controller = new AlunoController();
+        ProfessorController controller = new ProfessorController();
         try {
-            for (IAluno item : controller.getAll()) {
+            for (IDisciplina item : controller.getDisciplinasByProfessor(idProfessor)) {
                 DefaultTableModel model = (DefaultTableModel) tabela.getModel();
                 model.addRow(
                         new Object[]{
-                            item.getMatricula(),
-                            item.getNome(),
-                            item.getTelefone(),
-                            item.getEmail()
+                            item.getCodigo(),
+                            item.getConteudo(),
+                            item.getCargaHoraria(),
+                            item.getTipo()
                         }
                 );
             }

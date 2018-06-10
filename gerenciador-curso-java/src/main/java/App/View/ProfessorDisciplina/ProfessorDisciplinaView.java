@@ -9,10 +9,25 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 public class ProfessorDisciplinaView extends javax.swing.JFrame {
+    
+    private int id;
+    private String nomeProfessorByViewProfessor;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNomeProfessorByProfessorView(String nomeProfessorByViewProfessor) {
+        this.nomeProfessorByViewProfessor = nomeProfessorByViewProfessor;
+        this.nomeProfessor.setText(nomeProfessorByViewProfessor);
+    }
+
+    
+    
     /**
      * Creates new form ContactEditorUI
      */

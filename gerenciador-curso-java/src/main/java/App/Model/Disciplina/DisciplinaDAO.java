@@ -65,7 +65,7 @@ class DisciplinaDAO extends Model {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
+
     @Override
     protected void setCampos() {
         colunasBD.add("codigo");
@@ -73,8 +73,8 @@ class DisciplinaDAO extends Model {
         colunasBD.add("carga_horaria");
         colunasBD.add("tipo");
     }
-    
-    public String getTipo(){
+
+    public String getTipo() {
         return tipo;
     }
 
@@ -113,6 +113,21 @@ class DisciplinaDAO extends Model {
     @Override
     public void setById(Integer id) throws SQLException {
         ResultSet res = findById(id);
+        while (res.next()) {
+            setAll(res);
+        }
+    }
+
+    /**
+     *
+     * @param codigo
+     * @throws SQLException
+     */
+    public void setByCodigo(String codigo) throws SQLException {
+        String query = "SELECT * FROM " + TABELA + " WHERE (codigo) = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1, codigo);
+        ResultSet res = statement.executeQuery();
         while (res.next()) {
             setAll(res);
         }

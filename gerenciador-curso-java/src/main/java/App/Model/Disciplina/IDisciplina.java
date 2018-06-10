@@ -30,6 +30,8 @@ public interface IDisciplina extends IModel {
     public String getTEORICA();
 
     public void setTipo(String tipo);
+    
+    public void setByCodigo(String codigo) throws SQLException;
 
     /**
      *

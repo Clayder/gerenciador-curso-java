@@ -41,14 +41,14 @@ public class ProfessorController {
      * @param idDisciplina
      * @throws SQLException
      */
-    public void addProfessorDisciplina(int idProfessor, int idDisciplina) throws SQLException {
+    public void addProfessorDisciplinaByCodigo(int idProfessor, String codigoDisciplina) throws SQLException {
         IProfessor professor = new Professor();
         professor.setById(idProfessor);
 
         IDisciplina disciplina = new Disciplina();
-        disciplina.setById(idDisciplina);
+        disciplina.setByCodigo(codigoDisciplina);
 
-        IProfessorDisciplina profDisc = new ProfessorDisciplina(idProfessor, idDisciplina);
+        IProfessorDisciplina profDisc = new ProfessorDisciplina(idProfessor, disciplina.getId());
         profDisc.insert();
 
     }
@@ -68,7 +68,7 @@ public class ProfessorController {
         return disciplina.existe(id, "id");
     }
 
-    public String getDisciplinasByProfessor(List<Disciplina> disciplinas) {
+    public String listDisciplinasByProfessor(List<Disciplina> disciplinas) {
         String sDisciplinas = "";
         for (IDisciplina d : disciplinas) {
             sDisciplinas += d.getCodigo() + ", ";
@@ -85,6 +85,15 @@ public class ProfessorController {
     public ArrayList<Disciplina> disciplinas() throws SQLException {
         IDisciplina d = new Disciplina();
         ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
+        return data;
+    }
+    
+    public ArrayList<Disciplina> getDisciplinasByProfessor(int idProfessor) throws SQLException {
+        IProfessor professor = new Professor();
+        professor.setById(idProfessor);
+        
+        ArrayList<Disciplina> data = (ArrayList<Disciplina>) professor.getDisciplinas();
+        
         return data;
     }
 }

@@ -15,6 +15,7 @@ class DisciplinaDAO extends Model {
     private TipoDisciplina PRATICA = TipoDisciplina.PRATICA;
     private TipoDisciplina TEORICA = TipoDisciplina.TEORICA;
     private String tipo;
+    private Integer idProfessorDisciplina;
 
     public DisciplinaDAO() throws SQLException {
         super();
@@ -28,6 +29,14 @@ class DisciplinaDAO extends Model {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getIdProfessorDisciplina() {
+        return idProfessorDisciplina;
+    }
+
+    public void setIdProfessorDisciplina(int idProfessorDisciplina) {
+        this.idProfessorDisciplina = idProfessorDisciplina;
     }
 
     public String getCodigo() {

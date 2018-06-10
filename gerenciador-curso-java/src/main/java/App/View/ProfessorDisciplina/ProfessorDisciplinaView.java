@@ -3,9 +3,13 @@ package App.View.ProfessorDisciplina;
 import App.Controller.Aluno.AlunoController;
 import App.Controller.Professor.ProfessorController;
 import App.Model.Aluno.IAluno;
+import App.Model.Disciplina.Disciplina;
 import App.Model.Disciplina.IDisciplina;
 import java.awt.Color;
+import java.awt.Point;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -13,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 public class ProfessorDisciplinaView extends javax.swing.JFrame {
-    
+
     private int idProfessor;
     private String nomeProfessorByViewProfessor;
 
@@ -26,8 +30,6 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
         this.nomeProfessor.setText(nomeProfessorByViewProfessor);
     }
 
-    
-    
     /**
      * Creates new form ContactEditorUI
      */
@@ -85,6 +87,11 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
 
         nomeProfessor.setText("jLabel4");
@@ -105,27 +112,33 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
         });
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(239, 239, 239))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(disciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(disciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,9 +151,9 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
                     .addComponent(nomeProfessor)
                     .addComponent(disciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalvar))
-                .addGap(18, 18, 18)
-                .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -197,7 +210,8 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
                             item.getCodigo(),
                             item.getConteudo(),
                             item.getCargaHoraria(),
-                            item.getTipo()
+                            item.getTipo(),
+                            "Excluir"
                         }
                 );
             }
@@ -212,7 +226,7 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
         DefaultComboBoxModel<String> newItem = new javax.swing.DefaultComboBoxModel<>();
 
         ProfessorController professor = new ProfessorController();
-        
+
         try {
             for (IDisciplina disciplina : professor.disciplinas()) {
                 newItem.addElement(disciplina.getCodigo());
@@ -220,13 +234,61 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         disciplinas.setModel(newItem);
     }//GEN-LAST:event_disciplinasAncestorAdded
 
     private void disciplinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disciplinasActionPerformed
 
     }//GEN-LAST:event_disciplinasActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        String codigoDisciplina = disciplinas.getSelectedItem().toString();
+
+        ProfessorController controller = new ProfessorController();
+        try {
+            controller.addProfessorDisciplinaByCodigo(idProfessor, codigoDisciplina);
+
+            ProfessorDisciplinaView pd = new ProfessorDisciplinaView();
+            pd.setId(idProfessor);
+            pd.setNomeProfessorByProfessorView(nomeProfessorByViewProfessor);
+            pd.setVisible(true);
+
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        Point point = evt.getPoint();
+        int coluna = tabela.columnAtPoint(point);
+        int linha = tabela.rowAtPoint(point);
+        ProfessorController controller = new ProfessorController();
+        int idDisciplina = 0;
+        try {
+            ArrayList<Disciplina> disciplinas = controller.getDisciplinasByProfessor(idProfessor);
+            idDisciplina = disciplinas.get(linha).getIdProfessorDisciplina();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (coluna == 4 && idDisciplina != 0) {
+            try {
+                controller.excluir(idDisciplina);
+
+                ProfessorDisciplinaView pd = new ProfessorDisciplinaView();
+                pd.setId(idProfessor);
+                pd.setNomeProfessorByProfessorView(nomeProfessorByViewProfessor);
+                pd.setVisible(true);
+
+                this.dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_tabelaMouseClicked
 
     /**
      * @param args the command line arguments

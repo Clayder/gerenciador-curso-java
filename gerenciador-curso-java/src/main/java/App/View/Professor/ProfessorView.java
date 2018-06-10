@@ -8,12 +8,15 @@ package App.View.Professor;
 import App.Controller.Professor.ProfessorController;
 import App.Model.Professor.IProfessor;
 import App.Model.Professor.Professor;
+import App.View.ProfessorDisciplina.ProfessorDisciplinaView;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import App.View.Disciplina.DisciplinasView;
 import java.awt.Color;
+import java.awt.Point;
+import java.util.List;
 import java.util.Vector;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -98,7 +101,7 @@ public class ProfessorView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Matrícula", "Nome", "Endereço", "Telefone", "Valor hora", "Disciplinas", "Ação"
+                "Matrícula", "Nome", "Endereço", "Telefone", "Valor hora", "Disciplinas", "Disciplina", "Editar", "Excluir"
             }
         ));
         tableProfessores.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -108,6 +111,11 @@ public class ProfessorView extends javax.swing.JFrame {
                 tableProfessoresAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        tableProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProfessoresMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tableProfessores);
@@ -252,8 +260,8 @@ public class ProfessorView extends javax.swing.JFrame {
     }//GEN-LAST:event_matriculaActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-        DisciplinasView.exibe();
-        this.dispose();
+//        DisciplinasView.exibe();
+//        this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
@@ -270,29 +278,28 @@ public class ProfessorView extends javax.swing.JFrame {
             } else {
                 ProfessorController professor = new ProfessorController(matricula.getText(), nome.getText(), endereco.getText(), telefone.getText(), Double.parseDouble(valorHora.getText()));
                 professor.add();
-                
+
                 mensagem.setForeground(Color.GREEN);
                 mensagem.setText("Professor cadastrado com sucesso");
-                
+
                 DefaultTableModel model = (DefaultTableModel) tableProfessores.getModel();
-                
+
                 model.addRow(
                         new Object[]{
                             matricula.getText(),
                             nome.getText(),
                             endereco.getText(),
-                            telefone.getText(), 
+                            telefone.getText(),
                             Double.parseDouble(valorHora.getText())
                         }
                 );
-                
+
                 matricula.setText(null);
                 nome.setText(null);
                 endereco.setText(null);
                 telefone.setText(null);
                 valorHora.setText(null);
-                
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
@@ -300,15 +307,15 @@ public class ProfessorView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void menuDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDisciplinaActionPerformed
-        System.out.println("etetteet");
-        DisciplinasView.exibe();
+//        System.out.println("etetteet");
+//        DisciplinasView.exibe();
     }//GEN-LAST:event_menuDisciplinaActionPerformed
 
     private void tableProfessoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tableProfessoresAncestorAdded
 
         DefaultTableModel model = (DefaultTableModel) tableProfessores.getModel();
         ProfessorController professores = new ProfessorController();
-
+        JButton button = new JButton("Click here!");
         try {
             for (IProfessor professor : professores.professores()) {
                 model.addRow(
@@ -318,7 +325,8 @@ public class ProfessorView extends javax.swing.JFrame {
                             professor.getEndereco(),
                             professor.getTelefone(),
                             professor.getValorHora(),
-                            professores.getDisciplinasByProfessor(professor.getDisciplinas())
+                            professores.getDisciplinasByProfessor(professor.getDisciplinas()),
+                            tableProfessores.add(button)
                         }
                 );
             }
@@ -326,6 +334,30 @@ public class ProfessorView extends javax.swing.JFrame {
             Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tableProfessoresAncestorAdded
+
+    private void tableProfessoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProfessoresMouseClicked
+
+        Point point = evt.getPoint();
+        int coluna = tableProfessores.columnAtPoint(point);
+        int linha = tableProfessores.rowAtPoint(point);
+
+        ProfessorController professor = new ProfessorController();
+        try {
+            List<Professor> professores = professor.professores();
+            System.out.println(professores.get(linha).getNome());
+            switch (coluna) {
+                case 6:
+                    ProfessorDisciplinaView pd = new ProfessorDisciplinaView();
+                    pd.setNomeProfessorByProfessorView(professores.get(linha).getNome());
+                    pd.setVisible(true);
+                    this.dispose();
+                    break;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_tableProfessoresMouseClicked
 
     /**
      * @param args the command line arguments

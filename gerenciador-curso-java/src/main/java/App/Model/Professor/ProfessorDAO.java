@@ -47,7 +47,7 @@ class ProfessorDAO extends Model {
     public Integer getId() {
         return id;
     }
-
+    
     public String getMatricula() {
         return matricula;
     }
@@ -107,6 +107,7 @@ class ProfessorDAO extends Model {
             disc.setCodigo(res.getString("codigo"));
             disc.setConteudo(res.getString("conteudo"));
             disc.setId(res.getInt("disciplina_id"));
+            disc.setIdProfessorDisciplina(res.getInt("id"));
             disc.setTipo(res.getString("tipo"));
             disciplinas.add((Disciplina) disc);
         }

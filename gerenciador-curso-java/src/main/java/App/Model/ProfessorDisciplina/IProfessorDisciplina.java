@@ -1,22 +1,10 @@
 package App.Model.ProfessorDisciplina;
 
+import App.Model.IModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public interface IProfessorDisciplina {
-
-    /**
-     *
-     * @return @throws SQLException
-     */
-    public ResultSet findAll() throws SQLException;
-
-    /**
-     *
-     * @param id
-     * @throws SQLException
-     */
-    public void removeById(Integer id) throws SQLException;
+public interface IProfessorDisciplina extends IModel {
 
     public Integer getId();
 
@@ -33,20 +21,5 @@ public interface IProfessorDisciplina {
     public Integer getFkDisciplina();
 
     public void setFkDisciplina(Integer fkDisciplina);
-
-    /**
-     *
-     * @throws SQLException
-     */
-    public void insert() throws SQLException;
-
-    public void update() throws SQLException;
-
-    /**
-     *
-     * @param id
-     * @throws SQLException
-     */
-    public void setById(Integer id) throws SQLException;
 
 }

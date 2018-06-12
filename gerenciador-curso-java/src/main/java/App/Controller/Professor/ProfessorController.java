@@ -8,6 +8,7 @@ import App.Model.ProfessorDisciplina.IProfessorDisciplina;
 import App.Model.ProfessorDisciplina.ProfessorDisciplina;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProfessorController {
 
@@ -40,14 +41,14 @@ public class ProfessorController {
      * @param idDisciplina
      * @throws SQLException
      */
-    public void addProfessorDisciplina(int idProfessor, int idDisciplina) throws SQLException {
+    public void addProfessorDisciplinaByCodigo(int idProfessor, String codigoDisciplina) throws SQLException {
         IProfessor professor = new Professor();
         professor.setById(idProfessor);
 
         IDisciplina disciplina = new Disciplina();
-        disciplina.setById(idDisciplina);
+        disciplina.setByCodigo(codigoDisciplina);
 
-        IProfessorDisciplina profDisc = new ProfessorDisciplina(idProfessor, idDisciplina);
+        IProfessorDisciplina profDisc = new ProfessorDisciplina(idProfessor, disciplina.getId());
         profDisc.insert();
 
     }
@@ -67,40 +68,32 @@ public class ProfessorController {
         return disciplina.existe(id, "id");
     }
 
-    public void professores() throws SQLException {
-        IProfessor p = new Professor();
-        ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
-        System.out.println("---------------- Lista de professores ----------------");
-        for (Professor professor : data) {
-            System.out.println(
-                    "ID: " + professor.getId() + "   |   "
-                    + "Matrícula: " + professor.getMatricula() + "   |   "
-                    + "Nome: " + professor.getNome() + "   |   "
-                    + "Endereço: " + professor.getEndereco() + "   |   "
-                    + "Telefone: " + professor.getTelefone() + "   |   "
-                    + "Valor Hora: " + professor.getValorHora()
-            );
-            System.out.println("Disciplinas: ");
-            String disciplinas = "";
-            for (Disciplina d : professor.getDisciplinas()) {
-                disciplinas += d.getCodigo() + ", ";
-            }
-            System.out.println(disciplinas);
-            System.out.println("----------------------------"
-                    + "--------------------------------------------------"
-                    + "------------------------------------------"
-                    + "---------------------------------------"
-                    + "--------------------------------");
+    public String listDisciplinasByProfessor(List<Disciplina> disciplinas) {
+        String sDisciplinas = "";
+        for (IDisciplina d : disciplinas) {
+            sDisciplinas += d.getCodigo() + ", ";
         }
+        return sDisciplinas;
     }
 
-    public void disciplinas() throws SQLException {
+    public ArrayList<Professor> professores() throws SQLException {
+        IProfessor p = new Professor();
+        ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
+        return data;
+    }
+
+    public ArrayList<Disciplina> disciplinas() throws SQLException {
         IDisciplina d = new Disciplina();
         ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
-        System.out.println("ID   |  Código  ");
-        System.out.println("---------------- Lista de disciplinas ----------------");
-        for (Disciplina disciplina : data) {
-            System.out.println(disciplina.getId() + "   |   " + disciplina.getCodigo());
-        }
+        return data;
+    }
+    
+    public ArrayList<Disciplina> getDisciplinasByProfessor(int idProfessor) throws SQLException {
+        IProfessor professor = new Professor();
+        professor.setById(idProfessor);
+        
+        ArrayList<Disciplina> data = (ArrayList<Disciplina>) professor.getDisciplinas();
+        
+        return data;
     }
 }

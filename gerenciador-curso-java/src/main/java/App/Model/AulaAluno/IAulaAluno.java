@@ -1,69 +1,33 @@
 package App.Model.AulaAluno;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import App.Model.IModel;
 
-public interface IAulaAluno {
-     /**
-     * 
-     * @return @throws SQLException
-     */
-    public ResultSet findAll() throws SQLException;
-    
-    public boolean existe(String valor, String campo) throws SQLException;
+public interface IAulaAluno extends IModel {
 
-    /**
-     *
-     * @param id
-     * @throws SQLException
-     */
-    public void removeById(Integer id) throws SQLException;
-    
     public Integer getId();
 
     /**
-     * 
-     * @param id 
-     */
-    public void setId(Integer id) ;
-
-    /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public Integer getFkAluno();
 
     /**
-     * 
-     * @param fkAluno 
+     *
+     * @param fkAluno
      */
     public void setFkAluno(Integer fkAluno);
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
-    public Integer getFkAula() ;
-
-    /**
-     * 
-     * @param fkAula 
-     */
-    public void setFkAula(Integer fkAula);
+    public Integer getFkAula();
 
     /**
      *
-     * @throws SQLException
+     * @param fkAula
      */
-    public void insert() throws SQLException ;
+    public void setFkAula(Integer fkAula);
 
-    public void update() throws SQLException;
-
-    /**
-     * 
-     * @param id
-     * @throws SQLException 
-     */
-    public void setById(Integer id) throws SQLException;
-    
 }

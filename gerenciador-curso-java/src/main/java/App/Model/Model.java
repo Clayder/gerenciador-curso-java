@@ -14,6 +14,23 @@ public abstract class Model extends Dao {
     }
 
     /**
+     * Conta a quantidade de registros de uma tabela
+     * @return
+     * @throws SQLException 
+     */
+    public int count() throws SQLException {
+        String query = "SELECT count(*) as qtd FROM " + TABELA + ";";
+        statement = connection.prepareStatement(query);
+
+        ResultSet res = statement.executeQuery();
+        int qtd = 0;
+        while (res.next()) {
+            qtd = res.getInt("qtd");
+        }
+        return qtd;
+    }
+
+    /**
      *
      * @return @throws SQLException
      */

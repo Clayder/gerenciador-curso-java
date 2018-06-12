@@ -1,26 +1,14 @@
 package App.Model.Disciplina;
 
+import App.Model.IModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IDisciplina {
-
-     /**
-     * 
-     * @return @throws SQLException
-     */
-    public ResultSet findAll() throws SQLException;
-
-    /**
-     *
-     * @param id
-     * @throws SQLException
-     */
-    public void removeById(Integer id) throws SQLException;
+public interface IDisciplina extends IModel {
 
     public void setId(Integer id);
-    
+
     public Integer getId();
 
     public String getCodigo();
@@ -28,7 +16,7 @@ public interface IDisciplina {
     public void setCodigo(String codigo);
 
     public String getConteudo();
-    
+
     public String getTipo();
 
     public void setConteudo(String conteudo);
@@ -42,29 +30,17 @@ public interface IDisciplina {
     public String getTEORICA();
 
     public void setTipo(String tipo);
-    
-    public boolean existe(String valor, String campo) throws SQLException;
 
-    /**
-     *
-     * @throws SQLException
-     */
-    public void insert() throws SQLException ;
+    public void setByCodigo(String codigo) throws SQLException;
 
-    public void update() throws SQLException;
+    public void setIdProfessorDisciplina(int idProfessorDisciplina);
 
-    /**
-     *
-     * @param id
-     * @throws SQLException
-     */
-    public void setById(Integer id) throws SQLException;
+    public Integer getIdProfessorDisciplina();
 
     /**
      *
      * @return @throws SQLException
      */
     public List<Disciplina> getAll() throws SQLException;
-
 
 }

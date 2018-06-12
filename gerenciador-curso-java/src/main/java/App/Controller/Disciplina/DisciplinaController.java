@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class DisciplinaController {
 
-    public boolean existeDisciplina(String codigo) throws SQLException {
+    public static boolean existeDisciplina(String codigo) throws SQLException {
         IDisciplina aluno = new Disciplina();
         return aluno.existe(codigo, "codigo");
     }
@@ -21,20 +21,9 @@ public class DisciplinaController {
         disciplina.insert();
     }
 
-    public void disciplinas() throws SQLException {
+    public ArrayList<Disciplina> getAll() throws SQLException {
         IDisciplina d = new Disciplina();
         ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
-        System.out.println("---------------- Lista de disciplinas ----------------");
-        for (Disciplina disciplina : data) {
-            System.out.println("ID: " + disciplina.getId()
-                    + "   |  Código: " + disciplina.getCodigo()
-                    + "   |  Conteúdo: " + disciplina.getConteudo()
-                    + "   |  Carga horária: " + disciplina.getCargaHoraria()
-                    + "   |  Tipo: " + disciplina.getTipo()
-            );
-            System.out.println("----------------------------------------"
-                    + "----------------------------------------------"
-                    + "-------------------------------------------------------");
-        }
+        return data;
     }
 }

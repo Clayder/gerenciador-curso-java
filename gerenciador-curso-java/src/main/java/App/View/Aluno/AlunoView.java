@@ -6,9 +6,16 @@
 package App.View.Aluno;
 
 import App.Controller.Aluno.AlunoController;
+import App.Model.Aluno.Aluno;
 import App.Model.Aluno.IAluno;
+import App.View.Aula.AulaView;
+import App.View.Disciplina.DisciplinaView;
+import App.View.Professor.ProfessorView;
 import java.awt.Color;
+import java.awt.Point;
+import java.util.List;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -51,15 +58,15 @@ public class AlunoView extends javax.swing.JFrame {
         btnSalvar = new java.awt.Button();
         mensagem = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        alunoMenu = new javax.swing.JMenu();
+        professorMenu = new javax.swing.JMenu();
+        disciplinaMenu = new javax.swing.JMenu();
+        aulaMenu = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         jLabel1.setText("Matrícula:");
 
@@ -80,7 +87,7 @@ public class AlunoView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Matrícula", "Nome", "Telefone", "E-mail", "Ação"
+                "Matrícula", "Nome", "Telefone", "E-mail", "Editar", "Excluir"
             }
         ));
         tabela.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -90,6 +97,11 @@ public class AlunoView extends javax.swing.JFrame {
                 tabelaAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tabela);
@@ -118,7 +130,7 @@ public class AlunoView extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                             .addComponent(matricula))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)))
@@ -133,7 +145,8 @@ public class AlunoView extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {email, nome, telefone});
@@ -163,21 +176,41 @@ public class AlunoView extends javax.swing.JFrame {
                 .addContainerGap(143, Short.MAX_VALUE))
         );
 
-        jMenu1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu1.setText("Aluno");
-        jMenuBar1.add(jMenu1);
+        alunoMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        alunoMenu.setText("Aluno");
+        alunoMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                alunoMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(alunoMenu);
 
-        jMenu2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu2.setText("Professor");
-        jMenuBar1.add(jMenu2);
+        professorMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        professorMenu.setText("Professor");
+        professorMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                professorMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(professorMenu);
 
-        jMenu3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu3.setText("Disciplina");
-        jMenuBar1.add(jMenu3);
+        disciplinaMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        disciplinaMenu.setText("Disciplina");
+        disciplinaMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                disciplinaMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(disciplinaMenu);
 
-        jMenu4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu4.setText("Aula");
-        jMenuBar1.add(jMenu4);
+        aulaMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        aulaMenu.setText("Aula");
+        aulaMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aulaMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(aulaMenu);
 
         jMenu5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu5.setText("Relatórios");
@@ -212,14 +245,25 @@ public class AlunoView extends javax.swing.JFrame {
 
         AlunoController controller = new AlunoController();
         try {
+            // Recebe os alunos
             for (IAluno item : controller.getAll()) {
+                
+                /**
+                 * Cria a nova linha na tabela
+                 */
                 DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+                
+                /**
+                 * Popula a nova linha da tabela
+                 */
                 model.addRow(
                         new Object[]{
                             item.getMatricula(),
                             item.getNome(),
                             item.getTelefone(),
-                            item.getEmail()
+                            item.getEmail(),
+                            "Editar",
+                            "Excluir"
                         }
                 );
             }
@@ -231,28 +275,47 @@ public class AlunoView extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
+            /**
+             * Se a matrícula já existir
+             */
             if (AlunoController.existeMatricula(matricula.getText())) {
                 matricula.setText(null);
                 mensagem.setForeground(Color.red);
                 mensagem.setText("A matrícula não pode ser repetida.");
             } else {
+                /**
+                 * Crio um objeto do tipo aluno e inicializo os seus atributos
+                 */
                 AlunoController aluno = new AlunoController(matricula.getText(), nome.getText(), telefone.getText(), email.getText());
                 aluno.add();
-                
+
                 mensagem.setForeground(Color.GREEN);
+                /**
+                 * Imprimo a mensagem de sucesso (cor verde)
+                 */
                 mensagem.setText("Aluno cadastrado com sucesso");
 
+                /**
+                 * Crio um linha na tabela
+                 */
                 DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-
+                /**
+                 * Populo a nova linha na tabela.
+                 */
                 model.addRow(
                         new Object[]{
                             matricula.getText(),
                             nome.getText(),
-                            telefone.getText(), 
-                            email.getText()
+                            telefone.getText(),
+                            email.getText(),
+                            "Editar",
+                            "Excluir"
                         }
                 );
 
+                /**
+                 * Apago os inputs do formulário.
+                 */
                 matricula.setText(null);
                 nome.setText(null);
                 telefone.setText(null);
@@ -262,6 +325,66 @@ public class AlunoView extends javax.swing.JFrame {
             Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
+        new AlunoView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_alunoMenuMouseClicked
+
+    private void professorMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_professorMenuMouseClicked
+        new ProfessorView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_professorMenuMouseClicked
+
+    private void disciplinaMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disciplinaMenuMouseClicked
+        new DisciplinaView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_disciplinaMenuMouseClicked
+
+    private void aulaMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aulaMenuMouseClicked
+        new AulaView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_aulaMenuMouseClicked
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        Point point = evt.getPoint();
+        // Captura o numero da coluna
+        int coluna = tabela.columnAtPoint(point);
+        // Captura o número da linha
+        int linha = tabela.rowAtPoint(point);
+
+        AlunoController controller = new AlunoController();
+
+        // Verifica qual foi o número da coluna e realiza alguma ação 
+        switch (coluna) {
+            // Se a coluna for excluir 
+            case 5:
+                // Crio uma nova tela Aluno 
+                AlunoView view = new AlunoView();
+                // Exibo essa nova tela aluno.
+                view.setVisible(true);
+                 {
+                    try {
+                        // Excluir o registro 
+                        view.mensagem.setText(controller.excluir(controller.getAll().get(linha).getId()));
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                 // Fecha a antiga tela
+                this.dispose();
+                
+                /**
+                 *  view.setVisible(true);
+                 *  this.dispose();
+                 * 
+                 *  São utilizados para atualizar a tela. 
+                 */
+                break;
+        }
+
+    }//GEN-LAST:event_tabelaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -300,17 +423,16 @@ public class AlunoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu alunoMenu;
+    private javax.swing.JMenu aulaMenu;
     private java.awt.Button btnSalvar;
     private java.awt.Button button4;
+    private javax.swing.JMenu disciplinaMenu;
     private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
@@ -318,6 +440,7 @@ public class AlunoView extends javax.swing.JFrame {
     private javax.swing.JTextField matricula;
     private javax.swing.JLabel mensagem;
     private javax.swing.JTextField nome;
+    private javax.swing.JMenu professorMenu;
     private javax.swing.JTable tabela;
     private javax.swing.JTextField telefone;
     // End of variables declaration//GEN-END:variables

@@ -1,9 +1,9 @@
 package App.View;
 
-import App.View.Professor.ProfessorView;
-import App.View.Aula.AulaView;
-import App.View.Aluno.AlunoView;
-import App.View.Disciplina.DisciplinaView;
+import App.View.Professor.ProfessorTeView;
+import App.View.Aula.AulaTView;
+import App.View.Aluno.AlunoTView;
+import App.View.Disciplina.DisciplinaTView;
 import App.View.Relatorio.RelatorioView;
 import java.util.Scanner;
 
@@ -24,19 +24,19 @@ public class Menu implements IView {
         do {
             switch (op) {
                 case 1:
-                    view = new ProfessorView();
+                    view = new ProfessorTeView();
                     view.init();
                     break;
                 case 2:
-                    view = new AlunoView();
+                    view = new AlunoTView();
                     view.init();
                     break;
                 case 3:
-                    view = new AulaView();
+                    view = new AulaTView();
                     view.init();
                     break;
                 case 4:
-                    view = new DisciplinaView();
+                    view = new DisciplinaTView();
                     view.init();
                     break;
                 case 5:

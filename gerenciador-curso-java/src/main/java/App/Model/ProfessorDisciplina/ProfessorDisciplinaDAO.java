@@ -30,6 +30,10 @@ abstract public class ProfessorDisciplinaDAO extends Model {
         setCampos();
     }
 
+    /**
+     * 
+     * @return Integer
+     */
     public Integer getId() {
         return id;
     }
@@ -42,18 +46,34 @@ abstract public class ProfessorDisciplinaDAO extends Model {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return Integer
+     */
     public Integer getFkProfessor() {
         return fkProfessor;
     }
 
+    /**
+     * 
+     * @param fkProfessor 
+     */
     public void setFkProfessor(Integer fkProfessor) {
         this.fkProfessor = fkProfessor;
     }
 
+    /**
+     * 
+     * @return Integer
+     */
     public Integer getFkDisciplina() {
         return fkDisciplina;
     }
 
+    /**
+     * 
+     * @param fkDisciplina 
+     */
     public void setFkDisciplina(Integer fkDisciplina) {
         this.fkDisciplina = fkDisciplina;
     }
@@ -71,6 +91,10 @@ abstract public class ProfessorDisciplinaDAO extends Model {
         statement.execute();
     }
 
+    /**
+     * 
+     * @throws SQLException 
+     */
     @Override
     public void update() throws SQLException {
         String query = getQueryUpdate();
@@ -82,7 +106,8 @@ abstract public class ProfessorDisciplinaDAO extends Model {
     }
 
     /**
-     *
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
      * @param id
      * @throws SQLException
      */
@@ -94,6 +119,9 @@ abstract public class ProfessorDisciplinaDAO extends Model {
         }
     }
 
+     /**
+     * Informa o nome das colunas da tabela professor_disciplinas
+     */
     @Override
     protected void setCampos() {
         colunasBD.add("fkProfessor");
@@ -101,7 +129,8 @@ abstract public class ProfessorDisciplinaDAO extends Model {
     }
 
     /**
-     *
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
      * @param res
      * @throws SQLException
      */

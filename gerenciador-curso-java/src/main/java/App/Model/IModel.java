@@ -5,6 +5,11 @@ import java.sql.SQLException;
 
 public interface IModel {
 
+    /**
+     * 
+     * @return
+     * @throws SQLException 
+     */
     public int count() throws SQLException;
 
     /**
@@ -12,6 +17,8 @@ public interface IModel {
      * @return @throws SQLException
      */
     public ResultSet findAll() throws SQLException;
+    
+    public boolean existeByTabela(String valor, String campo, String tabela) throws SQLException;
 
     /**
      *
@@ -22,6 +29,11 @@ public interface IModel {
 
     public boolean existe(String valor, String campo) throws SQLException;
 
+    /**
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
+     * @param id 
+     */
     public void setId(Integer id);
 
     public void insert() throws SQLException;

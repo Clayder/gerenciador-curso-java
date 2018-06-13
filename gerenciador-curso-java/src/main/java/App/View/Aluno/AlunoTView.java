@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AlunoView implements IView {
+public class AlunoTView implements IView {
 
     @Override
     public void init() {
@@ -50,7 +50,7 @@ public class AlunoView implements IView {
                     try {
                         aluno.add();
                     } catch (SQLException ex) {
-                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AlunoTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;
@@ -61,7 +61,7 @@ public class AlunoView implements IView {
                     try {
                         a.alunos();
                     } catch (SQLException ex) {
-                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AlunoTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;
@@ -83,7 +83,7 @@ public class AlunoView implements IView {
                         a.update(id, telefone2, email2);
                         
                     } catch (SQLException ex) {
-                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AlunoTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;

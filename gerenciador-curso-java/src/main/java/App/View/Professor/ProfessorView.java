@@ -8,6 +8,9 @@ package App.View.Professor;
 import App.Controller.Professor.ProfessorController;
 import App.Model.Professor.IProfessor;
 import App.Model.Professor.Professor;
+import App.View.Aluno.AlunoView;
+import App.View.Aula.AulaView;
+import App.View.Disciplina.DisciplinaView;
 import App.View.ProfessorDisciplina.ProfessorDisciplinaView;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -43,6 +46,12 @@ public class ProfessorView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         matricula = new javax.swing.JTextField();
@@ -54,19 +63,29 @@ public class ProfessorView extends javax.swing.JFrame {
         telefone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         valorHora = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        disciplinas = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProfessores = new javax.swing.JTable();
         Cancelar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         mensagem = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        menuDisciplina = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        alunoMenu = new javax.swing.JMenu();
+        professorMenu = new javax.swing.JMenu();
+        disciplinaMenu = new javax.swing.JMenu();
+        aulaMenu = new javax.swing.JMenu();
+        relatorioMenu = new javax.swing.JMenu();
+
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu6.setText("Edit");
+        jMenuBar2.add(jMenu6);
+
+        jMenu7.setText("File");
+        jMenuBar3.add(jMenu7);
+
+        jMenu8.setText("Edit");
+        jMenuBar3.add(jMenu8);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,8 +112,6 @@ public class ProfessorView extends javax.swing.JFrame {
         jLabel5.setText("Telefone:");
 
         jLabel6.setText("Valor hora:");
-
-        jLabel7.setText("Disciplinas:");
 
         tableProfessores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,40 +157,32 @@ public class ProfessorView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(endereco, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                            .addComponent(valorHora)
-                            .addComponent(matricula)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel3))
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(endereco, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(valorHora)
+                    .addComponent(matricula))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Cancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2))
-                            .addComponent(disciplinas)))))
+                        .addComponent(Cancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))))
             .addComponent(jScrollPane1)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {endereco, nome, telefone});
@@ -193,46 +202,69 @@ public class ProfessorView extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(valorHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(disciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cancelar)
-                    .addComponent(jButton2)
-                    .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(valorHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Cancelar)
+                            .addComponent(jButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(107, 107, 107))
         );
 
-        jMenu1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu1.setText("Aluno");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu2.setText("Professor");
-        jMenuBar1.add(jMenu2);
-
-        menuDisciplina.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        menuDisciplina.setText("Disciplina");
-        menuDisciplina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuDisciplinaActionPerformed(evt);
+        alunoMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        alunoMenu.setText("Aluno");
+        alunoMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                alunoMenuMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuDisciplina);
+        jMenuBar1.add(alunoMenu);
 
-        jMenu4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu4.setText("Aula");
-        jMenuBar1.add(jMenu4);
+        professorMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        professorMenu.setText("Professor");
+        professorMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                professorMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(professorMenu);
 
-        jMenu5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu5.setText("Relatórios");
-        jMenuBar1.add(jMenu5);
+        disciplinaMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        disciplinaMenu.setText("Disciplina");
+        disciplinaMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                disciplinaMenuMouseClicked(evt);
+            }
+        });
+        disciplinaMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disciplinaMenuActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(disciplinaMenu);
+
+        aulaMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        aulaMenu.setText("Aula");
+        aulaMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aulaMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(aulaMenu);
+
+        relatorioMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        relatorioMenu.setText("Relatórios");
+        jMenuBar1.add(relatorioMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -290,7 +322,11 @@ public class ProfessorView extends javax.swing.JFrame {
                             nome.getText(),
                             endereco.getText(),
                             telefone.getText(),
-                            Double.parseDouble(valorHora.getText())
+                            Double.parseDouble(valorHora.getText()),
+                            "",
+                            "Visualisar",
+                            "Editar",
+                            "Excluir"
                         }
                 );
 
@@ -306,16 +342,15 @@ public class ProfessorView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void menuDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDisciplinaActionPerformed
+    private void disciplinaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disciplinaMenuActionPerformed
 //        System.out.println("etetteet");
 //        DisciplinasView.exibe();
-    }//GEN-LAST:event_menuDisciplinaActionPerformed
+    }//GEN-LAST:event_disciplinaMenuActionPerformed
 
     private void tableProfessoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tableProfessoresAncestorAdded
 
         DefaultTableModel model = (DefaultTableModel) tableProfessores.getModel();
         ProfessorController professores = new ProfessorController();
-        JButton button = new JButton("Click here!");
         try {
             for (IProfessor professor : professores.professores()) {
                 model.addRow(
@@ -325,8 +360,10 @@ public class ProfessorView extends javax.swing.JFrame {
                             professor.getEndereco(),
                             professor.getTelefone(),
                             professor.getValorHora(),
-                            professores.getDisciplinasByProfessor(professor.getDisciplinas()),
-                            tableProfessores.add(button)
+                            professores.listDisciplinasByProfessor(professor.getDisciplinas()),
+                            "Visualizar",
+                            "Editar",
+                            "Excluir"
                         }
                 );
             }
@@ -344,13 +381,21 @@ public class ProfessorView extends javax.swing.JFrame {
         ProfessorController professor = new ProfessorController();
         try {
             List<Professor> professores = professor.professores();
-            System.out.println(professores.get(linha).getNome());
             switch (coluna) {
                 case 6:
                     ProfessorDisciplinaView pd = new ProfessorDisciplinaView();
                     pd.setNomeProfessorByProfessorView(professores.get(linha).getNome());
+                    pd.setId(professores.get(linha).getId());
                     pd.setVisible(true);
                     this.dispose();
+                    break;
+                case 8:
+                    ProfessorView profView = new ProfessorView();
+                    profView.setVisible(true);
+                    profView.mensagem.setText(professor.excluirProfessor(professores.get(linha).getId()));
+
+                    this.dispose();
+
                     break;
             }
         } catch (SQLException ex) {
@@ -358,6 +403,26 @@ public class ProfessorView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_tableProfessoresMouseClicked
+
+    private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
+        new AlunoView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_alunoMenuMouseClicked
+
+    private void disciplinaMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disciplinaMenuMouseClicked
+        new DisciplinaView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_disciplinaMenuMouseClicked
+
+    private void aulaMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aulaMenuMouseClicked
+        new AulaView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_aulaMenuMouseClicked
+
+    private void professorMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_professorMenuMouseClicked
+        new ProfessorView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_professorMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -397,7 +462,9 @@ public class ProfessorView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
-    private javax.swing.JTextField disciplinas;
+    private javax.swing.JMenu alunoMenu;
+    private javax.swing.JMenu aulaMenu;
+    private javax.swing.JMenu disciplinaMenu;
     private javax.swing.JTextField endereco;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -405,18 +472,20 @@ public class ProfessorView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField matricula;
     private javax.swing.JLabel mensagem;
-    private javax.swing.JMenu menuDisciplina;
     private javax.swing.JTextField nome;
+    private javax.swing.JMenu professorMenu;
+    private javax.swing.JMenu relatorioMenu;
     private javax.swing.JTable tableProfessores;
     private javax.swing.JTextField telefone;
     private javax.swing.JTextField valorHora;

@@ -5,6 +5,10 @@ import App.Controller.Professor.ProfessorController;
 import App.Model.Aluno.IAluno;
 import App.Model.Disciplina.Disciplina;
 import App.Model.Disciplina.IDisciplina;
+import App.View.Aluno.AlunoView;
+import App.View.Aula.AulaView;
+import App.View.Disciplina.DisciplinaView;
+import App.View.Professor.ProfessorView;
 import java.awt.Color;
 import java.awt.Point;
 import java.sql.SQLException;
@@ -56,10 +60,10 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
         disciplinas = new javax.swing.JComboBox<>();
         btnSalvar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        alunoMenu = new javax.swing.JMenu();
+        professorMenu = new javax.swing.JMenu();
+        disciplinaMenu = new javax.swing.JMenu();
+        aulaMenu = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -158,21 +162,41 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jMenu1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu1.setText("Aluno");
-        jMenuBar1.add(jMenu1);
+        alunoMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        alunoMenu.setText("Aluno");
+        alunoMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                alunoMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(alunoMenu);
 
-        jMenu2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu2.setText("Professor");
-        jMenuBar1.add(jMenu2);
+        professorMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        professorMenu.setText("Professor");
+        professorMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                professorMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(professorMenu);
 
-        jMenu3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu3.setText("Disciplina");
-        jMenuBar1.add(jMenu3);
+        disciplinaMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        disciplinaMenu.setText("Disciplina");
+        disciplinaMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                disciplinaMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(disciplinaMenu);
 
-        jMenu4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu4.setText("Aula");
-        jMenuBar1.add(jMenu4);
+        aulaMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        aulaMenu.setText("Aula");
+        aulaMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aulaMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(aulaMenu);
 
         jMenu5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu5.setText("Relatórios");
@@ -290,6 +314,26 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tabelaMouseClicked
 
+    private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
+          new AlunoView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_alunoMenuMouseClicked
+
+    private void professorMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_professorMenuMouseClicked
+        new ProfessorView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_professorMenuMouseClicked
+
+    private void disciplinaMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disciplinaMenuMouseClicked
+        new DisciplinaView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_disciplinaMenuMouseClicked
+
+    private void aulaMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aulaMenuMouseClicked
+         new AulaView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_aulaMenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -328,20 +372,20 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu alunoMenu;
+    private javax.swing.JMenu aulaMenu;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JMenu disciplinaMenu;
     private javax.swing.JComboBox<String> disciplinas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mensagem;
     private javax.swing.JLabel nomeProfessor;
+    private javax.swing.JMenu professorMenu;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

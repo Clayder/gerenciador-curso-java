@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DisciplinaView implements IView {
+public class DisciplinaTView implements IView {
 
     @Override
     public void init() {
@@ -60,7 +60,7 @@ public class DisciplinaView implements IView {
                     try {
                         disciplina.add(codigo, conteudo, cargaHoraria, tipo);
                     } catch (SQLException ex) {
-                        Logger.getLogger(DisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(DisciplinaTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 break;
@@ -68,7 +68,7 @@ public class DisciplinaView implements IView {
                 try {
                     disciplina.disciplinas();
                 } catch (SQLException ex) {
-                    Logger.getLogger(DisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DisciplinaTView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             break;

@@ -19,6 +19,12 @@ abstract class AulaDAO extends Model {
     private IProfessor professor;
     private String data;
 
+    /**
+     * 
+     * @param professor
+     * @param disciplina
+     * @throws SQLException 
+     */
     public AulaDAO(IProfessor professor, IDisciplina disciplina) throws SQLException {
         super();
         TABELA = "aula";
@@ -33,38 +39,76 @@ abstract class AulaDAO extends Model {
         setCampos();
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id 
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return IDisciplina
+     */
     public IDisciplina getDisciplina() {
         return disciplina;
     }
 
+    /**
+     * 
+     * @return IProfessor
+     */
     public IProfessor getProfessor() {
         return professor;
     }
 
+    /**
+     * 
+     * @param disciplina 
+     */
     public void setDisciplina(IDisciplina disciplina) {
         this.disciplina = disciplina;
     }
 
+    /**
+     * 
+     * @param professor 
+     */
     public void setProfessor(IProfessor professor) {
         this.professor = professor;
     }
 
+    /**
+     * 
+     * @return String
+     */
     public String getData() {
         return data;
     }
 
+    /**
+     * 
+     * @param data 
+     */
     public void setData(String data) {
         this.data = data;
     }
 
+    /**
+     * Retorna os alunos associados a uma aula específica (getId)
+     * 
+     * @return List<Aluno>
+     * @throws SQLException 
+     */
     public List<Aluno> getAlunos() throws SQLException {
         String query = "SELECT aula_aluno.id, aluno.nome, aluno.telefone, aluno.matricula, aluno.email, aluno.id as id_aluno FROM curso.aula_aluno as aula_aluno\n"
                 + "INNER JOIN curso.aluno as aluno ON aluno.id = aula_aluno.fkAluno\n"
@@ -85,6 +129,9 @@ abstract class AulaDAO extends Model {
         return alunos;
     }
 
+    /**
+     * Informa o nome das colunas da tabela aula
+     */
     @Override
     protected void setCampos() {
         colunasBD.add("fkDisciplina");
@@ -118,12 +165,13 @@ abstract class AulaDAO extends Model {
     }
 
     /**
-     *
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
      * @param id
-     * @throws SQLException
+     * @throws SQLException 
      */
     @Override
-    public void setById(Integer id) throws SQLException {
+    public void setById(Integer id) throws SQLException { 
         ResultSet res = findById(id);
         while (res.next()) {
             setAll(res);
@@ -144,8 +192,9 @@ abstract class AulaDAO extends Model {
     }
 
     /**
-     *
-     * @return
+     * Cria um join para selecionar as aulas relacionadas a um professor e uma disciplina
+     * 
+     * @return String 
      */
     private String join() {
         String query = "SELECT aula.id, aula.fkProfessor, aula.fkDisciplina, aula.data,\n"

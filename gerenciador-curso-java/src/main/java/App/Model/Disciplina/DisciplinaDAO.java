@@ -23,58 +23,113 @@ class DisciplinaDAO extends Model {
         setCampos();
     }
 
+    /**
+     * 
+     * @return Integer
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * 
+     * @param id 
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * 
+     * @return Integer
+     */
     public Integer getIdProfessorDisciplina() {
         return idProfessorDisciplina;
     }
 
+    /**
+     * 
+     * @param idProfessorDisciplina 
+     */
     public void setIdProfessorDisciplina(int idProfessorDisciplina) {
         this.idProfessorDisciplina = idProfessorDisciplina;
     }
 
+    /**
+     * 
+     * @return String
+     */
     public String getCodigo() {
         return codigo;
     }
 
+    /**
+     * 
+     * @param codigo 
+     */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
+    /**
+     * 
+     * @return String
+     */
     public String getConteudo() {
         return conteudo;
     }
 
+    /**
+     * 
+     * @param conteudo 
+     */
     public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
     }
 
+    /**
+     * 
+     * @return double
+     */
     public double getCargaHoraria() {
         return cargaHoraria;
     }
 
+    /**
+     * 
+     * @param cargaHoraria 
+     */
     public void setCargaHoraria(double cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }
 
+       /**
+     * 
+     * @return String
+     */
     public String getPRATICA() {
         return PRATICA.getValor();
     }
 
+       /**
+     * 
+     * @return String
+     */
     public String getTEORICA() {
         return TEORICA.getValor();
     }
 
+    /**
+     * 
+     * @param tipo 
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     * Informa o nome das colunas da tabela disciplina
+     */
     @Override
     protected void setCampos() {
         colunasBD.add("codigo");
@@ -83,6 +138,10 @@ class DisciplinaDAO extends Model {
         colunasBD.add("tipo");
     }
 
+    /**
+     * 
+     * @return String
+     */
     public String getTipo() {
         return tipo;
     }
@@ -115,7 +174,8 @@ class DisciplinaDAO extends Model {
     }
 
     /**
-     *
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
      * @param id
      * @throws SQLException
      */
@@ -128,7 +188,8 @@ class DisciplinaDAO extends Model {
     }
 
     /**
-     *
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
      * @param codigo
      * @throws SQLException
      */

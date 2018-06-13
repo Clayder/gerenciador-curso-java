@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AulaView implements IView {
+public class AulaTView implements IView {
 
     @Override
     public void init() {
@@ -31,7 +31,7 @@ public class AulaView implements IView {
                     try {
                         aula.disciplinas();
                     } catch (SQLException ex) {
-                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AulaTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 System.out.println("Forneça id da disciplina: ");
@@ -53,7 +53,7 @@ public class AulaView implements IView {
                     try {
                         aula.professores();
                     } catch (SQLException ex) {
-                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AulaTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 System.out.println("Forneça o id do professor: ");
@@ -74,7 +74,7 @@ public class AulaView implements IView {
                     try {
                         aula.addAula(Integer.parseInt(idProfessor), Integer.parseInt(idDisciplina), data);
                     } catch (SQLException ex) {
-                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AulaTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
@@ -87,7 +87,7 @@ public class AulaView implements IView {
                     try {
                         aula.aulas();
                     } catch (SQLException ex) {
-                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AulaTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 System.out.println("Forneça o id da aula: ");
@@ -108,7 +108,7 @@ public class AulaView implements IView {
                     try {
                         aula.alunos();
                     } catch (SQLException ex) {
-                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AulaTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
 
@@ -130,7 +130,7 @@ public class AulaView implements IView {
                     try {
                         aula.addAlunoAula(Integer.parseInt(idAluno), Integer.parseInt(idAula));
                     } catch (SQLException ex) {
-                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AulaTView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 System.out.println(" Cadastro realizado. ");
@@ -139,7 +139,7 @@ public class AulaView implements IView {
                 try {
                     aula.aulas();
                 } catch (SQLException ex) {
-                    Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AulaTView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             break;

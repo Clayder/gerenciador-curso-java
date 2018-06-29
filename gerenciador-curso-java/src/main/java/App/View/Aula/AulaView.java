@@ -5,17 +5,27 @@
  */
 package App.View.Aula;
 
+import App.Controller.Aula.AulaController;
 import App.View.Professor.*;
 import App.Controller.Professor.ProfessorController;
+import App.Model.Aluno.Aluno;
+import App.Model.Aluno.IAluno;
+import App.Model.Aula.IAula;
+import App.Model.AulaAluno.AulaAluno;
+import App.Model.Disciplina.IDisciplina;
 import App.Model.Professor.IProfessor;
 import App.Model.Professor.Professor;
 import App.View.Aluno.AlunoView;
+import App.View.AulaAluno.AulaAlunoView;
 import App.View.Disciplina.DisciplinaView;
+import App.View.ProfessorDisciplina.ProfessorDisciplinaView;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.Color;
+import java.awt.Point;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -46,24 +56,16 @@ public class AulaView extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        matricula = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        endereco = new javax.swing.JTextField();
-        telefone = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        valorHora = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        disciplinas = new javax.swing.JTextField();
+        data = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableProfessores = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         Cancelar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         mensagem = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jTextField1 = new javax.swing.JTextField();
+        disciplina = new javax.swing.JLabel();
+        disciplinas = new javax.swing.JComboBox<>();
+        professores = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         alunoMenu = new javax.swing.JMenu();
         professorMenu = new javax.swing.JMenu();
@@ -75,52 +77,33 @@ public class AulaView extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Aula", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
-        jLabel1.setText("Matrícula:");
+        jLabel1.setText("Professor:");
 
-        matricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matriculaActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("Data:");
 
-        jLabel2.setText("Nome:");
-
-        nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Endereço:");
-
-        jLabel5.setText("Telefone:");
-
-        jLabel6.setText("Valor hora:");
-
-        jLabel7.setText("Disciplinas:");
-
-        tableProfessores.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Matrícula", "Nome", "Endereço", "Telefone", "Valor hora", "Disciplinas", "Ação"
+                "Professor", "Data", "Disciplina", "Alunos", "Editar", "Excluir"
             }
         ));
-        tableProfessores.addAncestorListener(new javax.swing.event.AncestorListener() {
+        tabela.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tableProfessoresAncestorAdded(evt);
+                tabelaAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jScrollPane1.setViewportView(tableProfessores);
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabela);
 
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,99 +119,95 @@ public class AulaView extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("jToggleButton1");
+        disciplina.setText("Disciplina: ");
 
-        jTextField1.setText("jTextField1");
+        disciplinas.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                disciplinasAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        disciplinas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                disciplinasActionPerformed(evt);
+            }
+        });
+
+        professores.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                professoresAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        professores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                professoresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(endereco, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                            .addComponent(valorHora)
-                            .addComponent(matricula)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(disciplinas)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Cancelar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2))))))
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(professores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(disciplina)
+                .addGap(18, 18, 18)
+                .addComponent(disciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addComponent(Cancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addGap(31, 31, 31))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {endereco, nome, telefone});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(endereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(valorHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(disciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(disciplina)
+                            .addComponent(disciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(39, 39, 39))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(professores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Cancelar)
                         .addComponent(jButton2)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38))
+                .addGap(58, 58, 58)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
         );
-
-        jToggleButton1.getAccessibleContext().setAccessibleParent(tableProfessores);
 
         alunoMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         alunoMenu.setText("Aluno");
@@ -288,63 +267,41 @@ public class AulaView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void matriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_matriculaActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
 //        DisciplinasView.exibe();
 //        this.dispose();
     }//GEN-LAST:event_CancelarActionPerformed
 
-    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
+        String novoProfessor = professores.getSelectedItem().toString();
+        String novaDisciplina = disciplinas.getSelectedItem().toString();
+
+        System.out.println(novoProfessor);
+        System.out.println(novaDisciplina);
+        System.out.println(data.getText());
+        AulaController novo = new AulaController(novoProfessor, novaDisciplina, data.getText());
         try {
-            if (ProfessorController.existeMatricula(matricula.getText())) {
-                matricula.setText(null);
-                mensagem.setForeground(Color.red);
-                mensagem.setText("A matrícula não pode ser repetida.");
-            } else {
-                ProfessorController professor = new ProfessorController(matricula.getText(), nome.getText(), endereco.getText(), telefone.getText(), Double.parseDouble(valorHora.getText()));
-                professor.add();
-
-                mensagem.setForeground(Color.GREEN);
-                mensagem.setText("Professor cadastrado com sucesso");
-
-                DefaultTableModel model = (DefaultTableModel) tableProfessores.getModel();
-
-                model.addRow(
-                        new Object[]{
-                            matricula.getText(),
-                            nome.getText(),
-                            endereco.getText(),
-                            telefone.getText(),
-                            Double.parseDouble(valorHora.getText())
-                        }
-                );
-
-                matricula.setText(null);
-                nome.setText(null);
-                endereco.setText(null);
-                telefone.setText(null);
-                valorHora.setText(null);
-
-            }
+            novo.addAula();
         } catch (SQLException ex) {
             Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        mensagem.setForeground(Color.GREEN);
+        mensagem.setText("Professor cadastrado com sucesso");
+
+        data.setText(null);
+
+        new AulaView().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void menuDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDisciplinaActionPerformed
@@ -352,29 +309,27 @@ public class AulaView extends javax.swing.JFrame {
 //        DisciplinasView.exibe();
     }//GEN-LAST:event_menuDisciplinaActionPerformed
 
-    private void tableProfessoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tableProfessoresAncestorAdded
+    private void tabelaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabelaAncestorAdded
 
-        DefaultTableModel model = (DefaultTableModel) tableProfessores.getModel();
-        ProfessorController professores = new ProfessorController();
-        JButton button = new JButton("Click here!");
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        AulaController aulas = new AulaController();
         try {
-            for (IProfessor professor : professores.professores()) {
+            for (IAula aula : aulas.aulas()) {
                 model.addRow(
                         new Object[]{
-                            professor.getMatricula(),
-                            professor.getNome(),
-                            professor.getEndereco(),
-                            professor.getTelefone(),
-                            professor.getValorHora(),
-                            professores.getDisciplinasByProfessor(professor.getId()),
-                            tableProfessores.add(button)
+                            aula.getProfessor().getNome(),
+                            aula.getDisciplina().getCodigo(),
+                            aula.getData(),
+                            "Alunos",
+                            "Editar",
+                            "Excluir"
                         }
                 );
             }
         } catch (SQLException ex) {
             Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_tableProfessoresAncestorAdded
+    }//GEN-LAST:event_tabelaAncestorAdded
 
     private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
         new AlunoView().setVisible(true);
@@ -395,6 +350,97 @@ public class AulaView extends javax.swing.JFrame {
         new AulaView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_aulaMenuMouseClicked
+
+    private void disciplinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disciplinasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_disciplinasActionPerformed
+
+    private void disciplinasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_disciplinasAncestorAdded
+        DefaultComboBoxModel<String> newItem = new javax.swing.DefaultComboBoxModel<>();
+
+        AulaController itens = new AulaController();
+
+        try {
+            for (IDisciplina item : itens.disciplinas()) {
+                newItem.addElement(item.getCodigo());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        disciplinas.setModel(newItem);
+    }//GEN-LAST:event_disciplinasAncestorAdded
+
+    private void professoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_professoresAncestorAdded
+        DefaultComboBoxModel<String> newItem = new javax.swing.DefaultComboBoxModel<>();
+
+        AulaController itens = new AulaController();
+
+        try {
+            for (IProfessor item : itens.professores()) {
+                newItem.addElement(item.getMatricula());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        professores.setModel(newItem);
+    }//GEN-LAST:event_professoresAncestorAdded
+
+    private void professoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professoresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_professoresActionPerformed
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+
+        Point point = evt.getPoint();
+        // Captura o numero da coluna
+        int coluna = tabela.columnAtPoint(point);
+        // Captura o número da linha
+        int linha = tabela.rowAtPoint(point);
+
+        AulaController controller = new AulaController();
+
+        // Verifica qual foi o número da coluna e realiza alguma ação 
+        switch (coluna) {
+            case 3:
+                this.dispose();
+                // Crio uma nova tela
+                AulaAlunoView viewAluno = new AulaAlunoView();
+                // Exibo essa nova tela.
+                viewAluno.setVisible(true);
+                // Fecha a antiga tela
+
+                break;
+            // Se a coluna for excluir 
+            case 5:
+
+                System.out.println(11);
+                // Crio uma nova tela
+                AulaView view = new AulaView();
+                // Exibo essa nova tela.
+                view.setVisible(true);
+                 {
+                    try {
+                        // Excluir o registro 
+                        view.mensagem.setText(controller.excluir(controller.aulas().get(linha).getId()));
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                // Fecha a antiga tela
+                this.dispose();
+
+                /**
+                 * view.setVisible(true); this.dispose();
+                 *
+                 * São utilizados para atualizar a tela.
+                 */
+                break;
+        }
+
+    }//GEN-LAST:event_tabelaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -439,28 +485,20 @@ public class AulaView extends javax.swing.JFrame {
     private javax.swing.JMenu alunoMenu;
     private javax.swing.JMenu aulaMenu;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField disciplinas;
-    private javax.swing.JTextField endereco;
+    private javax.swing.JTextField data;
+    private javax.swing.JLabel disciplina;
+    public static javax.swing.JComboBox<String> disciplinas;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JTextField matricula;
     private javax.swing.JLabel mensagem;
     private javax.swing.JMenu menuDisciplina;
-    private javax.swing.JTextField nome;
     private javax.swing.JMenu professorMenu;
-    private javax.swing.JTable tableProfessores;
-    private javax.swing.JTextField telefone;
-    private javax.swing.JTextField valorHora;
+    private javax.swing.JComboBox<String> professores;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

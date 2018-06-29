@@ -186,7 +186,7 @@ class ProfessorDAO extends Model {
      */
     @Override
     public void insert() throws SQLException {
-        String query = getQueryInsert();
+        String query = getQueryInsert(); // cria a string sql para fazer o insert
         statement = connection.prepareStatement(query);
         statement.setString(1, getMatricula());
         statement.setString(2, getNome());
@@ -218,6 +218,22 @@ class ProfessorDAO extends Model {
     @Override
     public void setById(Integer id) throws SQLException {
         ResultSet res = findById(id);
+        while (res.next()) {
+            setAll(res);
+        }
+    }
+    
+    /**
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
+     * @param matricula
+     * @throws SQLException
+     */
+    public void setByMatricula(String matricula) throws SQLException {
+        String query = "SELECT * FROM " + TABELA + " WHERE (matricula) = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1, matricula);
+        ResultSet res = statement.executeQuery();
         while (res.next()) {
             setAll(res);
         }

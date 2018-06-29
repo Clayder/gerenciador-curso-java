@@ -30,7 +30,9 @@ public interface IProfessor extends IModel {
     public void setValorHora(double valorHora);
 
     public void setId(Integer id);
-
+    
+    public void setByMatricula(String matricula) throws SQLException;
+    
     public List<Disciplina> getDisciplinas() throws SQLException;
 
     /**

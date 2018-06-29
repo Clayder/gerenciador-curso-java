@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Classe utilizada para acessar o banco de dados. 
+ * 
 
+*/
 class AlunoDAO extends Model {
 
     private Integer id;
@@ -177,6 +181,7 @@ class AlunoDAO extends Model {
     }
 
     /**
+     * Lista todos os alunos
      *
      * @return @throws SQLException
      */

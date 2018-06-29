@@ -38,6 +38,7 @@ public class DisciplinaController {
     }
 
     /**
+     * Retorna uma lista com os dados de todos as disciplinas
      * 
      * @return
      * @throws SQLException 

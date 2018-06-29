@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package App.View.Aluno;
+package App.View.AulaAluno;
 
+import App.View.Aluno.*;
 import App.Controller.Aluno.AlunoController;
 import App.Model.Aluno.Aluno;
 import App.Model.Aluno.IAluno;
@@ -25,12 +26,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Fernanda
  */
-public class AlunoView extends javax.swing.JFrame {
+public class AulaAlunoView extends javax.swing.JFrame {
 
     /**
      * Creates new form ContactEditorUI
      */
-    public AlunoView() {
+    public AulaAlunoView() {
         initComponents();
     }
 
@@ -322,12 +323,12 @@ public class AlunoView extends javax.swing.JFrame {
                 email.setText(null);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AulaAlunoView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
-        new AlunoView().setVisible(true);
+        new AulaAlunoView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_alunoMenuMouseClicked
 
@@ -360,7 +361,7 @@ public class AlunoView extends javax.swing.JFrame {
             // Se a coluna for excluir 
             case 5:
                 // Crio uma nova tela Aluno 
-                AlunoView view = new AlunoView();
+                AulaAlunoView view = new AulaAlunoView();
                 // Exibo essa nova tela aluno.
                 view.setVisible(true);
                  {
@@ -369,7 +370,7 @@ public class AlunoView extends javax.swing.JFrame {
                         view.mensagem.setText(controller.excluir(controller.getAll().get(linha).getId()));
 
                     } catch (SQLException ex) {
-                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(AulaAlunoView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                  // Fecha a antiga tela
@@ -403,21 +404,23 @@ public class AlunoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AulaAlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AulaAlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AulaAlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AulaAlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlunoView().setVisible(true);
+                new AulaAlunoView().setVisible(true);
             }
         });
     }

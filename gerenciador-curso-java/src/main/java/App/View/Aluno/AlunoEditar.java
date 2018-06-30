@@ -28,8 +28,7 @@ import javax.swing.table.DefaultTableModel;
 public class AlunoEditar extends javax.swing.JFrame {
 
     private int id;
-    
-    
+
     /**
      * Creates new form ContactEditorUI
      */
@@ -40,8 +39,8 @@ public class AlunoEditar extends javax.swing.JFrame {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public void setInput(IAluno aluno){
+
+    public void setInput(IAluno aluno) {
         this.id = aluno.getId();
         this.matricula.setText(aluno.getMatricula());
         this.nome.setText(aluno.getNome());
@@ -60,9 +59,7 @@ public class AlunoEditar extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        matricula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         telefone = new javax.swing.JTextField();
@@ -70,6 +67,8 @@ public class AlunoEditar extends javax.swing.JFrame {
         button4 = new java.awt.Button();
         btnSalvar = new java.awt.Button();
         mensagem = new javax.swing.JLabel();
+        matricula = new javax.swing.JLabel();
+        nome = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         alunoMenu = new javax.swing.JMenu();
         professorMenu = new javax.swing.JMenu();
@@ -82,12 +81,6 @@ public class AlunoEditar extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         jLabel1.setText("Matrícula:");
-
-        matricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matriculaActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Nome:");
 
@@ -104,6 +97,10 @@ public class AlunoEditar extends javax.swing.JFrame {
             }
         });
 
+        matricula.setText("jLabel4");
+
+        nome.setText("jLabel4");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -114,10 +111,13 @@ public class AlunoEditar extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                            .addComponent(matricula))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -128,16 +128,16 @@ public class AlunoEditar extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                    .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {email, nome, telefone});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {email, telefone});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,9 +145,9 @@ public class AlunoEditar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(matricula)
+                    .addComponent(nome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -244,64 +244,20 @@ public class AlunoEditar extends javax.swing.JFrame {
     }//GEN-LAST:event_aulaMenuMouseClicked
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        
-        
-        
-//        try {
-//            /**
-//            * Se a matrícula já existir
-//            */
-//            if (AlunoController.existeMatricula(matricula.getText())) {
-//                matricula.setText(null);
-//                mensagem.setForeground(Color.red);
-//                mensagem.setText("A matrícula não pode ser repetida.");
-//            } else {
-//                /**
-//                * Crio um objeto do tipo aluno e inicializo os seus atributos
-//                */
-//                AlunoController aluno = new AlunoController(matricula.getText(), nome.getText(), telefone.getText(), email.getText());
-//                aluno.add();
-//
-//                mensagem.setForeground(Color.GREEN);
-//                /**
-//                * Imprimo a mensagem de sucesso (cor verde)
-//                */
-//                mensagem.setText("Aluno cadastrado com sucesso");
-//
-//                /**
-//                * Crio um linha na tabela
-//                */
-//                DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-//                /**
-//                * Populo a nova linha na tabela.
-//                */
-//                model.addRow(
-//                    new Object[]{
-//                        matricula.getText(),
-//                        nome.getText(),
-//                        telefone.getText(),
-//                        email.getText(),
-//                        "Editar",
-//                        "Excluir"
-//                    }
-//                );
-//
-//                /**
-//                * Apago os inputs do formulário.
-//                */
-//                matricula.setText(null);
-//                nome.setText(null);
-//                telefone.setText(null);
-//                email.setText(null);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(AlunoEditar.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void matriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_matriculaActionPerformed
+        AlunoController aluno = new AlunoController();
+        try {
+            aluno.update(id, telefone.getText(), email.getText());
+            // Crio uma nova tela Aluno 
+            AlunoView view = new AlunoView();
+            // Exibo essa nova tela aluno.
+            view.setVisible(true);
+            // Fecha a antiga tela
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoEditar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,9 +311,9 @@ public class AlunoEditar extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField matricula;
+    private javax.swing.JLabel matricula;
     private javax.swing.JLabel mensagem;
-    private javax.swing.JTextField nome;
+    private javax.swing.JLabel nome;
     private javax.swing.JMenu professorMenu;
     private javax.swing.JTextField telefone;
     // End of variables declaration//GEN-END:variables

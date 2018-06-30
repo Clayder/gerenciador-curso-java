@@ -36,6 +36,8 @@ abstract class AulaDAO extends Model {
     public AulaDAO() throws SQLException {
         super();
         TABELA = "aula";
+        this.professor = new Professor();
+        this.disciplina = new Disciplina();
         setCampos();
     }
 

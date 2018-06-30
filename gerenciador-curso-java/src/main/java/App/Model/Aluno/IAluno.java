@@ -23,6 +23,8 @@ public interface IAluno extends IModel {
     public void setEmail(String endereco);
 
     public void setTelefone(String telefone);
+    
+    public void setByMatricula(String matricula) throws SQLException;
 
     /**
      *

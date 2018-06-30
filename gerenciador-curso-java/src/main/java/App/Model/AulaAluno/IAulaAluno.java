@@ -1,10 +1,13 @@
 package App.Model.AulaAluno;
 
 import App.Model.IModel;
+import java.sql.SQLException;
 
 public interface IAulaAluno extends IModel {
 
     public Integer getId();
+    
+    public void excluir(Integer idAula, Integer idAluno) throws SQLException;
 
     /**
      *

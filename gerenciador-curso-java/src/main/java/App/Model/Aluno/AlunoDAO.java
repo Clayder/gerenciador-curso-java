@@ -209,4 +209,20 @@ class AlunoDAO extends Model {
         setTelefone(res.getString("telefone"));
         setId(res.getInt("id"));
     }
+    
+    /**
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
+     * @param codigo
+     * @throws SQLException
+     */
+    public void setByMatricula(String matricula) throws SQLException {
+        String query = "SELECT * FROM " + TABELA + " WHERE (matricula) = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1, matricula);
+        ResultSet res = statement.executeQuery();
+        while (res.next()) {
+            setAll(res);
+        }
+    }
 }

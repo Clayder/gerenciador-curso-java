@@ -138,4 +138,19 @@ abstract public class AulaAlunoDAO  extends Model {
         setId(res.getInt("id"));
     }
     
+       /**
+     * Remove um registro específico, pelo id
+     * 
+     * @param id
+     * @throws SQLException
+     */
+    public void excluir(Integer idAula, Integer idAluno) throws SQLException {
+        String query = "DELETE FROM " + TABELA + " WHERE fkAula = ? AND fkAluno = ?";
+
+        statement = connection.prepareStatement(query);
+        statement.setInt(1, idAula);
+        statement.setInt(2, idAluno);
+        statement.execute();
+    }
+    
 }

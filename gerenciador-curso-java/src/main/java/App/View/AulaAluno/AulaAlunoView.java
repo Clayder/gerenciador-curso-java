@@ -7,6 +7,8 @@ package App.View.AulaAluno;
 
 import App.View.Aluno.*;
 import App.Controller.Aluno.AlunoController;
+import App.Controller.Aula.AulaController;
+import App.Controller.AulaAluno.AulaAlunoController;
 import App.Model.Aluno.Aluno;
 import App.Model.Aluno.IAluno;
 import App.View.Aula.AulaView;
@@ -30,6 +32,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AulaAlunoView extends javax.swing.JFrame {
 
+    int idAula;
+
     /**
      * Creates new form ContactEditorUI
      */
@@ -37,10 +41,22 @@ public class AulaAlunoView extends javax.swing.JFrame {
         initComponents();
     }
 
+    /**
+     *
+     * @param id
+     */
+    public void setIdAula(int id) {
+        this.idAula = id;
+    }
+
+    /**
+     *
+     * @param aula
+     */
     public void setAula(String aula) {
         this.aula.setText(aula);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -237,16 +253,17 @@ public class AulaAlunoView extends javax.swing.JFrame {
 
     private void tabelaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabelaAncestorAdded
 
-        AlunoController controller = new AlunoController();
+        AulaController controller = new AulaController();
+
         try {
             // Recebe os alunos
-            for (IAluno item : controller.getAll()) {
-                
+            for (IAluno item : controller.getAlunosByAula(idAula)) {
+
                 /**
                  * Cria a nova linha na tabela
                  */
                 DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-                
+
                 /**
                  * Popula a nova linha da tabela
                  */
@@ -268,12 +285,17 @@ public class AulaAlunoView extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaAncestorAdded
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-//        try {
-//                
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(AulaAlunoView.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        AulaController controller = new AulaController();
+        try {
+            controller.addAlunoAula(idAula, alunos.getSelectedItem().toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaAlunoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        AulaAlunoView view = new AulaAlunoView();
+        view.setIdAula(idAula);
+        view.setAula(aula.getText());
+        view.setVisible(true);
+        this.dispose();;
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
@@ -304,6 +326,7 @@ public class AulaAlunoView extends javax.swing.JFrame {
         int linha = tabela.rowAtPoint(point);
 
         AlunoController controller = new AlunoController();
+        AulaAlunoController aulaAlunoController = new AulaAlunoController();
 
         // Verifica qual foi o número da coluna e realiza alguma ação 
         switch (coluna) {
@@ -311,25 +334,26 @@ public class AulaAlunoView extends javax.swing.JFrame {
             case 5:
                 // Crio uma nova tela Aluno 
                 AulaAlunoView view = new AulaAlunoView();
-                // Exibo essa nova tela aluno.
-                view.setVisible(true);
                  {
                     try {
                         // Excluir o registro 
-                        view.mensagem.setText(controller.excluir(controller.getAll().get(linha).getId()));
+                        view.mensagem.setText(aulaAlunoController.excluir(idAula, controller.getAll().get(linha).getId()));
 
                     } catch (SQLException ex) {
                         Logger.getLogger(AulaAlunoView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                 // Fecha a antiga tela
+                view.setIdAula(idAula);
+                view.setAula(aula.getText());
+                // Exibo essa nova tela aluno.
+                view.setVisible(true);
+                // Fecha a antiga tela
                 this.dispose();
-                
+
                 /**
-                 *  view.setVisible(true);
-                 *  this.dispose();
-                 * 
-                 *  São utilizados para atualizar a tela. 
+                 * view.setVisible(true); this.dispose();
+                 *
+                 * São utilizados para atualizar a tela.
                  */
                 break;
         }

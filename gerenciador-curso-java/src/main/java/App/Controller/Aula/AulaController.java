@@ -12,6 +12,7 @@ import App.Model.Professor.IProfessor;
 import App.Model.Professor.Professor;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AulaController {
 
@@ -92,8 +93,16 @@ public class AulaController {
         }
     }
     
-    public void addAlunoAula(Integer fkAluno, Integer fkAula) throws SQLException{
-        IAulaAluno aulaAluno = new AulaAluno(fkAluno, fkAula);
+    public List<Aluno> getAlunosByAula(int aulaId) throws SQLException {
+        IAula aula = new Aula();
+        aula.setById(aulaId);
+        return aula.getAlunos();
+    }
+    
+    public void addAlunoAula(Integer fkAula, String matricula) throws SQLException{
+        IAluno aluno = new Aluno();
+        aluno.setByMatricula(matricula);
+        IAulaAluno aulaAluno = new AulaAluno(aluno.getId(), fkAula);
         aulaAluno.insert();
     }
     

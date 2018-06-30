@@ -86,7 +86,7 @@ public class AulaView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Professor", "Data", "Disciplina", "Alunos", "Editar", "Excluir"
+                "Professor", "Disciplina", "Data", "Alunos", "Editar", "Excluir"
             }
         ));
         tabela.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -410,6 +410,7 @@ public class AulaView extends javax.swing.JFrame {
                  {
                     try {
                         viewAluno.setAula(controller.aulas().get(linha).getData());
+                        viewAluno.setIdAula(controller.aulas().get(linha).getId());
                     } catch (SQLException ex) {
                         Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
                     }

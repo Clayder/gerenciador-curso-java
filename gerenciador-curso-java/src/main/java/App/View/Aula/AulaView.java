@@ -281,10 +281,10 @@ public class AulaView extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        
         String novoProfessor = professores.getSelectedItem().toString();
         String novaDisciplina = disciplinas.getSelectedItem().toString();
-
+        
         System.out.println(novoProfessor);
         System.out.println(novaDisciplina);
         System.out.println(data.getText());
@@ -294,12 +294,12 @@ public class AulaView extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         mensagem.setForeground(Color.GREEN);
         mensagem.setText("Professor cadastrado com sucesso");
-
+        
         data.setText(null);
-
+        
         new AulaView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -310,7 +310,7 @@ public class AulaView extends javax.swing.JFrame {
     }//GEN-LAST:event_menuDisciplinaActionPerformed
 
     private void tabelaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabelaAncestorAdded
-
+        
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         AulaController aulas = new AulaController();
         try {
@@ -357,9 +357,9 @@ public class AulaView extends javax.swing.JFrame {
 
     private void disciplinasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_disciplinasAncestorAdded
         DefaultComboBoxModel<String> newItem = new javax.swing.DefaultComboBoxModel<>();
-
+        
         AulaController itens = new AulaController();
-
+        
         try {
             for (IDisciplina item : itens.disciplinas()) {
                 newItem.addElement(item.getCodigo());
@@ -367,15 +367,15 @@ public class AulaView extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         disciplinas.setModel(newItem);
     }//GEN-LAST:event_disciplinasAncestorAdded
 
     private void professoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_professoresAncestorAdded
         DefaultComboBoxModel<String> newItem = new javax.swing.DefaultComboBoxModel<>();
-
+        
         AulaController itens = new AulaController();
-
+        
         try {
             for (IProfessor item : itens.professores()) {
                 newItem.addElement(item.getMatricula());
@@ -383,7 +383,7 @@ public class AulaView extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         professores.setModel(newItem);
     }//GEN-LAST:event_professoresAncestorAdded
 
@@ -392,13 +392,13 @@ public class AulaView extends javax.swing.JFrame {
     }//GEN-LAST:event_professoresActionPerformed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-
+        
         Point point = evt.getPoint();
         // Captura o numero da coluna
         int coluna = tabela.columnAtPoint(point);
         // Captura o número da linha
         int linha = tabela.rowAtPoint(point);
-
+        
         AulaController controller = new AulaController();
 
         // Verifica qual foi o número da coluna e realiza alguma ação 
@@ -407,14 +407,20 @@ public class AulaView extends javax.swing.JFrame {
                 this.dispose();
                 // Crio uma nova tela
                 AulaAlunoView viewAluno = new AulaAlunoView();
+                 {
+                    try {
+                        viewAluno.setAula(controller.aulas().get(linha).getData());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AulaView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 // Exibo essa nova tela.
                 viewAluno.setVisible(true);
-                // Fecha a antiga tela
-
+                
                 break;
             // Se a coluna for excluir 
             case 5:
-
+                
                 System.out.println(11);
                 // Crio uma nova tela
                 AulaView view = new AulaView();
@@ -424,7 +430,7 @@ public class AulaView extends javax.swing.JFrame {
                     try {
                         // Excluir o registro 
                         view.mensagem.setText(controller.excluir(controller.aulas().get(linha).getId()));
-
+                        
                     } catch (SQLException ex) {
                         Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
                     }

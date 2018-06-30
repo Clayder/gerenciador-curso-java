@@ -18,6 +18,7 @@ abstract class AulaDAO extends Model {
     private IDisciplina disciplina;
     private IProfessor professor;
     private String data;
+    private boolean status;
 
     /**
      * 
@@ -41,6 +42,14 @@ abstract class AulaDAO extends Model {
         setCampos();
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
     /**
      * 
      * @return 
@@ -261,5 +270,6 @@ abstract class AulaDAO extends Model {
 
         setData(res.getString("data"));
         setId(res.getInt("id"));
+        setStatus(res.getBoolean("status"));
     }
 }

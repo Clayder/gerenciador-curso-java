@@ -86,7 +86,7 @@ public class AulaView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Professor", "Disciplina", "Data", "Alunos", "Editar", "Excluir"
+                "Professor", "Disciplina", "Data", "Alunos", "Realizar aula", "Status", "Excluir"
             }
         ));
         tabela.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -321,7 +321,8 @@ public class AulaView extends javax.swing.JFrame {
                             aula.getDisciplina().getCodigo(),
                             aula.getData(),
                             "Alunos",
-                            "Editar",
+                            "Realizar aula",
+                            aula.isStatus(),
                             "Excluir"
                         }
                 );

@@ -208,7 +208,7 @@ abstract class AulaDAO extends Model {
      * @return String 
      */
     private String join() {
-        String query = "SELECT aula.id, aula.fkProfessor, aula.fkDisciplina, aula.data,\n"
+        String query = "SELECT aula.id, aula.status, aula.fkProfessor, aula.fkDisciplina, aula.data,\n"
                 + "prof.matricula, prof.nome, prof.endereco, prof.telefone, prof.valor_hora,\n"
                 + "disc.carga_horaria, disc.codigo, disc.conteudo, disc.tipo\n"
                 + "FROM curso.aula as aula\n"

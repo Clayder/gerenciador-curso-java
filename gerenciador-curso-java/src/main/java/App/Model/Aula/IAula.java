@@ -9,8 +9,12 @@ import java.util.List;
 
 public interface IAula extends IModel {
 
-    public boolean isStatus();
+    public void realizarAula() throws SQLException;
     
+    public void setStatus(boolean status);
+
+    public boolean isStatus();
+
     public Integer getId();
 
     public IDisciplina getDisciplina();

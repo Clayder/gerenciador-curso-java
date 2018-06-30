@@ -272,4 +272,11 @@ abstract class AulaDAO extends Model {
         setId(res.getInt("id"));
         setStatus(res.getBoolean("status"));
     }
+    
+    public void realizarAula() throws SQLException{
+        String query = "UPDATE curso.aula SET status = false where id = ?" ;
+        statement = connection.prepareStatement(query);
+        statement.setInt(1, getId());
+        statement.execute();
+    }
 }

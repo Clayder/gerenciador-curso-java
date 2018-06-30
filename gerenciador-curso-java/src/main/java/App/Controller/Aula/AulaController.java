@@ -127,4 +127,18 @@ public class AulaController {
         }
         return msg;
     }
+     
+         /**
+     * Atualiza um registro específico
+     * 
+     * @param id
+     * @param status
+     * @throws SQLException 
+     */
+    public void realizarAula(Integer id) throws SQLException{
+        IAula a = new Aula();
+        a.setById(id);
+        a.realizarAula();
+        a.update();
+    }
 }

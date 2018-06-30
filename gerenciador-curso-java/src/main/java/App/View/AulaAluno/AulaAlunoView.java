@@ -14,6 +14,7 @@ import App.Model.Aluno.IAluno;
 import App.View.Aula.AulaView;
 import App.View.Disciplina.DisciplinaView;
 import App.View.Professor.ProfessorView;
+import App.View.Relatorio.RelatorioView;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.List;
@@ -81,7 +82,7 @@ public class AulaAlunoView extends javax.swing.JFrame {
         professorMenu = new javax.swing.JMenu();
         disciplinaMenu = new javax.swing.JMenu();
         aulaMenu = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        relatorioMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -224,9 +225,14 @@ public class AulaAlunoView extends javax.swing.JFrame {
         });
         jMenuBar1.add(aulaMenu);
 
-        jMenu5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu5.setText("Relatórios");
-        jMenuBar1.add(jMenu5);
+        relatorioMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        relatorioMenu.setText("Relatórios");
+        relatorioMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                relatorioMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(relatorioMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -376,6 +382,11 @@ public class AulaAlunoView extends javax.swing.JFrame {
         alunos.setModel(newItem);
     }//GEN-LAST:event_alunosAncestorAdded
 
+    private void relatorioMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_relatorioMenuMouseClicked
+        new RelatorioView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_relatorioMenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -424,12 +435,12 @@ public class AulaAlunoView extends javax.swing.JFrame {
     private javax.swing.JMenu disciplinaMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mensagem;
     private javax.swing.JMenu professorMenu;
+    private javax.swing.JMenu relatorioMenu;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

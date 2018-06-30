@@ -12,6 +12,7 @@ import App.View.Aluno.AlunoView;
 import App.View.Aula.AulaView;
 import App.View.Disciplina.DisciplinaView;
 import App.View.ProfessorDisciplina.ProfessorDisciplinaView;
+import App.View.Relatorio.RelatorioView;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -264,6 +265,11 @@ public class ProfessorView extends javax.swing.JFrame {
 
         relatorioMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         relatorioMenu.setText("Relatórios");
+        relatorioMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                relatorioMenuMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(relatorioMenu);
 
         setJMenuBar(jMenuBar1);
@@ -427,6 +433,11 @@ public class ProfessorView extends javax.swing.JFrame {
         new ProfessorView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_professorMenuMouseClicked
+
+    private void relatorioMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_relatorioMenuMouseClicked
+        new RelatorioView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_relatorioMenuMouseClicked
 
     /**
      * @param args the command line arguments

@@ -12,6 +12,7 @@ import App.Model.Aluno.IAluno;
 import App.Model.Disciplina.IDisciplina;
 import App.View.Aula.AulaView;
 import App.View.Professor.ProfessorView;
+import App.View.Relatorio.RelatorioView;
 import java.awt.Color;
 import java.awt.Point;
 import java.sql.SQLException;
@@ -62,7 +63,7 @@ public class DisciplinaView extends javax.swing.JFrame {
         professorMenu = new javax.swing.JMenu();
         disciplinaMenu = new javax.swing.JMenu();
         aulaMenu = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        relatorioMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -228,9 +229,14 @@ public class DisciplinaView extends javax.swing.JFrame {
         });
         jMenuBar1.add(aulaMenu);
 
-        jMenu5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu5.setText("Relatórios");
-        jMenuBar1.add(jMenu5);
+        relatorioMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        relatorioMenu.setText("Relatórios");
+        relatorioMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                relatorioMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(relatorioMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -379,6 +385,11 @@ public class DisciplinaView extends javax.swing.JFrame {
           this.dispose();
     }//GEN-LAST:event_tabelaMouseClicked
 
+    private void relatorioMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_relatorioMenuMouseClicked
+        new RelatorioView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_relatorioMenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -430,12 +441,12 @@ public class DisciplinaView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mensagem;
     private javax.swing.JMenu professorMenu;
+    private javax.swing.JMenu relatorioMenu;
     private javax.swing.JTable tabela;
     private javax.swing.JTextArea textConteudo;
     private javax.swing.JComboBox<String> tipo;

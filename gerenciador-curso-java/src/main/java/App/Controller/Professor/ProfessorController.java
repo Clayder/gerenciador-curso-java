@@ -189,4 +189,21 @@ public class ProfessorController {
         }
         return msg;
     }
+    
+      /**
+     * Atualiza um registro específico
+     * 
+     * @param id
+     * @param telefone
+     * @param email
+     * @throws SQLException 
+     */
+    public void update(int id, String telefone, String endereco, Double valorHora) throws SQLException{
+        IProfessor p = new Professor();
+        p.setById(id);
+        p.setEndereco(endereco);
+        p.setTelefone(telefone);
+        p.setValorHora(valorHora);
+        p.update();
+    }
 }

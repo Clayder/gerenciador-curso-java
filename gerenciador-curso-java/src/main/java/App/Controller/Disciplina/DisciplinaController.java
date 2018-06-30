@@ -71,4 +71,20 @@ public class DisciplinaController {
         }
         return msg;
     }
+    
+      /**
+     * Atualiza um registro específico
+     * 
+     * @param id
+     * @param telefone
+     * @param email
+     * @throws SQLException 
+     */
+    public void update(int id, String conteudo, Double cargaHoraria) throws SQLException{
+        IDisciplina disc = new Disciplina();
+        disc.setById(id);
+        disc.setConteudo(conteudo);
+        disc.setCargaHoraria(cargaHoraria);
+        disc.update();
+    }
 }

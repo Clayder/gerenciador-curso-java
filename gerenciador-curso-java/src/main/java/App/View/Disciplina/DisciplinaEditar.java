@@ -24,13 +24,23 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Fernanda
  */
-public class DisciplinaView extends javax.swing.JFrame {
+public class DisciplinaEditar extends javax.swing.JFrame {
 
     /**
      * Creates new form ContactEditorUI
      */
-    public DisciplinaView() {
+    public DisciplinaEditar() {
         initComponents();
+    }
+
+    private int id;
+
+    public void setInput(IDisciplina disciplina) {
+        id = disciplina.getId();
+        textConteudo.setText(disciplina.getConteudo());
+        cargaHoraria.setText(Double.toString(disciplina.getCargaHoraria()));
+        tipo.setText(disciplina.getTipo());
+        codigo.setText(disciplina.getCodigo());
     }
 
     /**
@@ -44,19 +54,16 @@ public class DisciplinaView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        codigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cargaHoraria = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabela = new javax.swing.JTable();
-        button4 = new java.awt.Button();
         btnSalvar = new java.awt.Button();
         mensagem = new javax.swing.JLabel();
-        tipo = new javax.swing.JComboBox<>();
         conteudo = new javax.swing.JScrollPane();
         textConteudo = new javax.swing.JTextArea();
+        codigo = new javax.swing.JLabel();
+        tipo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         alunoMenu = new javax.swing.JMenu();
         professorMenu = new javax.swing.JMenu();
@@ -70,43 +77,11 @@ public class DisciplinaView extends javax.swing.JFrame {
 
         jLabel1.setText("Código:");
 
-        codigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codigoActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Tipo:");
 
         jLabel3.setText("Carga Horária:");
 
         jLabel5.setText("Conteúdo:");
-
-        tabela.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Código", "Carga Horária", "Tipo", "Conteúdo", "Editar", "Excluir"
-            }
-        ));
-        tabela.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tabelaAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tabela);
-
-        button4.setLabel("Cancelar");
 
         btnSalvar.setLabel("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,50 +90,47 @@ public class DisciplinaView extends javax.swing.JFrame {
             }
         });
 
-        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pratica", "teorica" }));
-        tipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoActionPerformed(evt);
-            }
-        });
-
         textConteudo.setColumns(20);
         textConteudo.setRows(5);
         conteudo.setViewportView(textConteudo);
+
+        codigo.setText("jLabel4");
+
+        tipo.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cargaHoraria, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
-                            .addComponent(codigo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(cargaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(28, 28, 28))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(140, 140, 140)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(39, 39, 39)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(conteudo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
+                        .addGap(0, 0, 0)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(102, 102, 102))
         );
@@ -171,10 +143,10 @@ public class DisciplinaView extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(codigo)
+                            .addComponent(tipo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -184,12 +156,8 @@ public class DisciplinaView extends javax.swing.JFrame {
                             .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(button4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
 
         alunoMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -255,73 +223,21 @@ public class DisciplinaView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_codigoActionPerformed
-
-    private void tabelaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabelaAncestorAdded
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
         DisciplinaController controller = new DisciplinaController();
         try {
-            for (IDisciplina item : controller.getAll()) {
-                DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-                model.addRow(
-                        new Object[]{
-                            item.getCodigo(),
-                            item.getCargaHoraria(),
-                            item.getTipo(),
-                            item.getConteudo(),
-                            "Editar",
-                            "Excluir"
-                        }
-                );
-            }
+            controller.update(id, textConteudo.getText(), Double.parseDouble(cargaHoraria.getText()));
         } catch (SQLException ex) {
-            Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DisciplinaEditar.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }//GEN-LAST:event_tabelaAncestorAdded
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
-        try {
-            if (DisciplinaController.existeDisciplina(codigo.getText())) {
-                codigo.setText(null);
-                mensagem.setForeground(Color.red);
-                mensagem.setText("O código não pode ser repetido.");
-            } else {
-                DisciplinaController disc = new DisciplinaController();
-                disc.add(codigo.getText(), textConteudo.getText(), Double.parseDouble(cargaHoraria.getText()), tipo.getSelectedItem().toString());
-
-                mensagem.setForeground(Color.GREEN);
-                mensagem.setText("Disciplina cadastrada com sucesso");
-
-                DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-
-                model.addRow(
-                        new Object[]{
-                            codigo.getText(),
-                            textConteudo.getText(),
-                            Double.parseDouble(cargaHoraria.getText()),
-                            tipo.getSelectedItem().toString(),
-                            "Editar",
-                            "Excluir"
-                        }
-                );
-
-                codigo.setText(null);
-                textConteudo.setText(null);
-                cargaHoraria.setText(null);
-                cargaHoraria.setText(null);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(DisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        // Crio uma nova tela Aluno 
+        DisciplinaView view = new DisciplinaView();
+        // Exibo essa nova tela aluno.
+        view.setVisible(true);
+        // Fecha a antiga tela
+        this.dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tipoActionPerformed
 
     private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
         new AlunoView().setVisible(true);
@@ -334,7 +250,7 @@ public class DisciplinaView extends javax.swing.JFrame {
     }//GEN-LAST:event_professorMenuMouseClicked
 
     private void disciplinaMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disciplinaMenuMouseClicked
-        new DisciplinaView().setVisible(true);
+        new DisciplinaEditar().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_disciplinaMenuMouseClicked
 
@@ -342,42 +258,6 @@ public class DisciplinaView extends javax.swing.JFrame {
         new AulaView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_aulaMenuMouseClicked
-
-    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        Point point = evt.getPoint();
-        int coluna = tabela.columnAtPoint(point);
-        int linha = tabela.rowAtPoint(point);
-
-        DisciplinaController controller = new DisciplinaController();
-
-        switch (coluna) {
-            case 4:
-                DisciplinaEditar viewEditar = new DisciplinaEditar();
-                 {
-                    try {
-                        // passo os dados do aluno para o formulario de edição
-                        viewEditar.setInput(controller.getAll().get(linha));
-                    } catch (SQLException ex) {
-                        Logger.getLogger(DisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                viewEditar.setVisible(true);
-                break;
-            case 5:
-                DisciplinaView view = new DisciplinaView();
-                view.setVisible(true);
-                 {
-                    try {
-                        view.mensagem.setText(controller.excluir(controller.getAll().get(linha).getId()));
-
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                break;
-        }
-          this.dispose();
-    }//GEN-LAST:event_tabelaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -396,14 +276,18 @@ public class DisciplinaView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DisciplinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisciplinaEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DisciplinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisciplinaEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DisciplinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisciplinaEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DisciplinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisciplinaEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -412,7 +296,7 @@ public class DisciplinaView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DisciplinaView().setVisible(true);
+                new DisciplinaEditar().setVisible(true);
             }
         });
     }
@@ -421,9 +305,8 @@ public class DisciplinaView extends javax.swing.JFrame {
     private javax.swing.JMenu alunoMenu;
     private javax.swing.JMenu aulaMenu;
     private java.awt.Button btnSalvar;
-    private java.awt.Button button4;
     private javax.swing.JTextField cargaHoraria;
-    private javax.swing.JTextField codigo;
+    private javax.swing.JLabel codigo;
     private javax.swing.JScrollPane conteudo;
     private javax.swing.JMenu disciplinaMenu;
     private javax.swing.JLabel jLabel1;
@@ -433,11 +316,9 @@ public class DisciplinaView extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mensagem;
     private javax.swing.JMenu professorMenu;
-    private javax.swing.JTable tabela;
     private javax.swing.JTextArea textConteudo;
-    private javax.swing.JComboBox<String> tipo;
+    private javax.swing.JLabel tipo;
     // End of variables declaration//GEN-END:variables
 }

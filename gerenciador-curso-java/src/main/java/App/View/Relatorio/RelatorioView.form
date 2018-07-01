@@ -313,6 +313,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Calcular"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calular2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="resultArrecadadoRealizado2">
         </Component>

@@ -98,6 +98,11 @@ public class RelatorioView extends javax.swing.JFrame {
         jLabel6.setText("Mês:");
 
         calular2.setText("Calcular");
+        calular2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calular2ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Gasto já acontecido (pago aos professores)");
 
@@ -311,20 +316,44 @@ public class RelatorioView extends javax.swing.JFrame {
     private void calular1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calular1ActionPerformed
         RelatorioController controller = new RelatorioController();
         Integer mes;
-        if("".equals(mes1.getText())){
+        if ("".equals(mes1.getText())) {
             mes = null;
-        }else{
-            System.out.println(222);
+        } else {
             mes = Integer.parseInt(mes1.getText());
         }
-        double valor = 0; 
-        try {
-            valor = controller.getValorAulasArrecadadas(Integer.parseInt(ano1.getText()), mes);
-        } catch (SQLException ex) {
-            Logger.getLogger(RelatorioView.class.getName()).log(Level.SEVERE, null, ex);
+        if ("".equals(ano1.getText())) {
+            resultArrecadadoRealizado1.setText("Campo ano vazio.");
+        } else {
+            double valor = 0;
+            try {
+                valor = controller.getValorAulasArrecadadas(Integer.parseInt(ano1.getText()), mes);
+            } catch (SQLException ex) {
+                Logger.getLogger(RelatorioView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            resultArrecadadoRealizado1.setText(Double.toString(valor));
         }
-        resultArrecadadoRealizado1.setText(Double.toString(valor));
     }//GEN-LAST:event_calular1ActionPerformed
+
+    private void calular2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calular2ActionPerformed
+        RelatorioController controller = new RelatorioController();
+        Integer mes;
+        if ("".equals(mes2.getText())) {
+            mes = null;
+        } else {
+            mes = Integer.parseInt(mes2.getText());
+        }
+        if ("".equals(ano2.getText())) {
+            resultArrecadadoRealizado2.setText("Campo ano vazio.");
+        } else {
+            double valor = 0;
+            try {
+                valor = controller.getValorAulas(Integer.parseInt(ano2.getText()), mes);
+            } catch (SQLException ex) {
+                Logger.getLogger(RelatorioView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            resultArrecadadoRealizado2.setText(Double.toString(valor));
+        }
+    }//GEN-LAST:event_calular2ActionPerformed
 
     /**
      * @param args the command line arguments

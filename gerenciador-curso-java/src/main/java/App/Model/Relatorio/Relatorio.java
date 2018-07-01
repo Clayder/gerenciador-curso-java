@@ -31,10 +31,7 @@ public class Relatorio extends Model implements IRelatorio {
         if (arrecadado) {
             status = 0;
         }
-        String query = this.query(status) + " where " + filtro + " \n";
-
-        System.out.println(query);
-        
+        String query = this.query(status) + " where " + filtro + " \n";       
         statement = connection.prepareStatement(query);
         statement.setInt(1, ano);
         if (mes != null) {

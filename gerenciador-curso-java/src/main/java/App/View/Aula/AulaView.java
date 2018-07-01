@@ -290,10 +290,7 @@ public class AulaView extends javax.swing.JFrame {
 
         String novoProfessor = professores.getSelectedItem().toString();
         String novaDisciplina = disciplinas.getSelectedItem().toString();
-
-        System.out.println(novoProfessor);
-        System.out.println(novaDisciplina);
-        System.out.println(data.getText());
+        
         AulaController novo = new AulaController(novoProfessor, novaDisciplina, data.getText());
         try {
             novo.addAula();
@@ -321,6 +318,10 @@ public class AulaView extends javax.swing.JFrame {
         AulaController aulas = new AulaController();
         try {
             for (IAula aula : aulas.aulas()) {
+                String statusAula = "Aula realizada";
+                if (aula.isStatus()) {
+                    statusAula = "Aula não realizada";
+                }
                 model.addRow(
                         new Object[]{
                             aula.getProfessor().getNome(),
@@ -328,7 +329,7 @@ public class AulaView extends javax.swing.JFrame {
                             aula.getData(),
                             "Alunos",
                             "Realizar aula",
-                            aula.isStatus(),
+                            statusAula,
                             "Excluir"
                         }
                 );
@@ -440,7 +441,7 @@ public class AulaView extends javax.swing.JFrame {
             }
             break;
             // Se a coluna for excluir 
-            case 5:
+            case 6:
                 // Crio uma nova tela
                 AulaView view = new AulaView();
                 // Exibo essa nova tela.

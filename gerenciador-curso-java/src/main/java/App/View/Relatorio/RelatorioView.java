@@ -111,6 +111,11 @@ public class RelatorioView extends javax.swing.JFrame {
         jLabel9.setText("Mês:");
 
         calular3.setText("Calcular");
+        calular3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calular3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -354,6 +359,27 @@ public class RelatorioView extends javax.swing.JFrame {
             resultArrecadadoRealizado2.setText(Double.toString(valor));
         }
     }//GEN-LAST:event_calular2ActionPerformed
+
+    private void calular3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calular3ActionPerformed
+        RelatorioController controller = new RelatorioController();
+        Integer mes;
+        if ("".equals(mes3.getText())) {
+            mes = null;
+        } else {
+            mes = Integer.parseInt(mes3.getText());
+        }
+        if ("".equals(ano3.getText())) {
+            resultArrecadadoRealizado3.setText("Campo ano vazio.");
+        } else {
+            double valor = 0;
+            try {
+                valor = controller.pagamentoProfessor(Integer.parseInt(ano3.getText()), mes);
+            } catch (SQLException ex) {
+                Logger.getLogger(RelatorioView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            resultArrecadadoRealizado3.setText(Double.toString(valor));
+        }
+    }//GEN-LAST:event_calular3ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -53,7 +53,7 @@ public class Relatorio extends Model implements IRelatorio {
     }
 
     @Override
-    public void pagamentoProfessor(Integer ano, Integer mes) throws SQLException {
+    public double pagamentoProfessor(Integer ano, Integer mes) throws SQLException {
         String filtro = "";
         filtro += " AND year(aula.data) = ?";
         if (mes != null) {
@@ -61,9 +61,8 @@ public class Relatorio extends Model implements IRelatorio {
         }
         String query = "SELECT format(sum(professor.valor_hora),2) as valor, professor.nome, aula.fkProfessor FROM curso.aula as aula\n"
                 + "INNER JOIN curso.professor as professor ON professor.id = aula.fkProfessor\n"
-                + "where aula.data <= now() \n"
                 + filtro + "\n"
-                + "AND aula.status = 1\n"
+                + "AND aula.status = 0\n"
                 + "group by aula.fkProfessor";
 
         statement = connection.prepareStatement(query);
@@ -72,13 +71,11 @@ public class Relatorio extends Model implements IRelatorio {
             statement.setInt(2, mes);
         }
         ResultSet res = statement.executeQuery();
+        double valor = 0;
         while (res.next()) {
-            System.out.println("******************************");
-            System.out.println(res.getString("fkProfessor"));
-            System.out.println(res.getString("nome"));
-            System.out.println(res.getString("valor"));
-            System.out.println("******************************");
+            valor = res.getDouble("valor");
         }
+        return valor;
     }
 
     @Override

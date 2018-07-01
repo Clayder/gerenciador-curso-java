@@ -15,9 +15,14 @@ public class RelatorioController {
         IRelatorio relatorio = new Relatorio();
         return relatorio.getValorAulas(ano, mes, true);
     }
-    
+
     public double getValorAulas(Integer ano, Integer mes) throws SQLException {
         IRelatorio relatorio = new Relatorio();
         return relatorio.getValorAulas(ano, mes, false);
+    }
+
+    public double pagamentoProfessor(Integer ano, Integer mes) throws SQLException {
+        IRelatorio relatorio = new Relatorio();
+        return relatorio.pagamentoProfessor(ano, mes);
     }
 }

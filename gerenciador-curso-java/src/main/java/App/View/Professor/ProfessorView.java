@@ -66,7 +66,6 @@ public class ProfessorView extends javax.swing.JFrame {
         valorHora = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProfessores = new javax.swing.JTable();
-        Cancelar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         mensagem = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -138,13 +137,6 @@ public class ProfessorView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableProfessores);
 
-        Cancelar.setText("Cancelar");
-        Cancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CancelarActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Salvar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,8 +168,7 @@ public class ProfessorView extends javax.swing.JFrame {
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Cancelar)
-                        .addGap(18, 18, 18)
+                        .addGap(99, 99, 99)
                         .addComponent(jButton2))))
             .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -212,9 +203,7 @@ public class ProfessorView extends javax.swing.JFrame {
                         .addGap(20, 20, 20))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Cancelar)
-                            .addComponent(jButton2))
+                        .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -296,11 +285,6 @@ public class ProfessorView extends javax.swing.JFrame {
     private void matriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_matriculaActionPerformed
-
-    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
-//        DisciplinasView.exibe();
-//        this.dispose();
-    }//GEN-LAST:event_CancelarActionPerformed
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
         // TODO add your handling code here:
@@ -476,7 +460,6 @@ public class ProfessorView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Cancelar;
     private javax.swing.JMenu alunoMenu;
     private javax.swing.JMenu aulaMenu;
     private javax.swing.JMenu disciplinaMenu;

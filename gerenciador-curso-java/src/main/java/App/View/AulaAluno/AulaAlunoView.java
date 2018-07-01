@@ -1,45 +1,61 @@
-package App.View.ProfessorDisciplina;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package App.View.AulaAluno;
 
+import App.View.Aluno.*;
 import App.Controller.Aluno.AlunoController;
-import App.Controller.Professor.ProfessorController;
+import App.Controller.Aula.AulaController;
+import App.Controller.AulaAluno.AulaAlunoController;
+import App.Model.Aluno.Aluno;
 import App.Model.Aluno.IAluno;
-import App.Model.Disciplina.Disciplina;
-import App.Model.Disciplina.IDisciplina;
-import App.View.Aluno.AlunoView;
 import App.View.Aula.AulaView;
 import App.View.Disciplina.DisciplinaView;
 import App.View.Professor.ProfessorView;
 import App.View.Relatorio.RelatorioView;
 import java.awt.Color;
 import java.awt.Point;
+import java.util.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class ProfessorDisciplinaView extends javax.swing.JFrame {
+/**
+ *
+ * @author Fernanda
+ */
+public class AulaAlunoView extends javax.swing.JFrame {
 
-    private int idProfessor;
-    private String nomeProfessorByViewProfessor;
-
-    public void setId(int id) {
-        this.idProfessor = id;
-    }
-
-    public void setNomeProfessorByProfessorView(String nomeProfessorByViewProfessor) {
-        this.nomeProfessorByViewProfessor = nomeProfessorByViewProfessor;
-        this.nomeProfessor.setText(nomeProfessorByViewProfessor);
-    }
+    int idAula;
 
     /**
      * Creates new form ContactEditorUI
      */
-    public ProfessorDisciplinaView() {
+    public AulaAlunoView() {
         initComponents();
+    }
+
+    /**
+     *
+     * @param id
+     */
+    public void setIdAula(int id) {
+        this.idAula = id;
+    }
+
+    /**
+     *
+     * @param aula
+     */
+    public void setAula(String aula) {
+        this.aula.setText(aula);
     }
 
     /**
@@ -53,13 +69,13 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        btnSalvar = new java.awt.Button();
         mensagem = new javax.swing.JLabel();
-        nomeProfessor = new javax.swing.JLabel();
-        disciplinas = new javax.swing.JComboBox<>();
-        btnSalvar = new javax.swing.JButton();
+        aula = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        alunos = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         alunoMenu = new javax.swing.JMenu();
         professorMenu = new javax.swing.JMenu();
@@ -69,18 +85,16 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
-        jLabel1.setText("Professor:");
-
-        jLabel2.setText("Disciplina:");
+        jLabel1.setText("Aula :");
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código", "Conteúdo", "Carga Horária", "Tipo", "Ação"
+                "Matrícula", "Nome", "Telefone", "E-mail", "Editar", "Excluir"
             }
         ));
         tabela.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -99,27 +113,24 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabela);
 
-        nomeProfessor.setText("jLabel4");
-
-        disciplinas.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                disciplinasAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        disciplinas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                disciplinasActionPerformed(evt);
-            }
-        });
-
-        btnSalvar.setText("Salvar");
+        btnSalvar.setLabel("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
+            }
+        });
+
+        aula.setText("jLabel4");
+
+        jLabel6.setText("Aluno :");
+
+        alunos.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                alunosAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -127,40 +138,49 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(disciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(aula, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(95, Short.MAX_VALUE)
+                        .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(161, 161, 161))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(alunos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(nomeProfessor)
-                    .addComponent(disciplinas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSalvar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(aula)
+                    .addComponent(jLabel6)
+                    .addComponent(alunos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36))
         );
 
         alunoMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -226,21 +246,34 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jPanel1.getAccessibleContext().setAccessibleName("Gerenciar Alunos da aula");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabelaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabelaAncestorAdded
 
-        ProfessorController controller = new ProfessorController();
+        AulaController controller = new AulaController();
+
         try {
-            for (IDisciplina item : controller.getDisciplinasByProfessor(idProfessor)) {
+            // Recebe os alunos
+            for (IAluno item : controller.getAlunosByAula(idAula)) {
+
+                /**
+                 * Cria a nova linha na tabela
+                 */
                 DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+
+                /**
+                 * Popula a nova linha da tabela
+                 */
                 model.addRow(
                         new Object[]{
-                            item.getCodigo(),
-                            item.getConteudo(),
-                            item.getCargaHoraria(),
-                            item.getTipo(),
+                            item.getMatricula(),
+                            item.getNome(),
+                            item.getTelefone(),
+                            item.getEmail(),
+                            "Editar",
                             "Excluir"
                         }
                 );
@@ -251,77 +284,22 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tabelaAncestorAdded
 
-    private void disciplinasAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_disciplinasAncestorAdded
-
-        DefaultComboBoxModel<String> newItem = new javax.swing.DefaultComboBoxModel<>();
-
-        ProfessorController professor = new ProfessorController();
-
-        try {
-            for (IDisciplina disciplina : professor.disciplinas()) {
-                newItem.addElement(disciplina.getCodigo());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        disciplinas.setModel(newItem);
-    }//GEN-LAST:event_disciplinasAncestorAdded
-
-    private void disciplinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disciplinasActionPerformed
-
-    }//GEN-LAST:event_disciplinasActionPerformed
-
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        String codigoDisciplina = disciplinas.getSelectedItem().toString();
-
-        ProfessorController controller = new ProfessorController();
+        AulaController controller = new AulaController();
         try {
-            controller.addProfessorDisciplinaByCodigo(idProfessor, codigoDisciplina);
-
-            ProfessorDisciplinaView pd = new ProfessorDisciplinaView();
-            pd.setId(idProfessor);
-            pd.setNomeProfessorByProfessorView(nomeProfessorByViewProfessor);
-            pd.setVisible(true);
-
-            this.dispose();
+            controller.addAlunoAula(idAula, alunos.getSelectedItem().toString());
         } catch (SQLException ex) {
-            Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AulaAlunoView.class.getName()).log(Level.SEVERE, null, ex);
         }
+        AulaAlunoView view = new AulaAlunoView();
+        view.setIdAula(idAula);
+        view.setAula(aula.getText());
+        view.setVisible(true);
+        this.dispose();;
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        Point point = evt.getPoint();
-        int coluna = tabela.columnAtPoint(point);
-        int linha = tabela.rowAtPoint(point);
-        ProfessorController controller = new ProfessorController();
-        int idDisciplina = 0;
-        try {
-            ArrayList<Disciplina> disciplinas = controller.getDisciplinasByProfessor(idProfessor);
-            idDisciplina = disciplinas.get(linha).getIdProfessorDisciplina();
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (coluna == 4 && idDisciplina != 0) {
-            try {
-                controller.excluir(idDisciplina);
-
-                ProfessorDisciplinaView pd = new ProfessorDisciplinaView();
-                pd.setId(idProfessor);
-                pd.setNomeProfessorByProfessorView(nomeProfessorByViewProfessor);
-                pd.setVisible(true);
-
-                this.dispose();
-            } catch (SQLException ex) {
-                Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-    }//GEN-LAST:event_tabelaMouseClicked
-
     private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
-          new AlunoView().setVisible(true);
+        new AulaAlunoView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_alunoMenuMouseClicked
 
@@ -336,9 +314,67 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
     }//GEN-LAST:event_disciplinaMenuMouseClicked
 
     private void aulaMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aulaMenuMouseClicked
-         new AulaView().setVisible(true);
+        new AulaView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_aulaMenuMouseClicked
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        Point point = evt.getPoint();
+        // Captura o numero da coluna
+        int coluna = tabela.columnAtPoint(point);
+        // Captura o número da linha
+        int linha = tabela.rowAtPoint(point);
+
+        AlunoController controller = new AlunoController();
+        AulaAlunoController aulaAlunoController = new AulaAlunoController();
+
+        // Verifica qual foi o número da coluna e realiza alguma ação 
+        switch (coluna) {
+            // Se a coluna for excluir 
+            case 5:
+                // Crio uma nova tela Aluno 
+                AulaAlunoView view = new AulaAlunoView();
+                 {
+                    try {
+                        // Excluir o registro 
+                        view.mensagem.setText(aulaAlunoController.excluir(idAula, controller.getAll().get(linha).getId()));
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AulaAlunoView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                view.setIdAula(idAula);
+                view.setAula(aula.getText());
+                // Exibo essa nova tela aluno.
+                view.setVisible(true);
+                // Fecha a antiga tela
+                this.dispose();
+
+                /**
+                 * view.setVisible(true); this.dispose();
+                 *
+                 * São utilizados para atualizar a tela.
+                 */
+                break;
+        }
+
+    }//GEN-LAST:event_tabelaMouseClicked
+
+    private void alunosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_alunosAncestorAdded
+        DefaultComboBoxModel<String> newItem = new javax.swing.DefaultComboBoxModel<>();
+
+        AlunoController itens = new AlunoController();
+
+        try {
+            for (IAluno item : itens.getAll()) {
+                newItem.addElement(item.getMatricula());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaAlunoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        alunos.setModel(newItem);
+    }//GEN-LAST:event_alunosAncestorAdded
 
     private void relatorioMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_relatorioMenuMouseClicked
         new RelatorioView().setVisible(true);
@@ -362,39 +398,40 @@ public class ProfessorDisciplinaView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AulaAlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AulaAlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AulaAlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProfessorDisciplinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AulaAlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProfessorDisciplinaView().setVisible(true);
+                new AulaAlunoView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu alunoMenu;
+    private javax.swing.JComboBox<String> alunos;
+    private javax.swing.JLabel aula;
     private javax.swing.JMenu aulaMenu;
-    private javax.swing.JButton btnSalvar;
+    private java.awt.Button btnSalvar;
     private javax.swing.JMenu disciplinaMenu;
-    private javax.swing.JComboBox<String> disciplinas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel mensagem;
-    private javax.swing.JLabel nomeProfessor;
     private javax.swing.JMenu professorMenu;
     private javax.swing.JMenu relatorioMenu;
     private javax.swing.JTable tabela;

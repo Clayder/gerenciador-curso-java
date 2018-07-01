@@ -4,8 +4,8 @@ import java.sql.SQLException;
 
 public interface IRelatorio {
     
-    public String getValorAulas(Integer ano, Integer mes, boolean arrecadado) throws SQLException ;
+    public double getValorAulas(Integer ano, Integer mes, boolean arrecadado) throws SQLException ;
     
-    public void pagamentoProfessor(Integer ano, Integer mes) throws SQLException;
+    public double pagamentoProfessor(Integer ano, Integer mes) throws SQLException;
    
 }

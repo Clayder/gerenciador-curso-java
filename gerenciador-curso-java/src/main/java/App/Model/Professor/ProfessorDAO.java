@@ -44,54 +44,108 @@ class ProfessorDAO extends Model {
         setCampos();
     }
 
+    /**
+     *
+     * @return Integer
+     */
     public Integer getId() {
         return id;
     }
-    
+
+    /**
+     *
+     * @return String
+     */
     public String getMatricula() {
         return matricula;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getEndereco() {
         return endereco;
     }
 
+    /**
+     *
+     * @return String
+     */
     public String getTelefone() {
         return telefone;
     }
 
+    /**
+     * 
+     * @return double
+     */
     public double getValorHora() {
         return valorHora;
     }
 
+    /**
+     * 
+     * @param matricula 
+     */
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
+    /**
+     * 
+     * @param nome 
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * 
+     * @param endereco 
+     */
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
 
+    /**
+     * 
+     * @param telefone 
+     */
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
+    /**
+     * 
+     * @param valorHora 
+     */
     public void setValorHora(double valorHora) {
         this.valorHora = valorHora;
     }
 
+    /**
+     * 
+     * @param id 
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * Retorna as disciplinas vinculadas a um professor específico (getId)
+     * 
+     * @return
+     * @throws SQLException 
+     */
     public List<Disciplina> getDisciplinas() throws SQLException {
         String query = "SELECT prof_disc.id, prof_disc.fkProfessor, disciplina.carga_horaria, disciplina.codigo, disciplina.conteudo, disciplina.id as disciplina_id, disciplina.tipo\n"
                 + "FROM curso.professor_disciplinas as prof_disc\n"
@@ -114,6 +168,10 @@ class ProfessorDAO extends Model {
         return disciplinas;
     }
 
+    /**
+     * 
+     */
+    @Override
     protected void setCampos() {
         colunasBD.add("matricula");
         colunasBD.add("nome");
@@ -128,7 +186,7 @@ class ProfessorDAO extends Model {
      */
     @Override
     public void insert() throws SQLException {
-        String query = getQueryInsert();
+        String query = getQueryInsert(); // cria a string sql para fazer o insert
         statement = connection.prepareStatement(query);
         statement.setString(1, getMatricula());
         statement.setString(2, getNome());
@@ -152,13 +210,30 @@ class ProfessorDAO extends Model {
     }
 
     /**
-     *
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
      * @param id
      * @throws SQLException
      */
     @Override
     public void setById(Integer id) throws SQLException {
         ResultSet res = findById(id);
+        while (res.next()) {
+            setAll(res);
+        }
+    }
+    
+    /**
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
+     * @param matricula
+     * @throws SQLException
+     */
+    public void setByMatricula(String matricula) throws SQLException {
+        String query = "SELECT * FROM " + TABELA + " WHERE (matricula) = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1, matricula);
+        ResultSet res = statement.executeQuery();
         while (res.next()) {
             setAll(res);
         }
@@ -180,7 +255,8 @@ class ProfessorDAO extends Model {
     }
 
     /**
-     *
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
      * @param res
      * @throws SQLException
      */

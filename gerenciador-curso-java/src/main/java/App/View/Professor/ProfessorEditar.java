@@ -29,13 +29,24 @@ import javax.swing.table.TableColumn;
  *
  * @author Fernanda
  */
-public class ProfessorView extends javax.swing.JFrame {
+public class ProfessorEditar extends javax.swing.JFrame {
+
+    private int id;
 
     /**
      * Creates new form ContactEditorUI
      */
-    public ProfessorView() {
+    public ProfessorEditar() {
         initComponents();
+    }
+
+    public void setInput(IProfessor professor) {
+        this.id = professor.getId();
+        this.endereco.setText(professor.getEndereco());
+        this.telefone.setText(professor.getTelefone());
+        this.valorHora.setText(Double.toString(professor.getValorHora()));
+        this.matricula.setText(professor.getMatricula());
+        this.nome.setText(professor.getNome());
     }
 
     /**
@@ -55,19 +66,17 @@ public class ProfessorView extends javax.swing.JFrame {
         jMenu8 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        matricula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         endereco = new javax.swing.JTextField();
         telefone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         valorHora = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tableProfessores = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         mensagem = new javax.swing.JLabel();
+        matricula = new javax.swing.JLabel();
+        nome = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         alunoMenu = new javax.swing.JMenu();
         professorMenu = new javax.swing.JMenu();
@@ -93,19 +102,7 @@ public class ProfessorView extends javax.swing.JFrame {
 
         jLabel1.setText("Matrícula:");
 
-        matricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matriculaActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Nome:");
-
-        nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Endereço:");
 
@@ -113,36 +110,16 @@ public class ProfessorView extends javax.swing.JFrame {
 
         jLabel6.setText("Valor hora:");
 
-        tableProfessores.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Matrícula", "Nome", "Endereço", "Telefone", "Valor hora", "Disciplinas", "Disciplina", "Editar", "Excluir"
-            }
-        ));
-        tableProfessores.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tableProfessoresAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        tableProfessores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableProfessoresMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tableProfessores);
-
         jButton2.setText("Salvar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        matricula.setText("jLabel4");
+
+        nome.setText("jLabel4");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,26 +135,27 @@ public class ProfessorView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(endereco, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addComponent(valorHora)
-                    .addComponent(matricula))
+                    .addComponent(matricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(99, 99, 99)
-                        .addComponent(jButton2))))
-            .addComponent(jScrollPane1)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {endereco, nome, telefone});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {endereco, telefone});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +163,9 @@ public class ProfessorView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(matricula)
+                    .addComponent(nome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -206,9 +184,7 @@ public class ProfessorView extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107))
+                .addGap(248, 248, 248))
         );
 
         alunoMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -282,121 +258,27 @@ public class ProfessorView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void matriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_matriculaActionPerformed
-
-    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        ProfessorController controller = new ProfessorController();
         try {
-            if (ProfessorController.existeMatricula(matricula.getText())) {
-                matricula.setText(null);
-                mensagem.setForeground(Color.red);
-                mensagem.setText("A matrícula não pode ser repetida.");
-            } else {
-                ProfessorController professor = new ProfessorController(matricula.getText(), nome.getText(), endereco.getText(), telefone.getText(), Double.parseDouble(valorHora.getText()));
-                professor.add();
-
-                mensagem.setForeground(Color.GREEN);
-                mensagem.setText("Professor cadastrado com sucesso");
-
-                DefaultTableModel model = (DefaultTableModel) tableProfessores.getModel();
-
-                model.addRow(
-                        new Object[]{
-                            matricula.getText(),
-                            nome.getText(),
-                            endereco.getText(),
-                            telefone.getText(),
-                            Double.parseDouble(valorHora.getText()),
-                            "",
-                            "Visualisar",
-                            "Editar",
-                            "Excluir"
-                        }
-                );
-
-                matricula.setText(null);
-                nome.setText(null);
-                endereco.setText(null);
-                telefone.setText(null);
-                valorHora.setText(null);
-
-            }
+            controller.update(id, telefone.getText(), endereco.getText(), Double.parseDouble(valorHora.getText()));
         } catch (SQLException ex) {
-            Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProfessorEditar.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        // Crio uma nova tela Aluno 
+        ProfessorView view = new ProfessorView();
+        // Exibo essa nova tela aluno.
+        view.setVisible(true);
+        // Fecha a antiga tela
+        this.dispose();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void disciplinaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_disciplinaMenuActionPerformed
 //        System.out.println("etetteet");
 //        DisciplinasView.exibe();
     }//GEN-LAST:event_disciplinaMenuActionPerformed
-
-    private void tableProfessoresAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tableProfessoresAncestorAdded
-
-        DefaultTableModel model = (DefaultTableModel) tableProfessores.getModel();
-        ProfessorController professores = new ProfessorController();
-        try {
-            for (IProfessor professor : professores.professores()) {
-                model.addRow(
-                        new Object[]{
-                            professor.getMatricula(),
-                            professor.getNome(),
-                            professor.getEndereco(),
-                            professor.getTelefone(),
-                            professor.getValorHora(),
-                            professores.listDisciplinasByProfessor(professor.getDisciplinas()),
-                            "Visualizar",
-                            "Editar",
-                            "Excluir"
-                        }
-                );
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_tableProfessoresAncestorAdded
-
-    private void tableProfessoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProfessoresMouseClicked
-
-        Point point = evt.getPoint();
-        int coluna = tableProfessores.columnAtPoint(point);
-        int linha = tableProfessores.rowAtPoint(point);
-
-        ProfessorController professor = new ProfessorController();
-        try {
-            List<Professor> professores = professor.professores();
-            switch (coluna) {
-                case 6:
-                    ProfessorDisciplinaView pd = new ProfessorDisciplinaView();
-                    pd.setNomeProfessorByProfessorView(professores.get(linha).getNome());
-                    pd.setId(professores.get(linha).getId());
-                    pd.setVisible(true);
-                    this.dispose();
-                    break;
-                case 7:
-                    ProfessorEditar viewEditar = new ProfessorEditar();
-                    // passo os dados do aluno para o formulario de edição
-                    viewEditar.setInput(professores.get(linha));
-                    viewEditar.setVisible(true);
-                    break;
-                case 8:
-                    ProfessorView profView = new ProfessorView();
-                    profView.setVisible(true);
-                    profView.mensagem.setText(professor.excluirProfessor(professores.get(linha).getId()));
-                    break;
-            }
-            this.dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(ProfessorView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_tableProfessoresMouseClicked
 
     private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
         new AlunoView().setVisible(true);
@@ -440,21 +322,23 @@ public class ProfessorView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProfessorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfessorEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProfessorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfessorEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProfessorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfessorEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProfessorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProfessorEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProfessorView().setVisible(true);
+                new ProfessorEditar().setVisible(true);
             }
         });
     }
@@ -478,13 +362,11 @@ public class ProfessorView extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField matricula;
+    private javax.swing.JLabel matricula;
     private javax.swing.JLabel mensagem;
-    private javax.swing.JTextField nome;
+    private javax.swing.JLabel nome;
     private javax.swing.JMenu professorMenu;
     private javax.swing.JMenu relatorioMenu;
-    private javax.swing.JTable tableProfessores;
     private javax.swing.JTextField telefone;
     private javax.swing.JTextField valorHora;
     // End of variables declaration//GEN-END:variables

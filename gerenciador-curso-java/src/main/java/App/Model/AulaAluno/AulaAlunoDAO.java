@@ -30,6 +30,10 @@ abstract public class AulaAlunoDAO  extends Model {
         setCampos();
     }
 
+    /**
+     * 
+     * @return Integer
+     */
     public Integer getId() {
         return id;
     }
@@ -44,7 +48,7 @@ abstract public class AulaAlunoDAO  extends Model {
 
     /**
      * 
-     * @return 
+     * @return Integer
      */
     public Integer getFkAluno() {
         return fkAluno;
@@ -60,7 +64,7 @@ abstract public class AulaAlunoDAO  extends Model {
 
     /**
      * 
-     * @return 
+     * @return Integer
      */
     public Integer getFkAula() {
         return fkAula;
@@ -87,6 +91,10 @@ abstract public class AulaAlunoDAO  extends Model {
         statement.execute();
     }
 
+    /**
+     * 
+     * @throws SQLException 
+     */
     @Override
     public void update() throws SQLException {
         String query = getQueryUpdate();
@@ -110,6 +118,9 @@ abstract public class AulaAlunoDAO  extends Model {
         }
     }
 
+    /**
+     * Informa o nome das colunas da tabela aula_aluno
+     */
     @Override
     protected void setCampos() {
         colunasBD.add("fkAula");
@@ -125,6 +136,21 @@ abstract public class AulaAlunoDAO  extends Model {
         setFkAula(res.getInt("fkAula"));
         setFkAluno(res.getInt("fkAluno"));
         setId(res.getInt("id"));
+    }
+    
+       /**
+     * Remove um registro específico, pelo id
+     * 
+     * @param id
+     * @throws SQLException
+     */
+    public void excluir(Integer idAula, Integer idAluno) throws SQLException {
+        String query = "DELETE FROM " + TABELA + " WHERE fkAula = ? AND fkAluno = ?";
+
+        statement = connection.prepareStatement(query);
+        statement.setInt(1, idAula);
+        statement.setInt(2, idAluno);
+        statement.execute();
     }
     
 }

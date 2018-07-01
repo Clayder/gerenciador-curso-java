@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * Classe utilizada para acessar o banco de dados. 
+ * 
 
+*/
 class AlunoDAO extends Model {
 
     private Integer id;
@@ -14,12 +18,24 @@ class AlunoDAO extends Model {
     private String email;
     private String telefone;
 
+    /**
+     * 
+     * @throws SQLException 
+     */
     public AlunoDAO() throws SQLException {
         super();
         TABELA = "aluno";
         setCampos();
     }
 
+    /**
+     * 
+     * @param matricula
+     * @param nome
+     * @param telefone
+     * @param email
+     * @throws SQLException 
+     */
     public AlunoDAO(String matricula, String nome, String telefone, String email) throws SQLException {
         super();
         this.matricula = matricula;
@@ -30,48 +46,89 @@ class AlunoDAO extends Model {
         setCampos();
     }
     
-    
-
+    /**
+     * 
+     * @return Integer
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * 
+     * @return String
+     */
     public String getMatricula() {
         return matricula;
     }
 
+    /**
+     * 
+     * @return String
+     */
     public String getNome() {
         return nome;
     }
 
+        /**
+     * 
+     * @return String
+     */
     public String getEmail() {
         return email;
     }
 
+        /**
+     * 
+     * @return String
+     */
     public String getTelefone() {
         return telefone;
     }
 
+    /**
+     * 
+     * @param matricula 
+     */
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
+    /**
+     * 
+     * @param nome 
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    /**
+     * 
+     * @param email 
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * 
+     * @param telefone 
+     */
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
+    /**
+     * 
+     * @param id 
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+     /**
+     * Informa o nome das colunas da tabela aluno
+     */
     @Override
     protected void setCampos() {
         colunasBD.add("matricula");
@@ -81,7 +138,8 @@ class AlunoDAO extends Model {
     }
 
     /**
-     *
+     * Realiza a inserção no banco de dados
+     * 
      * @throws SQLException
      */
     @Override
@@ -108,7 +166,9 @@ class AlunoDAO extends Model {
     }
 
     /**
-     *
+     * Método utilizado para popular o objeto aluno ( atributos da classe aluno ), através de 
+     * um registro específico. 
+     * 
      * @param id
      * @throws SQLException
      */
@@ -121,6 +181,7 @@ class AlunoDAO extends Model {
     }
 
     /**
+     * Lista todos os alunos
      *
      * @return @throws SQLException
      */
@@ -136,7 +197,8 @@ class AlunoDAO extends Model {
     }
 
     /**
-     *
+     * Popula o objeto aluno ( insere os valores nos atributos )
+     * 
      * @param res
      * @throws SQLException
      */
@@ -146,5 +208,21 @@ class AlunoDAO extends Model {
         setEmail(res.getString("email"));
         setTelefone(res.getString("telefone"));
         setId(res.getInt("id"));
+    }
+    
+    /**
+     * Método utilizado para popular um objeto ( atributos de uma classe )
+     * 
+     * @param codigo
+     * @throws SQLException
+     */
+    public void setByMatricula(String matricula) throws SQLException {
+        String query = "SELECT * FROM " + TABELA + " WHERE (matricula) = ?";
+        statement = connection.prepareStatement(query);
+        statement.setString(1, matricula);
+        ResultSet res = statement.executeQuery();
+        while (res.next()) {
+            setAll(res);
+        }
     }
 }

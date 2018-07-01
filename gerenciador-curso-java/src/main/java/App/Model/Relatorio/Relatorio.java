@@ -21,39 +21,39 @@ public class Relatorio extends Model implements IRelatorio {
      * @throws SQLException
      */
     @Override
-    public String getValorAulas(Integer ano, Integer mes, boolean arrecadado) throws SQLException {
+    public double getValorAulas(Integer ano, Integer mes, boolean arrecadado) throws SQLException {
         String filtro = "";
-        String sinal = ">";
         filtro += "year(aula.data) = ?";
+        int status = 1;
         if (mes != null) {
             filtro += " AND month(aula.data) = ?";
         }
         if (arrecadado) {
-            sinal = "<=";
+            status = 0;
         }
-        String query = this.query() + "where " + filtro + " AND aula.data " + sinal + " now() \n";
-
+        String query = this.query(status) + " where " + filtro + " \n";       
         statement = connection.prepareStatement(query);
         statement.setInt(1, ano);
         if (mes != null) {
             statement.setInt(2, mes);
         }
         ResultSet res = statement.executeQuery();
-        String valor = null;
+        double valor = 0;
         while (res.next()) {
-            valor = res.getString("valor");
+            valor = res.getDouble("valor");
         }
         return valor;
     }
 
-    private String query() {
+    private String query(int status) {
         String query = "SELECT format(sum(professor.valor_hora),2) as valor FROM curso.aula as aula\n"
                 + "INNER JOIN curso.professor as professor ON professor.id = aula.fkProfessor "
-                + "AND aula.status = 1 ";
+                + "AND aula.status = " + status;
         return query;
     }
 
-    public void pagamentoProfessor(Integer ano, Integer mes) throws SQLException {
+    @Override
+    public double pagamentoProfessor(Integer ano, Integer mes) throws SQLException {
         String filtro = "";
         filtro += " AND year(aula.data) = ?";
         if (mes != null) {
@@ -61,9 +61,8 @@ public class Relatorio extends Model implements IRelatorio {
         }
         String query = "SELECT format(sum(professor.valor_hora),2) as valor, professor.nome, aula.fkProfessor FROM curso.aula as aula\n"
                 + "INNER JOIN curso.professor as professor ON professor.id = aula.fkProfessor\n"
-                + "where aula.data <= now() \n"
                 + filtro + "\n"
-                + "AND aula.status = 1\n"
+                + "AND aula.status = 0\n"
                 + "group by aula.fkProfessor";
 
         statement = connection.prepareStatement(query);
@@ -72,13 +71,11 @@ public class Relatorio extends Model implements IRelatorio {
             statement.setInt(2, mes);
         }
         ResultSet res = statement.executeQuery();
+        double valor = 0;
         while (res.next()) {
-            System.out.println("******************************");
-            System.out.println(res.getString("fkProfessor"));
-            System.out.println(res.getString("nome"));
-            System.out.println(res.getString("valor"));
-            System.out.println("******************************");
+            valor = res.getDouble("valor");
         }
+        return valor;
     }
 
     @Override

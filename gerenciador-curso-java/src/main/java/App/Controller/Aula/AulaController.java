@@ -12,16 +12,17 @@ import App.Model.Professor.IProfessor;
 import App.Model.Professor.Professor;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AulaController {
 
-    private Integer idProfessor;
-    private Integer idDisciplina;
+    private String matriculaProfessor;
+    private String codDisciplina;
     private String data;
 
-    public AulaController(Integer idProfessor, Integer idDisciplina, String data) {
-        this.idProfessor = idProfessor;
-        this.idDisciplina = idDisciplina;
+    public AulaController(String matriculaProfessor, String codDisciplina, String data) {
+        this.matriculaProfessor = matriculaProfessor;
+        this.codDisciplina = codDisciplina;
         this.data = data;
     }
 
@@ -49,17 +50,13 @@ public class AulaController {
         return disciplina.existe(id, "id");
     }
 
-    public void addAula(Integer idProfessor, Integer idDisciplina, String data) throws SQLException {
-
-        this.idProfessor = idProfessor;
-        this.idDisciplina = idDisciplina;
-        this.data = data;
+    public void addAula() throws SQLException {
 
         IProfessor professor = new Professor();
-        professor.setById(idProfessor);
+        professor.setByMatricula(matriculaProfessor);
 
         IDisciplina disciplina = new Disciplina();
-        disciplina.setById(idDisciplina);
+        disciplina.setByCodigo(codDisciplina);
 
         IAula aula = new Aula(professor, disciplina);
         aula.setData(data);
@@ -68,41 +65,22 @@ public class AulaController {
         System.out.println("Cadastrado a disciplina " + disciplina.getCodigo() + " para o professor " + professor.getNome());
     }
 
-    public void professores() throws SQLException {
+    public ArrayList<Professor> professores() throws SQLException {
         IProfessor p = new Professor();
         ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
-        System.out.println("---------------- Lista de professores ----------------");
-        for (Professor professor : data) {
-            System.out.println("---------------------------------------------------");
-            System.out.println("Id: " + professor.getId() + "Nome: " + professor.getNome());
-            System.out.println("---------------------------------------------------");
-        }
+        return data;
     }
 
-    public void disciplinas() throws SQLException {
+    public ArrayList<Disciplina> disciplinas() throws SQLException {
         IDisciplina d = new Disciplina();
         ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
-        System.out.println("---------------- Lista de disciplinas ----------------");
-        System.out.println("ID   |  Codigo  ");
-        for (Disciplina disciplina : data) {
-            System.out.println(disciplina.getId() + "   |  " + disciplina.getCodigo() + "  ");
-        }
+        return data;
     }
 
-    public void aulas() throws SQLException {
+    public ArrayList<Aula> aulas() throws SQLException {
         IAula aulas = new Aula();
         ArrayList<Aula> data = (ArrayList<Aula>) aulas.getAll();
-        System.out.println("---------------- Lista de aulas ----------------");
-        System.out.println("ID   |  Codigo disciplina     |  Professor  ");
-        for (Aula aula : data) {
-            System.out.println(aula.getId() + "   |  " + aula.getDisciplina().getCodigo() + "   |   " + aula.getProfessor().getNome());
-            System.out.println("alunos: ");
-            String alunos = "";
-            for (Aluno a : aula.getAlunos()) {
-                alunos += "Matrícula: "+ a.getMatricula()+ " nome: " + a.getNome()+ ", ";
-            }
-            System.out.println(alunos);
-        }
+        return data;
     }
 
     public void alunos() throws SQLException {
@@ -115,8 +93,52 @@ public class AulaController {
         }
     }
     
-    public void addAlunoAula(Integer fkAluno, Integer fkAula) throws SQLException{
-        IAulaAluno aulaAluno = new AulaAluno(fkAluno, fkAula);
+    public List<Aluno> getAlunosByAula(int aulaId) throws SQLException {
+        IAula aula = new Aula();
+        aula.setById(aulaId);
+        return aula.getAlunos();
+    }
+    
+    public void addAlunoAula(Integer fkAula, String matricula) throws SQLException{
+        IAluno aluno = new Aluno();
+        aluno.setByMatricula(matricula);
+        IAulaAluno aulaAluno = new AulaAluno(aluno.getId(), fkAula);
         aulaAluno.insert();
+    }
+    
+    /**
+     * Exclui um registro específico, verificando se ele realmente pode ser excluído.
+     * 
+     * Se o aluno estiver vinculado a uma aula, retorna falso.
+     * 
+     * @param id
+     * @return
+     * @throws SQLException 
+     */
+     public String excluir(int id) throws SQLException {
+        IAula a = new Aula();
+        String msg = "";
+        boolean existeAulaAluno = a.existeByTabela(Integer.toString(id), "fkAula", "aula_aluno");
+        if(existeAulaAluno){
+            msg = "A aula está vinculada a um aluno.";
+        }else{
+            msg = "Aula excluída com sucesso.";
+            a.removeById(id);
+        }
+        return msg;
+    }
+     
+         /**
+     * Atualiza um registro específico
+     * 
+     * @param id
+     * @param status
+     * @throws SQLException 
+     */
+    public void realizarAula(Integer id) throws SQLException{
+        IAula a = new Aula();
+        a.setById(id);
+        a.realizarAula();
+        a.update();
     }
 }

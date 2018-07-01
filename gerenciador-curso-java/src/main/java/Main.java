@@ -1,7 +1,5 @@
 
-import App.Logg.Logg;
-import App.View.IView;
-import App.View.Menu;
+import App.View.Professor.ProfessorView;
 import java.sql.SQLException;
 
 public class Main {
@@ -11,9 +9,7 @@ public class Main {
      * @throws java.sql.SQLException
      */
     public static void main(String[] args) throws SQLException {
-        Logg.init();
-        
-        IView menu = new Menu();
-        menu.init();
+        ProfessorView p = new ProfessorView();
+        p.setVisible(true);
     }
 }

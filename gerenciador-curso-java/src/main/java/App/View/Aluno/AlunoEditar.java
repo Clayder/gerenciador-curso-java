@@ -26,13 +26,27 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Fernanda
  */
-public class AlunoView extends javax.swing.JFrame {
+public class AlunoEditar extends javax.swing.JFrame {
+
+    private int id;
 
     /**
      * Creates new form ContactEditorUI
      */
-    public AlunoView() {
+    public AlunoEditar() {
         initComponents();
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setInput(IAluno aluno) {
+        this.id = aluno.getId();
+        this.matricula.setText(aluno.getMatricula());
+        this.nome.setText(aluno.getNome());
+        this.telefone.setText(aluno.getTelefone());
+        this.email.setText(aluno.getEmail());
     }
 
     /**
@@ -46,17 +60,15 @@ public class AlunoView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        matricula = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         telefone = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabela = new javax.swing.JTable();
         btnSalvar = new java.awt.Button();
         mensagem = new javax.swing.JLabel();
+        matricula = new javax.swing.JLabel();
+        nome = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         alunoMenu = new javax.swing.JMenu();
         professorMenu = new javax.swing.JMenu();
@@ -70,41 +82,11 @@ public class AlunoView extends javax.swing.JFrame {
 
         jLabel1.setText("Matrícula:");
 
-        matricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                matriculaActionPerformed(evt);
-            }
-        });
-
         jLabel2.setText("Nome:");
 
         jLabel3.setText("Telefone:");
 
         jLabel5.setText("E-mail:");
-
-        tabela.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Matrícula", "Nome", "Telefone", "E-mail", "Editar", "Excluir"
-            }
-        ));
-        tabela.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tabelaAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tabela);
 
         btnSalvar.setLabel("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,21 +95,27 @@ public class AlunoView extends javax.swing.JFrame {
             }
         });
 
+        matricula.setText("jLabel4");
+
+        nome.setText("jLabel4");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                            .addComponent(matricula))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(telefone, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(matricula, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -136,16 +124,16 @@ public class AlunoView extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(mensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                    .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(24, 24, 24))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {email, nome, telefone});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {email, telefone});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,9 +141,9 @@ public class AlunoView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(matricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(matricula)
+                    .addComponent(nome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -166,9 +154,7 @@ public class AlunoView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mensagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
 
         alunoMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -237,95 +223,6 @@ public class AlunoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void matriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_matriculaActionPerformed
-
-    private void tabelaAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tabelaAncestorAdded
-        
-        AlunoController controller = new AlunoController();
-        try {
-            // Recebe os alunos
-            for (IAluno item : controller.getAll()) {
-
-                /**
-                 * Cria a nova linha na tabela
-                 */
-                DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-
-                /**
-                 * Popula a nova linha da tabela
-                 */
-                model.addRow(
-                        new Object[]{
-                            item.getMatricula(),
-                            item.getNome(),
-                            item.getTelefone(),
-                            item.getEmail(),
-                            "Editar",
-                            "Excluir"
-                        }
-                );
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_tabelaAncestorAdded
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        try {
-            /**
-             * Se a matrícula já existir
-             */
-            if (AlunoController.existeMatricula(matricula.getText())) {
-                matricula.setText(null);
-                mensagem.setForeground(Color.red);
-                mensagem.setText("A matrícula não pode ser repetida.");
-            } else {
-                /**
-                 * Crio um objeto do tipo aluno e inicializo os seus atributos
-                 */
-                AlunoController aluno = new AlunoController(matricula.getText(), nome.getText(), telefone.getText(), email.getText());
-                aluno.add();
-                
-                mensagem.setForeground(Color.GREEN);
-                /**
-                 * Imprimo a mensagem de sucesso (cor verde)
-                 */
-                mensagem.setText("Aluno cadastrado com sucesso");
-
-                /**
-                 * Crio um linha na tabela
-                 */
-                DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-                /**
-                 * Populo a nova linha na tabela.
-                 */
-                model.addRow(
-                        new Object[]{
-                            matricula.getText(),
-                            nome.getText(),
-                            telefone.getText(),
-                            email.getText(),
-                            "Editar",
-                            "Excluir"
-                        }
-                );
-
-                /**
-                 * Apago os inputs do formulário.
-                 */
-                matricula.setText(null);
-                nome.setText(null);
-                telefone.setText(null);
-                email.setText(null);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
     private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
         new AlunoView().setVisible(true);
         this.dispose();
@@ -346,56 +243,21 @@ public class AlunoView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_aulaMenuMouseClicked
 
-    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        Point point = evt.getPoint();
-        // Captura o numero da coluna
-        int coluna = tabela.columnAtPoint(point);
-        // Captura o número da linha
-        int linha = tabela.rowAtPoint(point);
-        
-        AlunoController controller = new AlunoController();
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
-        // Verifica qual foi o número da coluna e realiza alguma ação 
-        switch (coluna) {
-            case 4:
-                AlunoEditar viewEditar = new AlunoEditar();
-                 {
-                    try {
-                        // passo os dados do aluno para o formulario de edição
-                        viewEditar.setInput(controller.getAll().get(linha));
-                        viewEditar.setVisible(true);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                break;
-            // Se a coluna for excluir 
-            case 5:
-                // Crio uma nova tela Aluno 
-                AlunoView view = new AlunoView();
-                // Exibo essa nova tela aluno.
-                view.setVisible(true);
-                 {
-                    try {
-                        // Excluir o registro 
-                        view.mensagem.setText(controller.excluir(controller.getAll().get(linha).getId()));
-                        
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AlunoView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-                // Fecha a antiga tela
-                this.dispose();
-
-                /**
-                 * view.setVisible(true); this.dispose();
-                 *
-                 * São utilizados para atualizar a tela.
-                 */
-                break;
+        AlunoController aluno = new AlunoController();
+        try {
+            aluno.update(id, telefone.getText(), email.getText());
+            // Crio uma nova tela Aluno 
+            AlunoView view = new AlunoView();
+            // Exibo essa nova tela aluno.
+            view.setVisible(true);
+            // Fecha a antiga tela
+            this.dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(AlunoEditar.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }//GEN-LAST:event_tabelaMouseClicked
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void relatorioMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_relatorioMenuMouseClicked
         new RelatorioView().setVisible(true);
@@ -419,21 +281,23 @@ public class AlunoView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AlunoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlunoEditar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlunoView().setVisible(true);
+                new AlunoEditar().setVisible(true);
             }
         });
     }
@@ -450,13 +314,11 @@ public class AlunoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField matricula;
+    private javax.swing.JLabel matricula;
     private javax.swing.JLabel mensagem;
-    private javax.swing.JTextField nome;
+    private javax.swing.JLabel nome;
     private javax.swing.JMenu professorMenu;
     private javax.swing.JMenu relatorioMenu;
-    private javax.swing.JTable tabela;
     private javax.swing.JTextField telefone;
     // End of variables declaration//GEN-END:variables
 }

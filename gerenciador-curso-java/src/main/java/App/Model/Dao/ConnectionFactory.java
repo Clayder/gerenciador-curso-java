@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
- * @author peter
+ * 
+ * Classe utilizada para configurar o acesso ao banco de dados.
  */
 public class ConnectionFactory {
     private static final String BANCO = "curso";

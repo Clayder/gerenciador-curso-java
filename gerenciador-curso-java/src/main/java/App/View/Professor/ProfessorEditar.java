@@ -296,7 +296,7 @@ public class ProfessorEditar extends javax.swing.JFrame {
     }//GEN-LAST:event_aulaMenuMouseClicked
 
     private void professorMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_professorMenuMouseClicked
-        new ProfessorEditar().setVisible(true);
+        new ProfessorView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_professorMenuMouseClicked
 

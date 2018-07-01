@@ -152,8 +152,6 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="mensagem" min="-2" pref="212" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="button4" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
@@ -188,7 +186,6 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="button4" max="32767" attributes="0"/>
                       <Component id="btnSalvar" max="32767" attributes="0"/>
                       <Component id="mensagem" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -221,11 +218,6 @@
         <Component class="javax.swing.JTextField" name="telefone">
         </Component>
         <Component class="javax.swing.JTextField" name="email">
-        </Component>
-        <Component class="java.awt.Button" name="button4">
-          <Properties>
-            <Property name="label" type="java.lang.String" value="Cancelar"/>
-          </Properties>
         </Component>
         <Component class="java.awt.Button" name="btnSalvar">
           <Properties>

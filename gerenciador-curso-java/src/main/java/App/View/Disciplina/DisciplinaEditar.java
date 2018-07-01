@@ -254,7 +254,7 @@ public class DisciplinaEditar extends javax.swing.JFrame {
     }//GEN-LAST:event_professorMenuMouseClicked
 
     private void disciplinaMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disciplinaMenuMouseClicked
-        new DisciplinaEditar().setVisible(true);
+        new DisciplinaView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_disciplinaMenuMouseClicked
 

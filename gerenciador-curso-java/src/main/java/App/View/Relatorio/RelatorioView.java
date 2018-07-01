@@ -317,7 +317,7 @@ public class RelatorioView extends javax.swing.JFrame {
             System.out.println(222);
             mes = Integer.parseInt(mes1.getText());
         }
-        double valor = 0;
+        double valor = 0; 
         try {
             valor = controller.getValorAulasArrecadadas(Integer.parseInt(ano1.getText()), mes);
         } catch (SQLException ex) {

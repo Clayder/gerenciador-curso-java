@@ -1,11 +1,8 @@
 package App.Model.Relatorio;
 
-import App.Model.Aluno.Aluno;
 import App.Model.Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Relatorio extends Model implements IRelatorio {
 

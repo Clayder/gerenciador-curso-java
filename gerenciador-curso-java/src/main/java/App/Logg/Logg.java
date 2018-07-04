@@ -1,6 +1,5 @@
 package App.Logg;
 
-import org.apache.log4j.Logger;
 
 public class Logg {
 

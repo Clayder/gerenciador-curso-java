@@ -49,6 +49,13 @@ public class Relatorio extends Model implements IRelatorio {
         return query;
     }
 
+    /**
+     * 
+     * @param ano
+     * @param mes
+     * @return
+     * @throws SQLException 
+     */
     @Override
     public double pagamentoProfessor(Integer ano, Integer mes) throws SQLException {
         String filtro = "";

@@ -20,6 +20,12 @@ public class AulaController {
     private String codDisciplina;
     private String data;
 
+    /**
+     * 
+     * @param matriculaProfessor
+     * @param codDisciplina
+     * @param data 
+     */
     public AulaController(String matriculaProfessor, String codDisciplina, String data) {
         this.matriculaProfessor = matriculaProfessor;
         this.codDisciplina = codDisciplina;
@@ -30,26 +36,54 @@ public class AulaController {
 
     }
 
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws SQLException 
+     */
     public boolean existeProfessor(String id) throws SQLException {
         IProfessor professor = new Professor();
         return professor.existe(id, "id");
     }
     
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws SQLException 
+     */
     public boolean existeAula(String id) throws SQLException {
         IAula aula = new Aula();
         return aula.existe(id, "id");
     }
     
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws SQLException 
+     */
      public boolean existeAluno(String id) throws SQLException {
         IAluno aluno = new Aluno();
         return aluno.existe(id, "id");
     }
 
+     /**
+      * 
+      * @param id
+      * @return
+      * @throws SQLException 
+      */
     public boolean existeDisciplina(String id) throws SQLException {
         IDisciplina disciplina = new Disciplina();
         return disciplina.existe(id, "id");
     }
 
+    /**
+     * Envia a aula para model, para ser adicionada no banco.
+     * @throws SQLException 
+     */
     public void addAula() throws SQLException {
 
         IProfessor professor = new Professor();
@@ -65,24 +99,43 @@ public class AulaController {
         System.out.println("Cadastrado a disciplina " + disciplina.getCodigo() + " para o professor " + professor.getNome());
     }
 
+    /**
+     * Retorna todos os professores
+     * @return
+     * @throws SQLException 
+     */
     public ArrayList<Professor> professores() throws SQLException {
         IProfessor p = new Professor();
         ArrayList<Professor> data = (ArrayList<Professor>) p.getAll();
         return data;
     }
 
+    /**
+     * Retorna todas as disciplinas
+     * @return
+     * @throws SQLException 
+     */
     public ArrayList<Disciplina> disciplinas() throws SQLException {
         IDisciplina d = new Disciplina();
         ArrayList<Disciplina> data = (ArrayList<Disciplina>) d.getAll();
         return data;
     }
 
+    /**
+     * Retorna todas as aulas
+     * @return
+     * @throws SQLException 
+     */
     public ArrayList<Aula> aulas() throws SQLException {
         IAula aulas = new Aula();
         ArrayList<Aula> data = (ArrayList<Aula>) aulas.getAll();
         return data;
     }
 
+    /**
+     * Retorna todos os alunos
+     * @throws SQLException 
+     */
     public void alunos() throws SQLException {
         IAluno alunos = new Aluno();
         ArrayList<Aluno> data = (ArrayList<Aluno>) alunos.getAll();
@@ -93,12 +146,24 @@ public class AulaController {
         }
     }
     
+    /**
+     * Retorna os alunos de uma determinada aula
+     * @param aulaId
+     * @return
+     * @throws SQLException 
+     */
     public List<Aluno> getAlunosByAula(int aulaId) throws SQLException {
         IAula aula = new Aula();
         aula.setById(aulaId);
         return aula.getAlunos();
     }
     
+    /**
+     * Adiciona aluno em uma determinada aula
+     * @param fkAula
+     * @param matricula
+     * @throws SQLException 
+     */
     public void addAlunoAula(Integer fkAula, String matricula) throws SQLException{
         IAluno aluno = new Aluno();
         aluno.setByMatricula(matricula);

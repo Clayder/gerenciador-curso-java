@@ -27,6 +27,13 @@ public interface IModel {
      */
     public void removeById(Integer id) throws SQLException;
 
+    /**
+     * 
+     * @param valor
+     * @param campo
+     * @return
+     * @throws SQLException 
+     */
     public boolean existe(String valor, String campo) throws SQLException;
 
     /**

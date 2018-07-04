@@ -14,6 +14,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
+/**
+ * Classe utilizada para gerar dados falsos (apenas para teste). 
+ * 
+*/
 public class AulaFaker implements IFaker {
 
     @Override

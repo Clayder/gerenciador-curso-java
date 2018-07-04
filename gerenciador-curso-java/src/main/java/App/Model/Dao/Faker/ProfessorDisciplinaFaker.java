@@ -5,6 +5,10 @@ import App.Model.ProfessorDisciplina.ProfessorDisciplina;
 import com.github.javafaker.Faker;
 import java.sql.SQLException;
 
+/**
+ * Classe utilizada para gerar dados falsos (apenas para teste). 
+ * 
+*/
 public class ProfessorDisciplinaFaker implements IFaker {
 
     @Override

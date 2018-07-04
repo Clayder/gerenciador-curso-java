@@ -5,10 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Classe utilizada para acessar o banco de dados. 
- * 
 
+/**
+ * Classe utilizada para gerenciar os dados dos alunos. 
+ * 
 */
 class AlunoDAO extends Model {
 

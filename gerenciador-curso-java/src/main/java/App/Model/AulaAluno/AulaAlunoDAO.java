@@ -4,6 +4,10 @@ import App.Model.Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Classe utilizada para gerenciar os dados da aula_aluno. 
+ * 
+*/
 abstract public class AulaAlunoDAO  extends Model {
     
     private Integer id;

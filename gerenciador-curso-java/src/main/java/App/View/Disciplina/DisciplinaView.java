@@ -301,8 +301,8 @@ public class DisciplinaView extends javax.swing.JFrame {
                 model.addRow(
                         new Object[]{
                             codigo.getText(),
-                            textConteudo.getText(),
                             Double.parseDouble(cargaHoraria.getText()),
+                            textConteudo.getText(),
                             tipo.getSelectedItem().toString(),
                             "Editar",
                             "Excluir"

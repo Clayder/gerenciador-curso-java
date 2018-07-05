@@ -12,6 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe utilizada para gerenciar os dados das aulas. 
+ * 
+*/
 abstract class AulaDAO extends Model {
 
     private Integer id;

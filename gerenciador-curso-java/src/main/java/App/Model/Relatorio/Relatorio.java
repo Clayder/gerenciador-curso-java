@@ -1,11 +1,8 @@
 package App.Model.Relatorio;
 
-import App.Model.Aluno.Aluno;
 import App.Model.Model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Relatorio extends Model implements IRelatorio {
 
@@ -52,6 +49,13 @@ public class Relatorio extends Model implements IRelatorio {
         return query;
     }
 
+    /**
+     * 
+     * @param ano
+     * @param mes
+     * @return
+     * @throws SQLException 
+     */
     @Override
     public double pagamentoProfessor(Integer ano, Integer mes) throws SQLException {
         String filtro = "";

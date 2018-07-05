@@ -1,8 +1,6 @@
 package App.Model.ProfessorDisciplina;
 
 import App.Model.IModel;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public interface IProfessorDisciplina extends IModel {
 

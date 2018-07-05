@@ -7,6 +7,12 @@ public interface IAulaAluno extends IModel {
 
     public Integer getId();
     
+    /**
+     * 
+     * @param idAula
+     * @param idAluno
+     * @throws SQLException 
+     */
     public void excluir(Integer idAula, Integer idAluno) throws SQLException;
 
     /**

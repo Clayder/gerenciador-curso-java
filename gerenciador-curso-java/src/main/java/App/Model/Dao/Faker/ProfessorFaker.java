@@ -6,6 +6,10 @@ import com.github.javafaker.Faker;
 import java.sql.SQLException;
 import java.util.Locale;
 
+/**
+ * Classe utilizada para gerar dados falsos (apenas para teste). 
+ * 
+*/
 public class ProfessorFaker implements IFaker{
     
     @Override

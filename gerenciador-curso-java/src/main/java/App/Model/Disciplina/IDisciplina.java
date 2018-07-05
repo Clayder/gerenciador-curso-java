@@ -1,7 +1,6 @@
 package App.Model.Disciplina;
 
 import App.Model.IModel;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 

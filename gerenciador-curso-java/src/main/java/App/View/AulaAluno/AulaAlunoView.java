@@ -4,6 +4,7 @@ import App.Controller.Aluno.AlunoController;
 import App.Controller.Aula.AulaController;
 import App.Controller.AulaAluno.AulaAlunoController;
 import App.Model.Aluno.IAluno;
+import App.View.Aluno.AlunoView;
 import App.View.Aula.AulaView;
 import App.View.Disciplina.DisciplinaView;
 import App.View.Professor.ProfessorView;
@@ -73,7 +74,7 @@ public class AulaAlunoView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gerenciar Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alunos da aula", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         jLabel1.setText("Aula :");
 
@@ -287,7 +288,7 @@ public class AulaAlunoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void alunoMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_alunoMenuMouseClicked
-        new AulaAlunoView().setVisible(true);
+        new AlunoView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_alunoMenuMouseClicked
 

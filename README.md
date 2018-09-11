@@ -1,4 +1,4 @@
-Sistema desenvolvido em java, utilizando o padrão de projeto MVC e banco de dados mysql.
+Sistema desenvolvido em java, utilizando o padrão de projeto MVC e banco de dados mysql, com o objetivo de obter mais conhececimentos em Java.
 
 Para acessar a documentação [Clique aqui](https://github.com/Clayder/gerenciador-curso-java/wiki)
 
